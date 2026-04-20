@@ -14,29 +14,29 @@ const { exercises = [], currentBookSlug } = Astro.props;
   </head>
 
   <body class="flex flex-col min-h-screen sidebar-open">
-    <div class="fixed w-full h-[2px] rainbow-bar"></div>
+    <div class="fixed w-full h-[2px] rainbow-bar z-50"></div>
 
-    <div class="fixed top-4 right-4 z-50 flex items-center space-x-2">
-      <button
-        id="sidebar-toggle"
-        class="flex items-center justify-center w-10 h-10 ml-1 bg-[var(--cards)] text-white rounded-md shadow-lg transition-transform transform hover:scale-110"
-        aria-label="Toggle Sidebar"
+    <button
+      id="sidebar-toggle"
+      class="fixed top-4 z-50 flex items-center justify-center w-10 h-10 bg-[var(--cards)] text-white rounded-md shadow-lg transition-transform transform hover:scale-110"
+      aria-label="Toggle Sidebar"
+    >
+      <svg
+        id="toggle-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-[var(--titles)]"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <svg
-          id="toggle-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 text-[var(--titles)]"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M15 18l-6-6 6-6"></path>
-        </svg>
-      </button>
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+    </button>
 
+    <div id="right-buttons" class="fixed top-4 right-4 z-40 flex items-center space-x-2 transition-opacity duration-300">
       <a
         href="https://github.com/andreatrasvina/proyecto-libros"
         class="flex items-center justify-center w-10 h-10 bg-[var(--cards)] text-white rounded-md shadow-lg transition-transform transform hover:scale-110"
@@ -82,6 +82,9 @@ const { exercises = [], currentBookSlug } = Astro.props;
         </svg>
       </button>
     </div>
+
+    <!-- Backdrop para móviles -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-transparent z-30 hidden md:hidden transition-opacity duration-300 opacity-0"></div>
 
     <div class="flex flex-1 overflow-hidden">
       <aside
@@ -182,8 +185,8 @@ const { exercises = [], currentBookSlug } = Astro.props;
       >
       </div>
 
-      <main class="flex-1 overflow-y-auto">
-        <div class="max-w-4xl mx-auto p-8 prose prose-invert mt-10">
+      <main class="flex-1 overflow-y-auto w-full px-4 md:px-0">
+        <div class="max-w-4xl mx-auto md:p-8 prose prose-invert mt-10">
           <slot name="introduction" />
           <slot name="main" />
         </div>
@@ -243,6 +246,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
   const sidebar = document.getElementById("sidebar");
   const sidebarSpacer = document.getElementById("sidebar-spacer");
   const toggleIcon = document.getElementById("toggle-icon");
+  const sidebarBackdrop = document.getElementById("sidebar-backdrop");
 
   // Definir el ancho del sidebar para las transiciones
   const SIDEBAR_WIDTH = "312px";
@@ -277,6 +281,17 @@ const { exercises = [], currentBookSlug } = Astro.props;
       toggleIcon.innerHTML = `<path d="M9 18l6-6-6-6"></path>`;
     }
 
+    // 5. Manejar el backdrop en móviles
+    if (sidebarBackdrop) {
+      if (isOpen) {
+        sidebarBackdrop.classList.remove("hidden");
+        setTimeout(() => sidebarBackdrop.classList.remove("opacity-0"), 10);
+      } else {
+        sidebarBackdrop.classList.add("opacity-0");
+        setTimeout(() => sidebarBackdrop.classList.add("hidden"), 300);
+      }
+    }
+
     // Si no estaba animando, la volvemos a habilitar después de un pequeño retraso
     if (!animate) {
       // Usamos setTimeout para que se apliquen los estilos sin transición primero,
@@ -303,7 +318,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
 
   const savedSidebarState = localStorage.getItem("sidebarState");
 
-  if (savedSidebarState === "collapsed") {
+  if (savedSidebarState === "collapsed" || window.innerWidth <= 768) {
     // Aplicar estado colapsado SIN animación al cargar
     applySidebarState(false, false);
   } else {
@@ -313,6 +328,13 @@ const { exercises = [], currentBookSlug } = Astro.props;
 
   // Listener para el botón de alternancia
   sidebarToggle.addEventListener("click", toggleSidebar);
+
+  // Cerrar el sidebar si se hace clic en el backdrop
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener("click", () => {
+      if (isSidebarOpen) toggleSidebar();
+    });
+  }
 </script>
 
 <style>
@@ -384,5 +406,26 @@ const { exercises = [], currentBookSlug } = Astro.props;
 
   .no-transition-element {
     transition: none !important;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 768px) {
+    #sidebar-spacer {
+      width: 0px !important;
+    }
+    
+    #sidebar-toggle {
+      /* Mantiene el botón visible dentro de la pantalla incluso cuando está abierto el sidebar */
+      left: calc(100vw - 3.5rem); 
+    }
+    
+    .sidebar-collapsed #sidebar-toggle {
+      left: 0.5rem !important;
+    }
+
+    body:not(.sidebar-collapsed) #right-buttons {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 </style>
