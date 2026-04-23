@@ -1,0 +1,607 @@
+---
+// Ejercicio_7.astro
+---
+
+<div>
+  <div
+    class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]"
+  >
+    <h1 class="font-semibold text-lg text-[var(--titles)]">
+      🌊 Simulación: Flujo Ascendente y Carga Hidráulica
+    </h1>
+
+    <div class="canvas mt-6 mb-8 relative">
+      <canvas
+        id="ej7Canvas"
+        width="800"
+        height="500"
+        style="border:1px solid var(--borderEjercicio); margin: 0 auto; background-color: #ffffff; display: block;"
+        class="rounded shadow-sm"></canvas>
+
+      <!-- Overlay para oscurecer la mitad derecha en el Paso 1 -->
+      <div
+        id="canvas-overlay"
+        class="absolute top-0 right-0 w-[400px] h-[500px] bg-gray-100/90 backdrop-blur-sm flex items-center justify-center rounded-r border-l border-gray-300 transition-opacity duration-500"
+        style="margin-right: calc(50% - 400px);"
+      >
+        <p class="text-gray-500 font-bold text-lg px-6 text-center">
+          Gráfico oculto hasta completar el Paso 1
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 1 UI: Question -->
+    <div
+      id="step1-container"
+      class="mt-4 p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center transition-all duration-300"
+    >
+      <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+        Paso 1: Análisis de la sección transversal
+      </h2>
+      <p class="text-[var(--titles)] mb-6 text-lg">
+        Observa la sección transversal (izquierda). El nivel del agua en el
+        piezómetro representa la carga hidráulica en el acuífero, mientras que
+        el nivel del lago representa la carga en la superficie. El agua siempre fluye desde donde la carga hidráulica es mayor hacia donde es menor. <br /><br /><b
+          >¿El agua fluye hacia arriba o hacia abajo a través del sedimento?</b
+        >
+      </p>
+      <div class="flex justify-center gap-4">
+        <button
+          id="btn-answer-up"
+          disabled
+          class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed"
+          >Hacia arriba</button
+        >
+        <button
+          id="btn-answer-down"
+          disabled
+          class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed"
+          >Hacia abajo</button
+        >
+      </div>
+      <p id="step1-feedback" class="mt-4 font-bold hidden text-lg"></p>
+    </div>
+
+    <!-- Step 2 UI: Reveal Profile -->
+    <div
+      id="step2-container"
+      class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300"
+    >
+      <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
+        Paso 2: Perfil de Carga Hidráulica
+      </h2>
+      <p id="step2-explanation" class="text-gray-800 mb-6 text-lg"></p>
+      <button
+        id="btn-reveal-step3"
+        class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg"
+        >Siguiente: Explorar Ley de Darcy</button
+      >
+    </div>
+
+    <!-- Step 3 UI: Darcy & Sliders -->
+    <div id="step3-container" class="mt-4 hidden transition-all duration-300">
+      <div
+        class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center"
+      >
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          Paso 3: Ley de Darcy y Flujo Activo
+        </h2>
+        <p class="text-[var(--titles)] mb-4 text-lg">
+          La velocidad del flujo depende del gradiente de carga
+          (Δh/ΔL) y de la conductividad hidráulica del sedimento (K), según la
+          Ley de Darcy:<br />
+          <span
+            class="font-mono text-xl bg-white text-black p-3 rounded shadow inline-block mt-4"
+            >v ∝ Δh × K</span
+          >
+        </p>
+        <p class="text-[var(--titles)] font-bold text-lg mt-4">
+          Ajusta los controles para experimentar cómo cambia el perfil y la
+          velocidad del flujo.
+        </p>
+      </div>
+
+      <div class="controls grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm"
+        >
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg">
+            Carga del Acuífero (h<sub>acuífero</sub>)
+          </h3>
+          <input
+            type="range"
+            id="hAquifer"
+            min="110"
+            max="190"
+            value="150"
+            class="w-full custom-range"
+          />
+          <div
+            class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2"
+          >
+            <span>Menor al lago</span>
+            <span id="hAquiferVal" class="font-bold text-lg">150</span>
+            <span>Mayor al lago</span>
+          </div>
+        </div>
+
+        <div
+          class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm"
+        >
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg">
+            Conductividad Sedimento (K<sub>sedimento</sub>)
+          </h3>
+          <input
+            type="range"
+            id="kSediment"
+            min="1"
+            max="100"
+            value="50"
+            class="w-full custom-range"
+          />
+          <div
+            class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2"
+          >
+            <span>Baja (Arcilla)</span>
+            <span id="kSedimentVal" class="font-bold text-lg">50</span>
+            <span>Alta (Arena)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // State Machine
+  let currentStep = 1;
+
+  // Randomize Scenario
+  const isAquiferHigher = Math.random() > 0.5;
+  const initialHAq = isAquiferHigher ? 170 : 130;
+  let forcedObservationTime = 0;
+  const FORCED_OBSERVATION_DURATION = 3000; // 3 seconds
+  let observationComplete = false;
+
+  // Elements
+  const canvas = document.getElementById("ej7Canvas");
+  const ctx = canvas.getContext("2d");
+  const overlay = document.getElementById("canvas-overlay");
+
+  const step1Container = document.getElementById("step1-container");
+  const btnUp = document.getElementById("btn-answer-up");
+  const btnDown = document.getElementById("btn-answer-down");
+  const step1Feedback = document.getElementById("step1-feedback");
+
+  const step2Container = document.getElementById("step2-container");
+  const step2Explanation = document.getElementById("step2-explanation");
+  const btnRevealStep3 = document.getElementById("btn-reveal-step3");
+
+  const step3Container = document.getElementById("step3-container");
+  const hAquiferSlider = document.getElementById("hAquifer");
+  const kSedimentSlider = document.getElementById("kSediment");
+  const hAquiferVal = document.getElementById("hAquiferVal");
+  const kSedimentVal = document.getElementById("kSedimentVal");
+
+  // Set initial slider value
+  hAquiferSlider.value = initialHAq;
+  hAquiferVal.textContent = initialHAq;
+
+  // Sliders Update
+  hAquiferSlider.addEventListener("input", (e) => {
+    hAquiferVal.textContent = e.target.value;
+  });
+  kSedimentSlider.addEventListener("input", (e) => {
+    kSedimentVal.textContent = e.target.value;
+  });
+
+  // Flow Logic
+  function handleAnswer(selectedUp) {
+    step1Feedback.classList.remove("hidden");
+    const isCorrect =
+      (selectedUp && isAquiferHigher) || (!selectedUp && !isAquiferHigher);
+
+    if (isCorrect) {
+      step1Feedback.textContent =
+        "✅ Correcto. El agua fluye de mayor a menor carga hidráulica.";
+      step1Feedback.classList.remove("text-red-500");
+      step1Feedback.classList.add("text-green-600");
+
+      // Enable step 2 after a brief delay
+      setTimeout(() => {
+        currentStep = 2;
+        step1Container.classList.add("hidden");
+        overlay.style.opacity = "0";
+
+        // Update Step 2 text based on scenario
+        if (isAquiferHigher) {
+          step2Explanation.innerHTML =
+            "Como el agua fluye de mayor a menor carga, y la carga es mayor en el acuífero, esto genera un <b>flujo ascendente</b> a través del sedimento hacia el lago.<br/><br/>Ahora observa a la derecha el <b>perfil vertical de carga hidráulica</b>. Nota cómo la carga se mantiene constante en el lago, disminuye a través del sedimento, y es mayor en el acuífero.";
+        } else {
+          step2Explanation.innerHTML =
+            "Como el agua fluye de mayor a menor carga, y la carga es mayor en el lago, esto genera un <b>flujo descendente</b> a través del sedimento hacia el acuífero.<br/><br/>Ahora observa a la derecha el <b>perfil vertical de carga hidráulica</b>. Nota cómo la carga se mantiene constante en el lago, disminuye a través del sedimento, y es menor en el acuífero.";
+        }
+
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+          step2Container.classList.remove("hidden");
+        }, 500);
+      }, 1500);
+    } else {
+      step1Feedback.textContent =
+        "❌ Incorrecto. Recuerda que el agua fluye desde donde el nivel del agua (carga hidráulica) es mayor hacia donde es menor.";
+      step1Feedback.classList.remove("text-green-600");
+      step1Feedback.classList.add("text-red-500");
+
+      const btn = selectedUp ? btnUp : btnDown;
+      btn.classList.add("bg-red-200");
+      setTimeout(() => btn.classList.remove("bg-red-200"), 1000);
+    }
+  }
+
+  btnUp.addEventListener("click", () => handleAnswer(true));
+  btnDown.addEventListener("click", () => handleAnswer(false));
+
+  btnRevealStep3.addEventListener("click", () => {
+    currentStep = 3;
+    step2Container.classList.add("hidden");
+    step3Container.classList.remove("hidden");
+  });
+
+  // Resize Handling
+  function resizeCanvas() {
+    const parent = canvas.parentElement;
+    if (parent) {
+      // Mantenemos proporciones fijas o lo centramos
+      overlay.style.marginRight = `calc(50% - ${canvas.width / 2}px)`;
+    }
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  // Variables de Simulación
+  // Alturas Y (Profundidad)
+  const Y_LAKE_TOP = 100;
+  const Y_LAKE_BOT = 250;
+  const Y_SED_BOT = 350;
+  const Y_AQ_BOT = 480;
+
+  const LAKE_HEAD = 100; // Constante
+
+  // Partículas
+  let particles = [];
+  const NUM_PARTICLES = 60;
+  for (let i = 0; i < NUM_PARTICLES; i++) {
+    particles.push({
+      x: 100 + Math.random() * 200,
+      y: Y_SED_BOT - Math.random() * (Y_SED_BOT - Y_LAKE_BOT),
+      speedOffset: 0.8 + Math.random() * 0.4,
+    });
+  }
+
+  function draw(timestamp) {
+    if (!forcedObservationTime) forcedObservationTime = timestamp;
+    const elapsedTime = timestamp - forcedObservationTime;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Obtener valores (si estamos en step 1 o 2, usamos el valor inicial)
+    let hAqValue =
+      currentStep >= 3 ? parseInt(hAquiferSlider.value) : initialHAq;
+    let kValue = currentStep >= 3 ? parseInt(kSedimentSlider.value) : 50;
+
+    // Activar botones después de la observación forzada
+    if (
+      currentStep === 1 &&
+      !observationComplete &&
+      elapsedTime > FORCED_OBSERVATION_DURATION
+    ) {
+      observationComplete = true;
+      btnUp.disabled = false;
+      btnDown.disabled = false;
+      
+      const activateBtn = (b) => {
+        b.classList.remove("opacity-50", "cursor-not-allowed", "bg-gray-200", "text-gray-800");
+        b.classList.add("bg-[#3aa6b9]", "hover:bg-[#2c7a88]", "text-white");
+      };
+      
+      activateBtn(btnUp);
+      activateBtn(btnDown);
+    }
+
+    // Dibujar Línea de separación (Split View)
+    ctx.beginPath();
+    ctx.moveTo(400, 0);
+    ctx.lineTo(400, 500);
+    ctx.strokeStyle = "#cbd5e1"; // gray-300
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // ==========================================
+    // LADO IZQUIERDO: SECCIÓN TRANSVERSAL
+    // ==========================================
+
+    // 1. Acuífero
+    ctx.fillStyle = "#fde68a"; // yellow-200 (arena)
+    ctx.fillRect(50, Y_SED_BOT, 300, Y_AQ_BOT - Y_SED_BOT);
+    ctx.fillStyle = "#b45309"; // Puntos para textura de arena
+    for (let i = 0; i < 100; i++) {
+      ctx.fillRect(
+        50 + Math.random() * 300,
+        Y_SED_BOT + Math.random() * (Y_AQ_BOT - Y_SED_BOT),
+        2,
+        2,
+      );
+    }
+    ctx.fillStyle = "#000";
+    ctx.font = "14px Arial";
+    ctx.fillText("Acuífero Confinado", 60, Y_AQ_BOT - 20);
+
+    // 2. Sedimento
+    ctx.fillStyle = "#d6d3d1"; // stone-300 (arcilla/limo)
+    ctx.fillRect(50, Y_LAKE_BOT, 300, Y_SED_BOT - Y_LAKE_BOT);
+    ctx.fillStyle = "#78716c"; // Puntos para textura
+    for (let i = 0; i < 100; i++) {
+      ctx.beginPath();
+      ctx.arc(
+        50 + Math.random() * 300,
+        Y_LAKE_BOT + Math.random() * (Y_SED_BOT - Y_LAKE_BOT),
+        1,
+        0,
+        Math.PI * 2,
+      );
+      ctx.fill();
+    }
+    ctx.fillStyle = "#000";
+    ctx.fillText("Sedimento", 60, Y_SED_BOT - 20);
+
+    // 3. Lago (Agua)
+    ctx.fillStyle = "#bae6fd"; // sky-200
+    ctx.fillRect(50, Y_LAKE_TOP, 300, Y_LAKE_BOT - Y_LAKE_TOP);
+    ctx.fillStyle = "#0284c7";
+    ctx.fillText("Lago", 60, Y_LAKE_TOP + 30);
+
+    // Ondas en la superficie del lago
+    ctx.beginPath();
+    ctx.moveTo(50, Y_LAKE_TOP);
+    for (let i = 0; i < 15; i++) {
+      ctx.quadraticCurveTo(
+        50 + i * 20 + 10,
+        Y_LAKE_TOP - 5,
+        50 + (i + 1) * 20,
+        Y_LAKE_TOP,
+      );
+    }
+    ctx.strokeStyle = "#0284c7";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // 4. Piezómetro
+    const piezX = 250;
+    const piezW = 20;
+    // Tubo del piezómetro
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.fillRect(piezX, 40, piezW, Y_AQ_BOT - 60);
+    ctx.strokeStyle = "#475569";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(piezX, 40, piezW, Y_AQ_BOT - 60);
+
+    // Nivel del agua en piezómetro (Carga del acuífero)
+    // hAqValue de 110 a 190. 150 = nivel del lago (Y_LAKE_TOP = 100)
+    // Map: Y = 100 - (hAqValue - 150) * 1.5
+    const waterLevelY = 100 - (hAqValue - 150) * 1.5;
+
+    // Agua dentro del tubo
+    ctx.fillStyle = "#3aa6b9";
+    ctx.fillRect(
+      piezX + 1,
+      waterLevelY,
+      piezW - 2,
+      Y_AQ_BOT - 60 - waterLevelY,
+    );
+
+    // Pantalla del piezómetro (rayitas)
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 1;
+    for (let y = Y_AQ_BOT - 100; y < Y_AQ_BOT - 60; y += 5) {
+      ctx.beginPath();
+      ctx.moveTo(piezX, y);
+      ctx.lineTo(piezX + piezW, y);
+      ctx.stroke();
+    }
+
+    // ==========================================
+    // OBSERVACIÓN FORZADA (Destacar Niveles)
+    // ==========================================
+    if (currentStep === 1 && !observationComplete) {
+      const alpha = Math.max(0, 1 - elapsedTime / FORCED_OBSERVATION_DURATION);
+
+      // Animación de pulso
+      const pulseRadius = 5 + Math.sin(elapsedTime / 150) * 3;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      // Destacar Nivel del Lago
+      ctx.beginPath();
+      ctx.arc(150, Y_LAKE_TOP, pulseRadius, 0, Math.PI * 2);
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.setLineDash([5, 5]);
+      ctx.moveTo(150, Y_LAKE_TOP);
+      ctx.lineTo(400, Y_LAKE_TOP);
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Destacar Nivel del Piezómetro
+      ctx.beginPath();
+      ctx.arc(piezX + piezW / 2, waterLevelY, pulseRadius, 0, Math.PI * 2);
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.setLineDash([5, 5]);
+      ctx.moveTo(piezX + piezW / 2, waterLevelY);
+      ctx.lineTo(400, waterLevelY);
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.restore();
+    } else if (currentStep === 1 && observationComplete) {
+      // Línea punteada sutil permanente en Paso 1 después de observar
+      ctx.beginPath();
+      ctx.setLineDash([5, 5]);
+      ctx.moveTo(piezX - 50, waterLevelY);
+      ctx.lineTo(piezX + 70, waterLevelY);
+      ctx.strokeStyle = "#ef4444"; // red-500
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "#ef4444";
+      ctx.fillText("h_acuífero", piezX + 30, waterLevelY - 10);
+    }
+
+    // ==========================================
+    // LADO DERECHO: PERFIL DE CARGA HIDRÁULICA
+    // ==========================================
+
+    // Ejes
+    const graphX = 450;
+    const graphW = 300;
+
+    // Títulos de ejes
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 14px Arial";
+    ctx.fillText("Carga Hidráulica (h)", graphX + 100, 30);
+
+    // Eje X (Arriba)
+    ctx.beginPath();
+    ctx.moveTo(graphX, 50);
+    ctx.lineTo(graphX + graphW, 50);
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Marcas Eje X
+    ctx.fillText("Menor", graphX, 45);
+    ctx.fillText("Mayor", graphX + graphW - 40, 45);
+
+    // Título Eje Y
+    ctx.save();
+    ctx.translate(graphX - 30, 250);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("Profundidad (z)", -40, 0);
+    ctx.restore();
+
+    // Mapeo de Carga a X
+    // Lago head = 150 -> X = graphX + 100
+    const headToX = (head) => graphX + 100 + (head - 150) * 1.5;
+
+    const lakeHeadX = headToX(150);
+    const aqHeadX = headToX(hAqValue);
+
+    // Dibujar Perfil (solo si currentStep > 1)
+    if (currentStep > 1) {
+      ctx.beginPath();
+      // 1. En el Lago (Constante)
+      ctx.moveTo(lakeHeadX, Y_LAKE_TOP);
+      ctx.lineTo(lakeHeadX, Y_LAKE_BOT);
+      // 2. A través del sedimento (Gradiente)
+      ctx.lineTo(aqHeadX, Y_SED_BOT);
+      // 3. En el acuífero (Constante)
+      ctx.lineTo(aqHeadX, Y_AQ_BOT);
+
+      ctx.strokeStyle = "#1d4ed8"; // blue-700
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Puntos y etiquetas en el perfil
+      ctx.fillStyle = "#1d4ed8";
+      ctx.beginPath();
+      ctx.arc(lakeHeadX, Y_LAKE_TOP, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(lakeHeadX, Y_LAKE_BOT, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(aqHeadX, Y_SED_BOT, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(aqHeadX, Y_AQ_BOT, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Líneas de conexión horizontales entre la sección transversal y el gráfico
+      ctx.beginPath();
+      ctx.setLineDash([3, 3]);
+      ctx.strokeStyle = "rgba(0,0,0,0.3)";
+      ctx.moveTo(350, Y_LAKE_TOP);
+      ctx.lineTo(graphX - 10, Y_LAKE_TOP);
+      ctx.moveTo(350, Y_LAKE_BOT);
+      ctx.lineTo(graphX - 10, Y_LAKE_BOT);
+      ctx.moveTo(350, Y_SED_BOT);
+      ctx.lineTo(graphX - 10, Y_SED_BOT);
+      ctx.moveTo(350, Y_AQ_BOT);
+      ctx.lineTo(graphX - 10, Y_AQ_BOT);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // ==========================================
+    // ANIMACIÓN DE PARTÍCULAS (FLUJO)
+    // ==========================================
+    // Velocidad v = K * Δh
+    const deltaH = hAqValue - 150; // positivo = ascendente
+    // velocidad en pixeles por frame
+    const baseVel = (deltaH * kValue) / 5000;
+
+    ctx.fillStyle = "rgba(14, 165, 233, 0.6)"; // sky-500
+
+    // Solo mostramos flujo si hay gradiente y estamos en un paso que lo permita (o siempre lo mostramos, la Ley de Darcy dice que fluye)
+    if (Math.abs(baseVel) > 0.01) {
+      particles.forEach((p) => {
+        // Mover partícula
+        p.y -= baseVel * p.speedOffset; // si deltaH es pos, suben.
+
+        // Reset si salen del sedimento
+        if (baseVel > 0 && p.y < Y_LAKE_BOT) p.y = Y_SED_BOT;
+        if (baseVel < 0 && p.y > Y_SED_BOT) p.y = Y_LAKE_BOT;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+</script>
+
+<style>
+  .custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e2e8f0;
+    outline: none;
+  }
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3aa6b9;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+  }
+  .custom-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+</style>
