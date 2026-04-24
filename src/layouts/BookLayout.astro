@@ -6,6 +6,11 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 const { exercises = [], currentBookSlug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const otherLang = lang === 'es' ? 'en' : 'es';
+const pathWithoutBase = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const currentPath = pathWithoutBase.replace(new RegExp(`^${lang}/?`), '');
+const otherLangUrl = getRelativeLocaleUrl(otherLang, currentPath);
 ---
 
 <html>
@@ -42,6 +47,14 @@ const t = useTranslations(lang);
 
     <div id="right-buttons" class="fixed top-4 right-4 z-40 flex items-center space-x-2 transition-opacity duration-300">
       <a
+        href={otherLangUrl}
+        class="flex items-center justify-center w-10 h-10 bg-[var(--cards)] text-[var(--titles)] rounded-md shadow-lg transition-transform transform hover:scale-110 font-bold"
+        aria-label="Switch Language"
+      >
+        {otherLang.toUpperCase()}
+      </a>
+
+      <a
         href="https://github.com/andreatrasvina/proyecto-libros"
         class="flex items-center justify-center w-10 h-10 bg-[var(--cards)] text-white rounded-md shadow-lg transition-transform transform hover:scale-110"
         aria-label="GitHub Repository"
@@ -61,7 +74,7 @@ const t = useTranslations(lang);
 
       <button
         id="theme-toggle"
-        class="flex items-center justify-center w-10 h-10 rounded-md shadow-lg transition-transform transform hover:scale-110 dark:bg-[var(--cards)] dark:text-white dark:focus:ring-gray-600"
+        class="flex items-center justify-center w-10 h-10 bg-[var(--cards)] rounded-md shadow-lg transition-transform transform hover:scale-110"
         aria-label="Toggle dark mode"
       >
         <svg

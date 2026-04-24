@@ -1,11 +1,11 @@
 ---
-title: Example
-author: Example
-description: Example description
+title: Ejemplo
+author: Ejemplo
+description: Descripción de ejemplo
 img: genericcover.jpg
-date: Example
-place: Example
-publisher: Example
+date: Ejemplo
+place: Ejemplo
+publisher: Ejemplo
 pages: 100
 link: "https://example.com"
 lang: 'es'
