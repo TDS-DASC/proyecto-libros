@@ -1,0 +1,439 @@
+---
+// Ejercicio_10.astro
+const basePath = import.meta.env.BASE_URL;
+---
+<div>
+  <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
+    <h1 class="font-semibold text-lg text-[var(--titles)] mb-4">
+      🗺️ Simulación: Identificación de Líneas Equipotenciales
+    </h1>
+
+    <!-- Step 1 UI: Question and Image Selection -->
+    <div id="step1-container-ej10" class="transition-all duration-300">
+      <div class="text-center mb-6">
+        <img src={`${basePath}images/exercise10-problem.png`} alt="Diagrama de 4 pozos" class="mx-auto rounded border border-gray-300 max-w-full shadow-sm" />
+      </div>
+      
+      <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center">
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          Paso 1: Selecciona el Esquema Correcto
+        </h2>
+        <p class="text-[var(--titles)] mb-6 text-lg">
+          Basándote en los datos de nivel de agua mostrados arriba (180m a la izquierda, 170m a la derecha, en ambos acuíferos), ¿qué esquema de abajo representa mejor las líneas equipotenciales y la dirección del flujo?
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Option A -->
+          <button id="btn-opt-a" class="p-2 border-2 border-transparent hover:border-blue-400 rounded transition-all bg-white shadow flex flex-col items-center">
+            <span class="font-bold text-lg mb-2">Opción a)</span>
+            <img src={`${basePath}images/exercise10-opt-a.png`} alt="Opción A" class="max-w-full" />
+          </button>
+          
+          <!-- Option B -->
+          <button id="btn-opt-b" class="p-2 border-2 border-transparent hover:border-blue-400 rounded transition-all bg-white shadow flex flex-col items-center">
+            <span class="font-bold text-lg mb-2">Opción b)</span>
+            <img src={`${basePath}images/exercise10-opt-b.png`} alt="Opción B" class="max-w-full" />
+          </button>
+          
+          <!-- Option C -->
+          <button id="btn-opt-c" class="p-2 border-2 border-transparent hover:border-blue-400 rounded transition-all bg-white shadow flex flex-col items-center">
+            <span class="font-bold text-lg mb-2">Opción c)</span>
+            <img src={`${basePath}images/exercise10-opt-c.png`} alt="Opción C" class="max-w-full" />
+          </button>
+          
+          <!-- Option D -->
+          <button id="btn-opt-d" class="p-2 border-2 border-transparent hover:border-blue-400 rounded transition-all bg-white shadow flex flex-col items-center">
+            <span class="font-bold text-lg mb-2">Opción d)</span>
+            <img src={`${basePath}images/exercise10-opt-d.png`} alt="Opción D" class="max-w-full" />
+          </button>
+        </div>
+        <p id="step1-feedback-ej10" class="mt-6 font-bold hidden text-lg"></p>
+      </div>
+    </div>
+
+    <!-- Step 2 UI: Explanation -->
+    <div id="step2-container-ej10" class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300">
+      <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
+        Paso 2: Solución y Explicación
+      </h2>
+      <p class="text-gray-800 mb-6 text-lg text-left">
+        ¡Correcto! La respuesta correcta es la <strong>Opción b)</strong>.<br/><br/>
+        La carga hidráulica en cada tramo ranurado es igual a la elevación del nivel de agua en cada pozo (180m a la izquierda, 170m a la derecha). Basado en estos datos, la carga disminuye hacia la derecha, y el flujo vertical estará restringido debido al acuitardo de arcilla. Por consiguiente, el flujo en las zonas de arena es principalmente horizontal, y las líneas equipotenciales son casi verticales porque el flujo es ortogonal a las equipotenciales en medios isotrópicos.
+      </p>
+      <button id="btn-reveal-step3-ej10" class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg">Siguiente: Simulador Interactivo de Cargas</button>
+    </div>
+
+    <!-- Step 3 UI: Interactive Canvas -->
+    <div id="step3-container-ej10" class="mt-4 hidden transition-all duration-300">
+      <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center">
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          Paso 3: Experimentar con Gradientes Verticales
+        </h2>
+        <p class="text-[var(--titles)] mb-4 text-lg">
+          ¿Qué sucedería si los niveles de agua no fueran idénticos arriba y abajo? Modifica los niveles de agua de los pozos superiores e inferiores para observar cómo cambia la dirección del flujo a través del acuitardo.
+        </p>
+      </div>
+
+      <div class="canvas mt-6 mb-8 relative">
+        <canvas
+          id="ej10Canvas"
+          width="800"
+          height="500"
+          style="border:1px solid var(--borderEjercicio); margin: 0 auto; background-color: #ffffff; display: block;"
+          class="rounded shadow-sm"></canvas>
+      </div>
+
+      <div class="controls grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg text-center">Lado Izquierdo</h3>
+          <div class="mb-4">
+            <label class="block text-sm text-[var(--textoCardCanvas)] mb-1">Pozo Superior (m)</label>
+            <input type="range" id="hUL" min="160" max="190" step="1" value="180" class="w-full custom-range" />
+            <div class="text-center font-bold" id="hULVal">180</div>
+          </div>
+          <div>
+            <label class="block text-sm text-[var(--textoCardCanvas)] mb-1">Pozo Inferior (m)</label>
+            <input type="range" id="hLL" min="160" max="190" step="1" value="180" class="w-full custom-range" />
+            <div class="text-center font-bold" id="hLLVal">180</div>
+          </div>
+        </div>
+
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg text-center">Lado Derecho</h3>
+          <div class="mb-4">
+            <label class="block text-sm text-[var(--textoCardCanvas)] mb-1">Pozo Superior (m)</label>
+            <input type="range" id="hUR" min="150" max="180" step="1" value="170" class="w-full custom-range" />
+            <div class="text-center font-bold" id="hURVal">170</div>
+          </div>
+          <div>
+            <label class="block text-sm text-[var(--textoCardCanvas)] mb-1">Pozo Inferior (m)</label>
+            <input type="range" id="hLR" min="150" max="180" step="1" value="170" class="w-full custom-range" />
+            <div class="text-center font-bold" id="hLRVal">170</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentStep = 1;
+  const step1Container = document.getElementById("step1-container-ej10");
+  const step2Container = document.getElementById("step2-container-ej10");
+  const step3Container = document.getElementById("step3-container-ej10");
+  const step1Feedback = document.getElementById("step1-feedback-ej10");
+
+  const btns = {
+    a: document.getElementById("btn-opt-a"),
+    b: document.getElementById("btn-opt-b"),
+    c: document.getElementById("btn-opt-c"),
+    d: document.getElementById("btn-opt-d")
+  };
+
+  function handleAnswer(choice) {
+    step1Feedback.classList.remove("hidden");
+    
+    // Reset borders
+    Object.values(btns).forEach(b => {
+      b.classList.remove("border-green-500", "border-red-500", "bg-green-50", "bg-red-50");
+      b.classList.add("border-transparent");
+    });
+
+    if (choice === 'b') {
+      step1Feedback.innerHTML = "✅ ¡Correcto! Las equipotenciales son verticales y el flujo es horizontal.";
+      step1Feedback.className = "mt-6 font-bold text-lg text-green-600";
+      btns[choice].classList.add("border-green-500", "bg-green-50");
+      btns[choice].classList.remove("border-transparent");
+      
+      setTimeout(() => {
+        currentStep = 2;
+        step1Container.classList.add("hidden");
+        step2Container.classList.remove("hidden");
+      }, 1500);
+    } else {
+      let reason = "";
+      if (choice === 'a') reason = "La línea equipotencial no tiene la inflexión correcta en el acuitardo.";
+      if (choice === 'c') reason = "Los valores representan la altura de la columna de agua, no la carga hidráulica.";
+      if (choice === 'd') reason = "Los valores representan la elevación del punto de medición, no la carga hidráulica.";
+      
+      step1Feedback.innerHTML = `❌ Incorrecto. ${reason}`;
+      step1Feedback.className = "mt-6 font-bold text-lg text-red-500";
+      btns[choice].classList.add("border-red-500", "bg-red-50");
+      btns[choice].classList.remove("border-transparent");
+    }
+  }
+
+  btns.a.addEventListener("click", () => handleAnswer('a'));
+  btns.b.addEventListener("click", () => handleAnswer('b'));
+  btns.c.addEventListener("click", () => handleAnswer('c'));
+  btns.d.addEventListener("click", () => handleAnswer('d'));
+
+  document.getElementById("btn-reveal-step3-ej10").addEventListener("click", () => {
+    currentStep = 3;
+    step2Container.classList.add("hidden");
+    step3Container.classList.remove("hidden");
+    // Start drawing canvas when revealed
+    requestAnimationFrame(drawCanvas);
+  });
+
+  // Sliders Setup
+  const hUL = document.getElementById("hUL");
+  const hULVal = document.getElementById("hULVal");
+  const hLL = document.getElementById("hLL");
+  const hLLVal = document.getElementById("hLLVal");
+  const hUR = document.getElementById("hUR");
+  const hURVal = document.getElementById("hURVal");
+  const hLR = document.getElementById("hLR");
+  const hLRVal = document.getElementById("hLRVal");
+
+  [hUL, hLL, hUR, hLR].forEach(slider => {
+    slider.addEventListener("input", (e) => {
+      document.getElementById(e.target.id + "Val").textContent = e.target.value;
+    });
+  });
+
+  // Canvas Drawing
+  const canvas = document.getElementById("ej10Canvas");
+  const ctx = canvas.getContext("2d");
+  let offset = 0;
+
+  function drawCanvas() {
+    if (currentStep !== 3) return;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const vUL = parseFloat(hUL.value);
+    const vLL = parseFloat(hLL.value);
+    const vUR = parseFloat(hUR.value);
+    const vLR = parseFloat(hLR.value);
+
+    // Layout dimensions
+    const startX = 100;
+    const endX = 700;
+    const dist = endX - startX;
+
+    // Background Layers
+    // Upper Sand
+    ctx.fillStyle = "#fef08a"; // yellow-200
+    ctx.fillRect(startX, 100, dist, 150);
+    // Clay
+    ctx.fillStyle = "#9ca3af"; // gray-400
+    ctx.fillRect(startX, 250, dist, 50);
+    // Lower Sand
+    ctx.fillStyle = "#fde047"; // yellow-300
+    ctx.fillRect(startX, 300, dist, 150);
+
+    // Ground line
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(startX, 100);
+    ctx.lineTo(endX, 100);
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 16px Arial";
+    ctx.fillText("Arena (Alta K)", startX + 250, 180);
+    ctx.fillStyle = "#fff";
+    ctx.fillText("Arcilla (Acuitardo)", startX + 235, 280);
+    ctx.fillStyle = "#000";
+    ctx.fillText("Arena (Alta K)", startX + 250, 380);
+
+    // Map Heads to Y for equipotentials
+    // We will draw simple equipotential lines at Left (X=200) and Right (X=600)
+    // To represent the head change visually.
+    const xLeft = 200;
+    const xRight = 600;
+
+    // Calculate middle values for gradient display
+    const avgUL_UR = (vUL + vUR) / 2;
+    const avgLL_LR = (vLL + vLR) / 2;
+
+    // Draw Vertical Flow Arrows through Clay
+    ctx.strokeStyle = "#2563eb";
+    ctx.fillStyle = "#2563eb";
+    ctx.lineWidth = 2;
+    
+    // Left side vertical flow
+    const flowLeft = vUL - vLL; // positive means downward
+    if (flowLeft !== 0) {
+      const dirL = flowLeft > 0 ? 1 : -1;
+      drawVerticalArrow(ctx, xLeft + 50, 275, dirL);
+    }
+    
+    // Right side vertical flow
+    const flowRight = vUR - vLR;
+    if (flowRight !== 0) {
+      const dirR = flowRight > 0 ? 1 : -1;
+      drawVerticalArrow(ctx, xRight - 50, 275, dirR);
+    }
+    
+    // Center vertical flow
+    const flowCenter = avgUL_UR - avgLL_LR;
+    if (flowCenter !== 0) {
+      const dirC = flowCenter > 0 ? 1 : -1;
+      drawVerticalArrow(ctx, (xLeft+xRight)/2, 275, dirC);
+    }
+
+    // Horizontal Flow Arrows in Sands
+    // Upper Sand
+    if (vUL !== vUR) {
+      const dirU = vUL > vUR ? 1 : -1;
+      drawHorizontalFlow(ctx, 175, dirU, offset);
+    }
+    // Lower Sand
+    if (vLL !== vLR) {
+      const dirL = vLL > vLR ? 1 : -1;
+      drawHorizontalFlow(ctx, 375, dirL, offset);
+    }
+
+    // Draw Equipotential representation
+    // To show the refraction, we draw a line connecting identical heads.
+    // Let's just draw an illustrative equipotential line near the center.
+    ctx.strokeStyle = "#0d9488"; // teal-600
+    ctx.lineWidth = 3;
+    
+    // Calculate X position of a specific head value. Let's pick a head H = (vUR + vUL)/2
+    const refHeadU = avgUL_UR;
+    // Find X for refHeadU in upper aquifer
+    // The head in upper is linear from vUL at X=200 to vUR at X=600
+    const xUpper = 400; // Since it's exactly the average
+
+    // Find X for the SAME head value in the lower aquifer
+    // The head in lower is linear from vLL at X=200 to vLR at X=600
+    // refHeadU = vLL + (xLower - 200)/(600 - 200) * (vLR - vLL)
+    let xLower = 400;
+    if (vLR !== vLL) {
+       xLower = 200 + ((refHeadU - vLL) / (vLR - vLL)) * 400;
+    } else {
+       xLower = vLL === refHeadU ? 400 : -1000; // Avoid drawing if completely out of bounds
+    }
+
+    // Clamp for visual sanity
+    xLower = Math.max(120, Math.min(680, xLower));
+
+    // Draw the refracted equipotential line if it makes sense
+    if (Math.abs(xLower - 400) < 400) {
+      ctx.beginPath();
+      // Upper vertical
+      ctx.moveTo(xUpper, 100);
+      ctx.lineTo(xUpper, 250);
+      // Refraction through clay
+      ctx.lineTo(xLower, 300);
+      // Lower vertical
+      ctx.lineTo(xLower, 450);
+      ctx.stroke();
+      
+      // Label the equipotential line
+      ctx.fillStyle = "#0f766e";
+      ctx.font = "14px Arial";
+      ctx.fillText(refHeadU.toFixed(1) + "m", xUpper - 20, 95);
+      ctx.fillText(refHeadU.toFixed(1) + "m", xLower - 20, 470);
+    }
+
+    // Draw Wells
+    // 4 Wells: Left-Lower (150), Left-Upper (250), Right-Lower (550), Right-Upper (650)
+    drawWell(ctx, 160, 420, vLL, "Pozo Inferior", 160, 200);
+    drawWell(ctx, 240, 220, vUL, "Pozo Superior", 160, 200);
+    drawWell(ctx, 560, 420, vLR, "Pozo Inferior", 150, 190);
+    drawWell(ctx, 640, 220, vUR, "Pozo Superior", 150, 190);
+
+    offset += 0.5;
+    requestAnimationFrame(drawCanvas);
+  }
+
+  function drawVerticalArrow(ctx, x, y, dir) {
+    ctx.beginPath();
+    ctx.moveTo(x, y - dir*20);
+    ctx.lineTo(x, y + dir*20);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y + dir*20);
+    ctx.lineTo(x - 5, y + dir*10);
+    ctx.lineTo(x + 5, y + dir*10);
+    ctx.fill();
+  }
+
+  function drawHorizontalFlow(ctx, y, dir, offset) {
+    for(let xPos = 200; xPos <= 600; xPos += 100) {
+      let arrowX = xPos + (dir > 0 ? (offset % 100) : -(offset % 100));
+      if (arrowX > 150 && arrowX < 650) {
+        ctx.beginPath();
+        ctx.moveTo(arrowX - dir*20, y);
+        ctx.lineTo(arrowX + dir*20, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(arrowX + dir*20, y);
+        ctx.lineTo(arrowX + dir*10, y - 5);
+        ctx.lineTo(arrowX + dir*10, y + 5);
+        ctx.fill();
+      }
+    }
+  }
+
+  // Draw a single well
+  function drawWell(ctx, x, screenY, headVal, name, minH, maxH) {
+    // Map headVal to a Y position relative to ground at 100
+    // Scale: 10 units of head = 100px.
+    // E.g., if max is 200m -> Y=50px. 180m -> Y=150px.
+    // Let's use a simple mapping for the visualization:
+    const baseY = 150; 
+    const baseHead = 180;
+    const yWater = baseY - (headVal - baseHead) * 5;
+
+    // Casing
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(x - 6, 80, 12, screenY - 80);
+    
+    // Water
+    ctx.fillStyle = "#38bdf8";
+    if (yWater < screenY) {
+      ctx.fillRect(x - 6, yWater, 12, screenY - yWater);
+    }
+    
+    // Borders
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x - 6, 80, 12, screenY - 80);
+
+    // Screen
+    ctx.lineWidth = 1;
+    for (let sy = screenY - 20; sy <= screenY; sy += 4) {
+      ctx.beginPath();
+      ctx.moveTo(x - 6, sy);
+      ctx.lineTo(x + 6, sy);
+      ctx.stroke();
+    }
+
+    // Labels
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 12px Arial";
+    ctx.fillText(name, x - 35, 75);
+    ctx.fillText(headVal + "m", x + 10, yWater + 5);
+  }
+</script>
+<style>
+  .custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e2e8f0;
+    outline: none;
+  }
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3aa6b9;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+  }
+  .custom-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+</style>
