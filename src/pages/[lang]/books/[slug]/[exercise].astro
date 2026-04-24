@@ -13,7 +13,11 @@ const { exercise } = Astro.props;
 const allExercises = await getCollection("exercises", (ex) => ex.data.lang === 'en');
 const bookExercises = allExercises.filter(
   (ex) => ex.data.bookSlug === exercise.data.bookSlug
-);
+).sort((a, b) => {
+  const numA = parseInt(a.id.match(/\\d+/g)?.pop() || "0");
+  const numB = parseInt(b.id.match(/\\d+/g)?.pop() || "0");
+  return numA - numB;
+});
 ---
 
 <ExerciseDetail exercise={exercise} bookExercises={bookExercises} />
