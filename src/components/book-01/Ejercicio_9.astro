@@ -1,0 +1,395 @@
+---
+// Ejercicio_9.astro
+---
+<div>
+  <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
+    <h1 class="font-semibold text-lg text-[var(--titles)]">
+      🗺️ Simulación: Flujo Horizontal y Carga en Acuíferos Múltiples
+    </h1>
+
+    <div class="canvas mt-6 mb-8 relative">
+      <canvas
+        id="ej9Canvas"
+        width="800"
+        height="500"
+        style="border:1px solid var(--borderEjercicio); margin: 0 auto; background-color: #ffffff; display: block;"
+        class="rounded shadow-sm"></canvas>
+    </div>
+
+    <!-- Step 1 UI: Question -->
+    <div id="step1-container-ej9" class="mt-4 p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center transition-all duration-300">
+      <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+        Paso 1: Estimar Niveles y Flujo Vertical
+      </h2>
+      <p class="text-[var(--titles)] mb-6 text-lg">
+        Considera un acuífero no confinado sobre un acuitardo de arcilla, y un acuífero confinado debajo. El sistema está flanqueado por cuerpos de agua (54 m a la izquierda, 50 m a la derecha). Asumiendo una disminución lineal del nivel freático, estima el nivel en cada pozo (Izquierdo, Centro, Derecho) separados equitativamente, y determina si hay flujo vertical a través del acuitardo de arcilla.
+      </p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <button id="btn-opt1" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors hover:bg-gray-300">53m, 52m, 51m<br/><span class="text-sm font-normal">Flujo vertical hacia abajo</span></button>
+        <button id="btn-opt2" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors hover:bg-gray-300">53m, 52m, 51m<br/><span class="text-sm font-normal">Sin flujo vertical</span></button>
+        <button id="btn-opt3" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors hover:bg-gray-300">54m, 52m, 50m<br/><span class="text-sm font-normal">Flujo vertical hacia arriba</span></button>
+        <button id="btn-opt4" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors hover:bg-gray-300">53m, 52m, 51m<br/><span class="text-sm font-normal">Flujo vertical hacia arriba</span></button>
+      </div>
+      <p id="step1-feedback-ej9" class="mt-4 font-bold hidden text-lg"></p>
+    </div>
+
+    <!-- Step 2 UI: Reveal Equipotentials -->
+    <div id="step2-container-ej9" class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300">
+      <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
+        Paso 2: Explicación del Gradiente Lineal
+      </h2>
+      <p class="text-gray-800 mb-6 text-lg text-left">
+        ¡Correcto! Al asumir una disminución lineal del nivel freático a través de una distancia que cae de 54 m a 50 m, los pozos espaciados a 1/4, 1/2 y 3/4 de la distancia tienen niveles de <strong>53 m, 52 m y 51 m</strong> respectivamente.<br/><br/>
+        El acuífero confinado inferior comparte las mismas fronteras de carga hidráulica constante. Por lo tanto, el gradiente horizontal es el mismo en ambos acuíferos. Como la carga es igual por encima y por debajo de la arcilla en cualquier ubicación (por ej. 53 m en ambos acuíferos en el pozo izquierdo), <strong>no hay gradiente vertical</strong> y, en consecuencia, no hay flujo vertical a través de la arcilla.
+      </p>
+      <button id="btn-reveal-step3-ej9" class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg">Siguiente: Experimentar con el Gradiente</button>
+    </div>
+
+    <!-- Step 3 UI: Sliders -->
+    <div id="step3-container-ej9" class="mt-4 hidden transition-all duration-300">
+      <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center">
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          Paso 3: Experimentar con las Fronteras Constantes
+        </h2>
+        <p class="text-[var(--titles)] mb-4 text-lg">
+          Ajusta los niveles de los cuerpos de agua fronterizos. Observa cómo el nivel freático y las líneas equipotenciales del acuífero confinado cambian en paralelo, manteniendo siempre un flujo vertical nulo a través de la arcilla.
+        </p>
+      </div>
+
+      <div class="controls grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg text-center">
+            Nivel de Agua Izquierdo (m)
+          </h3>
+          <input type="range" id="hLeftBorder" min="50" max="58" step="1" value="54" class="w-full custom-range" />
+          <div class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2">
+            <span>50 m</span>
+            <span id="hLeftBorderVal" class="font-bold text-lg">54</span>
+            <span>58 m</span>
+          </div>
+        </div>
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg text-center">
+            Nivel de Agua Derecho (m)
+          </h3>
+          <input type="range" id="hRightBorder" min="46" max="54" step="1" value="50" class="w-full custom-range" />
+          <div class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2">
+            <span>46 m</span>
+            <span id="hRightBorderVal" class="font-bold text-lg">50</span>
+            <span>54 m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentStep = 1;
+  const canvas = document.getElementById("ej9Canvas");
+  const ctx = canvas.getContext("2d");
+
+  const step1Container = document.getElementById("step1-container-ej9");
+  const btnOpt1 = document.getElementById("btn-opt1");
+  const btnOpt2 = document.getElementById("btn-opt2");
+  const btnOpt3 = document.getElementById("btn-opt3");
+  const btnOpt4 = document.getElementById("btn-opt4");
+  const step1Feedback = document.getElementById("step1-feedback-ej9");
+
+  const step2Container = document.getElementById("step2-container-ej9");
+  const btnRevealStep3 = document.getElementById("btn-reveal-step3-ej9");
+
+  const step3Container = document.getElementById("step3-container-ej9");
+  const hLeftBorderSlider = document.getElementById("hLeftBorder");
+  const hLeftBorderVal = document.getElementById("hLeftBorderVal");
+  const hRightBorderSlider = document.getElementById("hRightBorder");
+  const hRightBorderVal = document.getElementById("hRightBorderVal");
+
+  function handleAnswer(isCorrect, buttonId) {
+    step1Feedback.classList.remove("hidden");
+    if (isCorrect) {
+      step1Feedback.innerHTML = "✅ ¡Correcto! Has determinado los niveles y la falta de flujo vertical adecuadamente.";
+      step1Feedback.className = "mt-4 font-bold text-lg text-green-600";
+      
+      document.getElementById(buttonId).classList.add("bg-green-500", "text-white");
+      
+      setTimeout(() => {
+        currentStep = 2;
+        step1Container.classList.add("hidden");
+        step2Container.classList.remove("hidden");
+      }, 1500);
+    } else {
+      step1Feedback.innerHTML = "❌ Incorrecto. Recuerda que la caída es lineal y las fronteras son iguales para ambos acuíferos.";
+      step1Feedback.className = "mt-4 font-bold text-lg text-red-500";
+    }
+  }
+
+  btnOpt1.addEventListener("click", () => handleAnswer(false, "btn-opt1"));
+  btnOpt2.addEventListener("click", () => handleAnswer(true, "btn-opt2"));
+  btnOpt3.addEventListener("click", () => handleAnswer(false, "btn-opt3"));
+  btnOpt4.addEventListener("click", () => handleAnswer(false, "btn-opt4"));
+
+  btnRevealStep3.addEventListener("click", () => {
+    currentStep = 3;
+    step2Container.classList.add("hidden");
+    step3Container.classList.remove("hidden");
+  });
+
+  hLeftBorderSlider.addEventListener("input", (e) => {
+    hLeftBorderVal.textContent = e.target.value;
+  });
+  hRightBorderSlider.addEventListener("input", (e) => {
+    hRightBorderVal.textContent = e.target.value;
+  });
+
+  function resizeCanvas() {
+    // Canvas styling is handled automatically, no overlay to resize.
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  // Animación del Canvas
+  let offset = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dynamic Variables
+    let hLeft = 54;
+    let hRight = 50;
+    if (currentStep === 3) {
+      hLeft = parseFloat(hLeftBorderSlider.value);
+      hRight = parseFloat(hRightBorderSlider.value);
+    }
+    
+    // Canvas dimensions and geometry
+    const startX = 150;
+    const endX = 650;
+    const dist = endX - startX;
+    
+    // Map heads to Y positions (inverted: higher head -> smaller Y)
+    // base Y = 400 for 45m head. 1m = 15px.
+    const baseY = 400;
+    const baseHead = 45;
+    const getY = (head) => baseY - (head - baseHead) * 15;
+
+    const yLeft = getY(hLeft);
+    const yRight = getY(hRight);
+
+    // Draw Water Bodies (Boundaries)
+    ctx.fillStyle = "#bae6fd"; // sky-200
+    // Left Water Body
+    ctx.fillRect(0, yLeft, startX, 500 - yLeft);
+    // Right Water Body
+    ctx.fillRect(endX, yRight, 800 - endX, 500 - yRight);
+    
+    // Draw Land Mass Backgrounds
+    // Unconfined aquifer
+    ctx.fillStyle = "#fef08a"; // yellow-200 (sand)
+    ctx.beginPath();
+    ctx.moveTo(startX, yLeft);
+    ctx.lineTo(endX, yRight);
+    ctx.lineTo(endX, 280);
+    ctx.lineTo(startX, 280);
+    ctx.fill();
+
+    // Aquitard (Clay)
+    ctx.fillStyle = "#9ca3af"; // gray-400
+    ctx.fillRect(startX, 280, dist, 60);
+    
+    // Confined Aquifer
+    ctx.fillStyle = "#fde047"; // yellow-300 (sand)
+    ctx.fillRect(startX, 340, dist, 160);
+
+    // Labels for Layers
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 14px Arial";
+    ctx.fillText("Acuífero No Confinado (Arena)", startX + 150, 240);
+    ctx.fillStyle = "#fff";
+    ctx.fillText("Acuitardo (Arcilla)", startX + 190, 315);
+    ctx.fillStyle = "#000";
+    ctx.fillText("Acuífero Confinado (Arena)", startX + 160, 420);
+
+    // Boundary Lines
+    ctx.strokeStyle = "#0284c7"; // border lake
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(startX, yLeft);
+    ctx.lineTo(startX, 500);
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.moveTo(endX, yRight);
+    ctx.lineTo(endX, 500);
+    ctx.stroke();
+    
+    // Water Table Line
+    ctx.strokeStyle = "#0ea5e9";
+    ctx.lineWidth = 3;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(startX, yLeft);
+    ctx.lineTo(endX, yRight);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#0284c7";
+    ctx.fillText("Nivel Freático", 350, (yLeft+yRight)/2 - 10);
+
+    // Draw Equipotential Lines (only Step 2 & 3)
+    if (currentStep >= 2) {
+      ctx.strokeStyle = "#0d9488"; // teal-600
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 8]);
+      
+      const headDiff = hLeft - hRight;
+      if (headDiff !== 0) {
+        // Draw equipotentials every 1m
+        const minHead = Math.min(hLeft, hRight);
+        const maxHead = Math.max(hLeft, hRight);
+        
+        let startHead = Math.ceil(minHead);
+        if (startHead === minHead) startHead += 1; // exclusive of boundary
+        
+        for (let h = startHead; h < maxHead; h++) {
+          // Linear interpolation for X
+          const ratio = Math.abs((h - hLeft) / (hRight - hLeft));
+          const lineX = startX + ratio * dist;
+          
+          // Draw in unconfined
+          ctx.beginPath();
+          ctx.moveTo(lineX, getY(h));
+          ctx.lineTo(lineX, 280);
+          ctx.stroke();
+          
+          // Draw in confined
+          ctx.beginPath();
+          ctx.moveTo(lineX, 340);
+          ctx.lineTo(lineX, 500);
+          ctx.stroke();
+          
+          // Label
+          ctx.fillStyle = "#0f766e";
+          ctx.font = "12px Arial";
+          ctx.fillText(h + "m", lineX + 2, 450);
+        }
+      }
+      ctx.setLineDash([]);
+      
+      // Draw Flow Arrows in Confined & Unconfined Aquifers
+      ctx.strokeStyle = "#2563eb"; // blue-600
+      ctx.fillStyle = "#2563eb";
+      ctx.lineWidth = 2;
+      
+      const arrowDir = hLeft > hRight ? 1 : (hLeft < hRight ? -1 : 0);
+      if (arrowDir !== 0) {
+        for(let xPos = startX + 100; xPos < endX; xPos += 150) {
+          let arrowX = xPos + (arrowDir > 0 ? (offset % 100) : -(offset % 100));
+          if (arrowX > startX + 20 && arrowX < endX - 20) {
+            // Unconfined arrow (at y=200 roughly, clamped by water table)
+            const wtY = yLeft + ((arrowX - startX)/dist) * (yRight - yLeft);
+            if (wtY < 250) {
+               drawArrow(ctx, arrowX, 260, arrowDir);
+            }
+            // Confined arrow
+            drawArrow(ctx, arrowX, 400, arrowDir);
+          }
+        }
+      }
+    }
+
+    // Wells Setup
+    const wells = [
+      { id: "Izq", x: startX + dist * 0.25, name: "Pozo Izquierdo" },
+      { id: "Cen", x: startX + dist * 0.50, name: "Pozo Central" },
+      { id: "Der", x: startX + dist * 0.75, name: "Pozo Derecho" }
+    ];
+
+    wells.forEach(w => {
+      const wHead = hLeft + ((w.x - startX) / dist) * (hRight - hLeft);
+      const wY = getY(wHead);
+      
+      // Draw Well Casing
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(w.x - 6, 20, 12, wY - 20); // down to water level
+      ctx.fillStyle = "#38bdf8"; // water color inside well
+      ctx.fillRect(w.x - 6, wY, 12, 480 - wY); 
+      
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(w.x - 6, 20, 12, 460);
+      
+      // Well Label
+      ctx.fillStyle = "#000";
+      ctx.font = "bold 14px Arial";
+      ctx.fillText(w.name, w.x - 35, 15);
+      
+      if (currentStep >= 2) {
+        ctx.fillStyle = "#000";
+        ctx.fillText(wHead.toFixed(1) + "m", w.x + 10, wY + 5);
+      } else {
+        ctx.fillStyle = "#000";
+        ctx.fillText("? m", w.x + 10, wY + 5);
+      }
+      
+      // Draw screen (ranuras)
+      // Left well is screened in confined aquifer
+      // Center and Right wells can be shown just reaching water table, but usually they are unconfined. Let's make them screen in unconfined for visually matching text or all in unconfined/confined.
+      // Text says: "The well on the left side is screened in the confined aquifer ... water level in the center...". We will screen left well in confined, others in unconfined.
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 1;
+      let screenTop, screenBot;
+      if (w.id === "Izq") {
+         screenTop = 420; screenBot = 460;
+      } else {
+         screenTop = wY; screenBot = wY + 40; 
+      }
+      for (let sy = screenTop; sy <= screenBot; sy += 4) {
+         ctx.beginPath();
+         ctx.moveTo(w.x - 6, sy);
+         ctx.lineTo(w.x + 6, sy);
+         ctx.stroke();
+      }
+    });
+
+    offset += 0.5;
+    requestAnimationFrame(draw);
+  }
+
+  function drawArrow(ctx, x, y, dir) {
+    ctx.beginPath();
+    ctx.moveTo(x - dir*20, y);
+    ctx.lineTo(x + dir*20, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x + dir*20, y);
+    ctx.lineTo(x + dir*10, y - 5);
+    ctx.lineTo(x + dir*10, y + 5);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+</script>
+<style>
+  .custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e2e8f0;
+    outline: none;
+  }
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3aa6b9;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+  }
+  .custom-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+</style>
