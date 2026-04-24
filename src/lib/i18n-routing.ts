@@ -10,8 +10,8 @@ export async function getBookStaticPaths(lang: 'es' | 'en') {
     const filteredExercises = allExercises.filter(
       (exercise) => exercise.data.bookSlug === cleanBookSlug
     ).sort((a, b) => {
-      const numA = parseInt(a.id.match(/\\d+/g)?.pop() || "0");
-      const numB = parseInt(b.id.match(/\\d+/g)?.pop() || "0");
+      const numA = parseInt(a.id.match(/\d+/g)?.pop() || "0");
+      const numB = parseInt(b.id.match(/\d+/g)?.pop() || "0");
       return numA - numB;
     });
 
