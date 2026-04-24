@@ -1,0 +1,45 @@
+---
+title: "Exercise 11"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 11</h3>
+  
+  <p>Analyze the provided hydrogeological cross-section consisting of an upper clay unit and a lower sand unit with two monitoring wells. Based on the measurements in the diagram, answer the following questions regarding groundwater flow.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_11/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 11 Solution</h3>
+
+  <p>The step-by-step solution can be explored in the interactive exercise above. The key takeaways are:</p>
+
+  <ul>
+    <li><strong>Potentiometric contours in the lower sand unit</strong> are evenly spaced vertical lines based on the linear interpolation of head values between the wells, decreasing from left to right.</li>
+    <li><strong>The potentiometric surface</strong> is represented by a planar surface (a straight line in cross-section) connecting the head elevations of the two wells.</li>
+    <li><strong>The direction of groundwater flow through the upper clay unit</strong> is mainly downward (recharge). This is determined by comparing the water table elevation to the potentiometric surface elevation. Since the water table is higher, there is a downward vertical gradient.</li>
+    <li><strong>The expected vertical hydraulic head profile</strong> near Well 2 shows a relatively steep downward gradient through the clay, followed by a relatively constant head (or a much slighter gradient) through the highly conductive sand.</li>
+  </ul>
+
+</section>
