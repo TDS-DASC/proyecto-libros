@@ -1,0 +1,45 @@
+---
+title: "Exercise 12"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 12</h3>
+  
+  <p>Analyze the provided hydrogeological cross-section, which shows an upper sand unit, an upper clay aquitard, a lower sand unit, and a lower clay unit, with two monitoring wells. Based on the water level measurements shown in the diagram, answer the following questions about groundwater flow.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_12/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 12 Solution</h3>
+
+  <p>The step-by-step solution can be explored in the interactive exercise above. The key takeaways are:</p>
+
+  <ul>
+    <li><strong>Potentiometric contours (Part a)</strong> in the lower sand unit are evenly spaced vertical lines based on linear interpolation of head values between the wells — head increases from left (36 m at Well 1) to right (40 m at Well 2), so contours are labeled 36, 37, 38, 39, 40 m from left to right.</li>
+    <li><strong>The potentiometric surface (Part b)</strong> is a planar surface (a straight line in cross-section) connecting the head elevations of the two wells screened in the lower confined aquifer (36 m at Well 1, 40 m at Well 2).</li>
+    <li><strong>The flow direction through the upper clay unit (Part c)</strong> is <em>upward</em>. The potentiometric head in the lower sand at Well 2 is 40 m, which is higher than the water table at that location (~38 m), creating an upward vertical gradient through the clay.</li>
+    <li><strong>The expected vertical head profile (Part d)</strong> near Well 2 shows a slight downward decrease in head through the unconfined aquifer (due to non-horizontal flow), then a sharp upward jump across the aquitard, then a relatively constant head in the lower confined aquifer.</li>
+  </ul>
+
+</section>
