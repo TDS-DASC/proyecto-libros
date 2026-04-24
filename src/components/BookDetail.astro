@@ -1,0 +1,42 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BookLayout from "../layouts/BookLayout.astro";
+import { getLangFromUrl } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  book: CollectionEntry<"books">;
+  exercises: CollectionEntry<"exercises">[];
+}
+
+const { book, exercises } = Astro.props;
+const { Content } = await render(book);
+
+const lang = getLangFromUrl(Astro.url);
+const currentBookSlug = book.data.lang === 'es' ? (book as any).slug || book.id.split('/')[1] : book.id.split('/')[1];
+---
+
+<BookLayout exercises={exercises} currentBookSlug={currentBookSlug}>
+  <div slot="sidebar-li">
+    {
+      exercises.map((exercise) => {
+        const exerciseSlug = exercise.id.split("/").pop()?.replace('.mdx', '').replace('.md', '');
+        return (
+          <li>
+            <a
+              href={getRelativeLocaleUrl(lang, `books/${exercise.data.bookSlug}/${exerciseSlug}`)}
+            >
+              {exercise.data.title}
+            </a>
+          </li>
+        );
+      })
+    }
+  </div>
+
+  <div slot="introduction">
+    <h1>{book.data.title}</h1>
+    <Content />
+    <br />
+  </div>
+</BookLayout>

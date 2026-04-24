@@ -1,0 +1,12 @@
+---
+import { getBookStaticPaths } from "../../../../lib/i18n-routing";
+import BookDetail from "../../../../components/BookDetail.astro";
+
+export async function getStaticPaths() {
+  return await getBookStaticPaths('en');
+}
+
+const { book, exercises } = Astro.props;
+---
+
+<BookDetail book={book} exercises={exercises} />

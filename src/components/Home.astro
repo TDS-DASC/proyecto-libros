@@ -1,0 +1,157 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout>
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <!--contenedor del texto en dos columnas-->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!--columna izquierda: titulo-->
+      <h1 class="text-3xl md:text-5xl lato-bold leading-tight title-[var(--titles)]" set:html={t('home.title').replace('plataforma', 'plataforma<br />').replace('interactive', 'interactive<br />').replace('educational', 'educational<br />')}>
+      </h1>
+
+      <!--columna derecha: parrafo y los dos botones-->
+      <div class="flex flex-col justify-center">
+        <p class="text-gray-700 mb-6">
+          {t('home.mission')}
+        </p>
+
+        <div class="flex gap-4">
+          <a
+            href="#"
+            onclick="window.scrollBy({ top: 850, behavior: 'smooth' }); return false;"
+            class="bg-[var(--botonOscuro)] border border-gray-400 text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+          >
+            {t('home.explore')}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(lang, 'books')}
+            class="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300 transition"
+            >{t('home.start')}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--iamgen de la uabcs-->
+    <div>
+      <img
+        src="/proyecto-libros/uabcsimage.png"
+        alt="Campus UABCS"
+        class="w-full rounded shadow"
+      />
+    </div>
+
+    <div class="contenedor w-full flex justify-center mt-12 md:mt-24">
+      <div class="text-center">
+        <p class="lato-regular mb-6">{t('home.portfolio')}</p>
+        <h1 class="text-2xl md:text-4xl lato-bold px-4">{t('home.library_title')}</h1>
+        <p class="mt-8 lato-regular">
+          {t('home.library_desc')}
+        </p>
+
+        <!-- GRID DE LIBROS -->
+        <div
+          class="matriz grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 md:mt-18 px-4 md:px-0"
+        >
+          <!-- Cuerpo de la tarjeta  -->
+          <div
+            class="shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition bg-[var(--cards)]"
+          >
+            <img
+              class="w-full h-88 object-cover"
+              src="/proyecto-libros/book1.jpg"
+              alt="Book Cover"
+            />
+
+            <div class="p-6 text-left">
+              <h1 class="text-lg lato-bold mb-2">
+                Conceptual and Visual Understanding of Hydraulic Head and
+                Groundwater Flow
+              </h1>
+              <h3 class="text-gray-500 mb-4 lato-regular">
+                Andrew J.B. Cohen and John A. Cherry
+              </h3>
+
+              <!-- Etiquetas -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.geology')}</span
+                >
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.hydrology')}</span
+                >
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.water')}</span
+                >
+              </div>
+
+              <!-- Boton ver proyecto -->
+              <a
+                href={getRelativeLocaleUrl(lang, 'books/book-01')}
+                class="text-blue-600 font-semibold hover:underline"
+                >{t('home.view_project')}</a
+              >
+            </div>
+          </div>
+
+          <!-- TARJETA 2 -->
+          <div
+            class="shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition bg-[var(--cards)]"
+          >
+            <img
+              class="w-full h-88 object-cover"
+              src="/proyecto-libros/genericcover.jpg"
+              alt="Book Cover"
+            />
+
+            <div class="p-6 text-left">
+              <h1 class="text-lg lato-bold mb-2">Lorem Ipsum dolor sit amet</h1>
+              <h3 class="text-gray-500 mb-4">Hazael Flores</h3>
+
+              <!-- Etiquetas -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.salinity')}</span
+                >
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.hydrology')}</span
+                >
+                <span
+                  class="px-3 py-1 text-sm text-[var(--titles)] bg-[var(--navfooternt)]"
+                  >{t('home.water')}</span
+                >
+              </div>
+
+              <!-- Boton ver proyecto -->
+              <a
+                href={getRelativeLocaleUrl(lang, 'books/book-02')}
+                class="text-blue-600 font-semibold hover:underline"
+                >{t('home.view_project')}</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- BOTÓN VER TODOS -->
+        <div class="mt-24 mb-24">
+          <a
+            href={getRelativeLocaleUrl(lang, 'books')}
+            class="px-6 py-2 border border-gray-400 rounded hover:bg-[var(--navfooternt)] bg-[var(--cards)] text-[var(--titles)] transition-colors duration-300 ease-in-out"
+          >
+            {t('home.see_all')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

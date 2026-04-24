@@ -1,11 +1,17 @@
 ---
 import "../styles/global.css";
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div id="container">
   <nav class="navbar relative z-50">
     <div class="contenedor flex items-center justify-between">
-      <a href="/proyecto-libros/" class="z-50">
+      <a href={getRelativeLocaleUrl(lang, "/")} class="z-50">
         <img
           src="/proyecto-libros/logouabcs.png"
           alt="logo uabcs"
@@ -47,17 +53,17 @@ import "../styles/global.css";
       >
         <li>
           <a
-            href="/proyecto-libros/"
+            href={getRelativeLocaleUrl(lang, "/")}
             class="font-regular text-[var(--titles)] hover:text-blue-400 transition-colors duration-300"
-            >Inicio Rápido</a
+            >{t('nav.home')}</a
           >
         </li>
 
         <li>
           <a
-            href="/proyecto-libros/books"
+            href={getRelativeLocaleUrl(lang, "books")}
             class="font-regular text-[var(--titles)] hover:text-blue-400 transition-colors duration-300"
-            >Libros Interactivos</a
+            >{t('nav.books')}</a
           >
         </li>
 
@@ -65,56 +71,12 @@ import "../styles/global.css";
           <a
             href=""
             class="font-regular text-[var(--titles)] hover:text-blue-400 transition-colors duration-300"
-            >Contacto</a
+            >{t('nav.contact')}</a
           >
         </li>
 
-        <li class="relative group">
-          <a
-            href="#"
-            class="flex items-center gap-2 font-regular text-[var(--titles)] hover:text-blue-400 transition-colors duration-300 cursor-pointer"
-          >
-            Español
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </a>
-
-          <ul
-            class="absolute left-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow-lg opacity-0 translate-y-2 scale-95 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 invisible group-hover:visible transition-all duration-300 z-10 dark:bg-gray-800 dark:border-gray-700"
-          >
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-                >Español</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-                >English</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-                >Deutsch</a
-              >
-            </li>
-          </ul>
+        <li>
+          <LanguagePicker />
         </li>
 
         <li>

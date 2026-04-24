@@ -1,0 +1,48 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const currentLabel = languages[lang as keyof typeof languages];
+
+// Get the current path without the base and without the current language prefix
+const pathWithoutBase = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const currentPath = pathWithoutBase.replace(new RegExp(`^${lang}/?`), '');
+---
+
+<li class="relative group list-none">
+  <div
+    class="flex items-center gap-2 font-regular text-[var(--titles)] hover:text-blue-400 transition-colors duration-300 cursor-pointer"
+  >
+    {currentLabel}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </div>
+
+  <ul
+    class="absolute left-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow-lg opacity-0 translate-y-2 scale-95 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 invisible group-hover:visible transition-all duration-300 z-50 dark:bg-gray-800 dark:border-gray-700 p-0"
+  >
+    {Object.entries(languages).map(([l, label]) => (
+      <li class="list-none">
+        <a
+          href={getRelativeLocaleUrl(l, currentPath)}
+          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white transition-colors duration-200"
+        >
+          {label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</li>

@@ -1,0 +1,11 @@
+---
+import Books from "../../../components/Books.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+  ];
+}
+---
+
+<Books />

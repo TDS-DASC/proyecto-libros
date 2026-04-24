@@ -1,46 +1,20 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import BookLayout from "../../../layouts/BookLayout.astro";
-
-const allExercises = await getCollection("exercises");
+import { getCollection } from "astro:content";
+import { getExerciseStaticPaths } from "../../../lib/i18n-routing";
+import ExerciseDetail from "../../../components/ExerciseDetail.astro";
 
 export async function getStaticPaths() {
-  const allExercises = await getCollection("exercises");
-
-  return allExercises.map(
-    (exercise: { data: { bookSlug: any }; slug: string }) => ({
-      params: {
-        slug: exercise.data.bookSlug,
-        // Usamos .split('/').pop() para obtener solo la última parte del slug
-        exercise: exercise.slug.split("/").pop(),
-      },
-      props: {
-        exercise,
-      },
-    }),
-  );
+  const paths = await getExerciseStaticPaths('es');
+  return paths.map(p => ({ params: { slug: p.params.slug, exercise: p.params.exercise }, props: p.props }));
 }
 
-type Props = {
-  exercise: CollectionEntry<"exercises">;
-};
+const { exercise } = Astro.props;
 
-const { exercise } = Astro.props as Props;
-
-//filtra todos los ejercicios del mismo libro
+// Filter exercises for the sidebar (must be from the same language)
+const allExercises = await getCollection("exercises", (ex) => ex.data.lang === 'es');
 const bookExercises = allExercises.filter(
-  (ex: { data: { bookSlug: any } }) =>
-    ex.data.bookSlug === exercise.data.bookSlug,
+  (ex) => ex.data.bookSlug === exercise.data.bookSlug
 );
-
-const { Content } = await exercise.render();
-//current book
-const currentBookSlug = exercise.data.bookSlug;
 ---
 
-<BookLayout exercises={bookExercises} currentBookSlug={currentBookSlug}>
-  <div slot="introduction">
-    <!-- <h1>{exercise.data.title}</h1> -->
-    <Content />
-  </div>
-</BookLayout>
+<ExerciseDetail exercise={exercise} bookExercises={bookExercises} />

@@ -1,7 +1,11 @@
 ---
 import "../styles/global.css";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 const { exercises = [], currentBookSlug } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <html>
@@ -10,7 +14,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Libro interactivo</title>
+    <title>{t('book.title')}</title>
   </head>
 
   <body class="flex flex-col min-h-screen sidebar-open">
@@ -95,16 +99,16 @@ const { exercises = [], currentBookSlug } = Astro.props;
           <h5
             class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-[var(--titles)]"
           >
-            Contenido
+            {t('book.content')}
           </h5>
         </div>
         <nav
           class="flex flex-col gap-1 p-2 font-sans lato-regular text-gray-700 overflow-y-auto"
         >
           <a
-            href={`/proyecto-libros/books/${currentBookSlug}`}
+            href={getRelativeLocaleUrl(lang, `books/${currentBookSlug}`)}
             class={`text-[var(--sidebarText)] flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-[var(--hoverSidebar)] hover:bg-opacity-80 focus:bg-[var(--hoverSidebar)] focus:bg-opacity-80 active:bg-[var(--hoverSidebar)] active:bg-opacity-80 hover:text-[var(--textoHover)] focus:text-[var(--textoHover)] active:text-[var(--textoHover)] outline-none
-  ${Astro.url.pathname === `/books/${currentBookSlug}/` ? "bg-[var(--hoverSidebar)] bg-opacity-80 !text-[var(--textoHover)]" : ""}`}
+  ${Astro.url.pathname === getRelativeLocaleUrl(lang, `books/${currentBookSlug}`) ? "bg-[var(--hoverSidebar)] bg-opacity-80 !text-[var(--textoHover)]" : ""}`}
           >
             <div class="grid place-items-center mr-4">
               <svg
@@ -118,37 +122,41 @@ const { exercises = [], currentBookSlug } = Astro.props;
                 ></path>
               </svg>
             </div>
-            Introduccion
+            {t('book.intro')}
           </a>
 
           {
-            exercises.map((ex: { slug: string; data: { title: unknown } }) => (
-              <a
-                href={`/proyecto-libros/books/${currentBookSlug}/${ex.slug.split("/").pop()}`}
-                class={`text-[var(--sidebarText)] flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-[var(--hoverSidebar)] hover:bg-opacity-80 focus:bg-[var(--hoverSidebar)] focus:bg-opacity-80 active:bg-[var(--hoverSidebar)] active:bg-opacity-80 hover:text-[var(--textoHover)] focus:text-[var(--textoHover)] active:text-[var(--textoHover)] outline-none
-  ${Astro.url.pathname.includes(ex.slug.split("/").pop() as string) ? "bg-[var(--hoverSidebar)] bg-opacity-80 !text-[var(--textoHover)]" : ""}`}
-              >
-                <div class="grid place-items-center mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M4.5 6.75A2.25 2.25 0 016.75 4.5h10.5A2.25 2.25 0 0119.5 6.75v10.5a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25V6.75zM6 8.25h12v1.5H6v-1.5zm0 3h12v1.5H6v-1.5zm0 3h8.25v1.5H6v-1.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                {ex.data.title}
-              </a>
-            ))
+            exercises.map((ex: any) => {
+              const exerciseSlug = ex.id.split("/").pop()?.replace('.mdx', '').replace('.md', '');
+              const url = getRelativeLocaleUrl(lang, `books/${currentBookSlug}/${exerciseSlug}`);
+              return (
+                <a
+                  href={url}
+                  class={`text-[var(--sidebarText)] flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-[var(--hoverSidebar)] hover:bg-opacity-80 focus:bg-[var(--hoverSidebar)] focus:bg-opacity-80 active:bg-[var(--hoverSidebar)] active:bg-opacity-80 hover:text-[var(--textoHover)] focus:text-[var(--textoHover)] active:text-[var(--textoHover)] outline-none
+  ${Astro.url.pathname.includes(exerciseSlug as string) ? "bg-[var(--hoverSidebar)] bg-opacity-80 !text-[var(--textoHover)]" : ""}`}
+                >
+                  <div class="grid place-items-center mr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="h-5 w-5"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.5 6.75A2.25 2.25 0 016.75 4.5h10.5A2.25 2.25 0 0119.5 6.75v10.5a2.25 2.25 0 01-2.25 2.25H6.75a2.25 2.25 0 01-2.25-2.25V6.75zM6 8.25h12v1.5H6v-1.5zm0 3h12v1.5H6v-1.5zm0 3h8.25v1.5H6v-1.5z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  {ex.data.title}
+                </a>
+              );
+            })
           }
 
           <a
-            href="/proyecto-libros/books"
+            href={getRelativeLocaleUrl(lang, "books")}
             class="text-[var(--sidebarText)] flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-[var(--hoverSidebar)] hover:bg-opacity-80 focus:bg-[var(--hoverSidebar)] focus:bg-opacity-80 active:bg-[var(--hoverSidebar)] active:bg-opacity-80 hover:text-[var(--textoHover)] focus:text-[var(--textoHover)] active:text-[var(--textoHover)] outline-none"
           >
             <svg
@@ -163,7 +171,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
             >
               <path d="M19 12H5M12 19l-7-7 7-7"></path>
             </svg>
-            <span>Volver</span>
+            <span>{t('book.back')}</span>
           </a>
         </nav>
 
@@ -173,7 +181,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
           class="mt-8 flex items-center gap-2 border border-green-500 rounded-md p-4 text-[#206f47] bg-[#dbede6] max-w-md"
         >
           <span
-            >☝️ Para acceder a los ejercicios selecciona una opción de arriba</span
+            >{t('book.select')}</span
           >
         </div>
       </aside>
@@ -391,7 +399,7 @@ const { exercises = [], currentBookSlug } = Astro.props;
 
   /* Estado cuando el sidebar está colapsado en el body */
   .sidebar-collapsed #sidebar {
-    left: -312px; /* Mueve el sidebar completamente fuera de la pantalla */
+    left: -312px; /* Mueve el sidebar completely fuera de la pantalla */
   }
 
   /* Mueve el botón de alternancia al borde izquierdo cuando está colapsado */

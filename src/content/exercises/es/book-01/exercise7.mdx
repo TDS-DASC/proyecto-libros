@@ -1,0 +1,53 @@
+---
+title: "Ejercicio 7"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.3 Flow Across Aquitards</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  In some cases, the hydraulic conductivity of the aquitard is less restrictive, and some groundwater may flow between the overlying and underlying aquifers. Such a formation may be referred to as a leaky aquitard. In the vicinity of a recharge or discharge area, the groundwater in both unconfined and confined aquifers can have a significant vertical flow component even in the presence of an aquitard.
+
+  Figure 27 shows that the direction of flow in the aquitard is dependent on the relative elevations of the water table and potentiometric surface. The flow direction is determined by the hydraulic gradient between the aquifers.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figure 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 27</b> <em> – Head profile across aquitards resulting in: a) downward and b) upward flow (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Example Problem 7</h3>
+
+  <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> A piezometer is inserted into an aquifer beneath sediment (low K) of a lake, and water rises to a stable level as shown below. A water table is present but not shown. Is water flowing upward or downward through the sediment? Explain.</p>
+    <p class="text-[var(--titles)] text-lg"><b>b)</b> Draw a schematic representation of the vertical head profile, extending from the water level of the lake to the well screen.</p>
+  </div>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Solución Interactiva</h3>
+
+  Este ejercicio interactivo ilustra la solución al problema anterior. Un piezómetro está instalado en el acuífero para medir la carga hidráulica (h<sub>acuífero</sub>). El agua puede fluir hacia arriba o hacia abajo a través del sedimento dependiendo de la diferencia de carga hidráulica entre el acuífero y el lago. En esta simulación descubriremos cuál es el caso.
+
+  Exploraremos cómo la **carga hidráulica del acuífero** y la **conductividad hidráulica del sedimento (K<sub>sedimento</sub>)** afectan la dirección y velocidad del flujo y el perfil vertical de carga hidráulica, basándonos en la Ley de Darcy.
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo guiado </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_7/>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+</section>
