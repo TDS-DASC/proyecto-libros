@@ -1,0 +1,50 @@
+---
+title: "Ejercicio 8"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 8</h3>
+  
+  <p>La figura a continuación es una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado), ¿cuál es la elevación esperada del nivel del agua en el Pozo B?</p>
+
+  <img 
+    src="/proyecto-libros/images/exercise8-diagram.jpg" 
+    alt="Diagrama del Problema 8"
+    class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
+  />
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_8/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución al Problema 8</h3>
+
+  <p>El nivel del agua en el lago es horizontal. Por lo tanto, la carga hidráulica es la misma en todo el lago, incluso a lo largo de la interfaz costa-lago. Dado que el flujo es ortogonal a las líneas equipotenciales y se asume que el nivel freático es planar, el intervalo de contorno de 2 m se extrapola hacia aguas arriba, resultando así en un nivel de agua de <strong>14 m</strong> en el Pozo B.</p>
+
+  <img 
+    src="/proyecto-libros/images/exercise8-solution.png" 
+    alt="Solución del Problema 8"
+    class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
+  />
+
+</section>

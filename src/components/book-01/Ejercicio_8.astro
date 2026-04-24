@@ -1,0 +1,322 @@
+---
+// Ejercicio_8.astro
+---
+<div>
+  <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
+    <h1 class="font-semibold text-lg text-[var(--titles)]">
+      🗺️ Simulación: Plano Freático (Water Table)
+    </h1>
+
+    <div class="canvas mt-6 mb-8 relative">
+      <canvas
+        id="ej8Canvas"
+        width="800"
+        height="500"
+        style="border:1px solid var(--borderEjercicio); margin: 0 auto; background-color: #ffffff; display: block;"
+        class="rounded shadow-sm"></canvas>
+
+      <div
+        id="canvas-overlay-ej8"
+        class="absolute top-0 right-0 h-[500px] bg-gray-100/90 backdrop-blur-sm flex items-center justify-center rounded-r border-l border-gray-300 transition-opacity duration-500"
+        style="width: 400px; margin-right: calc(50% - 400px);"
+      >
+        <p class="text-gray-500 font-bold text-lg px-6 text-center">
+          Líneas equipotenciales y Pozo B ocultos hasta completar el Paso 1
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 1 UI: Question -->
+    <div id="step1-container-ej8" class="mt-4 p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center transition-all duration-300">
+      <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+        Paso 1: Determinar el Nivel del Agua
+      </h2>
+      <p class="text-[var(--titles)] mb-6 text-lg">
+        La figura muestra una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado) y la elevación del lago es de 10 m, ¿cuál es la elevación esperada del nivel del agua en el Pozo B?
+      </p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <button id="btn-12m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg hover:bg-gray-300">12 m</button>
+        <button id="btn-13m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg hover:bg-gray-300">13 m</button>
+        <button id="btn-14m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg hover:bg-gray-300">14 m</button>
+        <button id="btn-between" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg hover:bg-gray-300">Entre 12 y 13 m</button>
+      </div>
+      <p id="step1-feedback-ej8" class="mt-4 font-bold hidden text-lg"></p>
+    </div>
+
+    <!-- Step 2 UI: Reveal Equipotentials -->
+    <div id="step2-container-ej8" class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300">
+      <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
+        Paso 2: Líneas Equipotenciales y Dirección de Flujo
+      </h2>
+      <p id="step2-explanation-ej8" class="text-gray-800 mb-6 text-lg">
+        ¡Correcto! El nivel del agua en el lago es horizontal (10 m). Por lo tanto, la carga es la misma a lo largo de toda la costa (línea equipotencial de 10 m). 
+        Como el flujo es perpendicular a las líneas equipotenciales y se asume que el nivel freático es planar, el intervalo de contorno de 2 m se extrapola hacia aguas arriba. El Pozo B está al doble de distancia de la costa que el Pozo A, resultando en un nivel de agua de 14 m.
+      </p>
+      <button id="btn-reveal-step3-ej8" class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg">Siguiente: Experimentar con la Pendiente</button>
+    </div>
+
+    <!-- Step 3 UI: Sliders -->
+    <div id="step3-container-ej8" class="mt-4 hidden transition-all duration-300">
+      <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center">
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          Paso 3: Experimentar con el Gradiente
+        </h2>
+        <p class="text-[var(--titles)] mb-4 text-lg">
+          Ajusta la elevación del Pozo A. Observa cómo cambia la pendiente del nivel freático (gradiente) y cómo se reajustan las líneas equipotenciales y el nivel esperado en el Pozo B.
+        </p>
+      </div>
+
+      <div class="controls grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg">
+            Nivel del Agua Pozo A (m)
+          </h3>
+          <input type="range" id="hWellA" min="10.5" max="15" step="0.5" value="12" class="w-full custom-range" />
+          <div class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2">
+            <span>Poco profundo (10.5)</span>
+            <span id="hWellAVal" class="font-bold text-lg">12</span>
+            <span>Más profundo (15)</span>
+          </div>
+        </div>
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm text-center flex flex-col justify-center">
+          <h3 class="text-[var(--titles)] font-bold mb-2 text-lg">
+            Nivel Esperado Pozo B:
+          </h3>
+          <span id="expectedWellB" class="font-mono text-3xl text-[#3aa6b9] font-bold">14.0 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentStep = 1;
+  const canvas = document.getElementById("ej8Canvas");
+  const ctx = canvas.getContext("2d");
+  const overlay = document.getElementById("canvas-overlay-ej8");
+
+  const step1Container = document.getElementById("step1-container-ej8");
+  const btn12m = document.getElementById("btn-12m");
+  const btn13m = document.getElementById("btn-13m");
+  const btn14m = document.getElementById("btn-14m");
+  const btnBetween = document.getElementById("btn-between");
+  const step1Feedback = document.getElementById("step1-feedback-ej8");
+
+  const step2Container = document.getElementById("step2-container-ej8");
+  const btnRevealStep3 = document.getElementById("btn-reveal-step3-ej8");
+
+  const step3Container = document.getElementById("step3-container-ej8");
+  const hWellASlider = document.getElementById("hWellA");
+  const hWellAVal = document.getElementById("hWellAVal");
+  const expectedWellB = document.getElementById("expectedWellB");
+
+  function handleAnswer(answer) {
+    step1Feedback.classList.remove("hidden");
+    if (answer === 14) {
+      step1Feedback.textContent = "✅ ¡Correcto! El Pozo B está a 14 m.";
+      step1Feedback.className = "mt-4 font-bold text-lg text-green-600";
+      
+      btn14m.classList.add("bg-green-500", "text-white");
+      
+      setTimeout(() => {
+        currentStep = 2;
+        step1Container.classList.add("hidden");
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+          step2Container.classList.remove("hidden");
+        }, 500);
+      }, 1500);
+    } else {
+      step1Feedback.textContent = "❌ Incorrecto. Revisa la distancia entre la costa, el Pozo A y el Pozo B.";
+      step1Feedback.className = "mt-4 font-bold text-lg text-red-500";
+    }
+  }
+
+  btn12m.addEventListener("click", () => handleAnswer(12));
+  btn13m.addEventListener("click", () => handleAnswer(13));
+  btn14m.addEventListener("click", () => handleAnswer(14));
+  btnBetween.addEventListener("click", () => handleAnswer(12.5));
+
+  btnRevealStep3.addEventListener("click", () => {
+    currentStep = 3;
+    step2Container.classList.add("hidden");
+    step3Container.classList.remove("hidden");
+  });
+
+  hWellASlider.addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value);
+    hWellAVal.textContent = val;
+    // Si Lake = 10, A = val, entonces B = 10 + 2*(val - 10) = 2*val - 10
+    const valB = 2 * val - 10;
+    expectedWellB.textContent = valB.toFixed(1) + " m";
+  });
+
+  function resizeCanvas() {
+    if (canvas.parentElement) {
+      overlay.style.marginRight = `calc(50% - ${canvas.width / 2}px)`;
+    }
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  // Animación del Canvas
+  let offset = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Lake on the left (X: 0 to 200)
+    ctx.fillStyle = "#bae6fd"; // sky-200
+    ctx.fillRect(0, 0, 200, 500);
+    
+    // Lake waves
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 10; i++) {
+      ctx.beginPath();
+      ctx.arc(50 + (i%2)*20, 50 * i + (offset % 50), 10, 0, Math.PI);
+      ctx.stroke();
+    }
+
+    // Shoreline
+    ctx.beginPath();
+    ctx.moveTo(200, 0);
+    ctx.lineTo(200, 500);
+    ctx.strokeStyle = "#0284c7"; // border lake
+    ctx.lineWidth = 4;
+    ctx.stroke();
+    
+    // Land on the right (X: 200 to 800)
+    ctx.fillStyle = "#fde68a"; // yellow-200
+    ctx.fillRect(200, 0, 600, 500);
+
+    // Lake Label
+    ctx.fillStyle = "#0369a1";
+    ctx.font = "bold 20px Arial";
+    ctx.fillText("Lago (10 m)", 40, 250);
+
+    let hA = 12;
+    if (currentStep === 3) {
+      hA = parseFloat(hWellASlider.value);
+    }
+    const lakeHead = 10;
+    const gradient = (hA - lakeHead) / 150; // Pozo A está a 150px de la costa (X=350)
+    
+    // Wells
+    const wellAX = 350;
+    const wellAY = 250;
+    const wellBX = 500;
+    const wellBY = 250;
+
+    // Draw Equipotential Lines (only Step 2 & 3)
+    if (currentStep >= 2) {
+      ctx.strokeStyle = "#0d9488"; // teal-600
+      ctx.lineWidth = 2;
+      ctx.setLineDash([10, 10]);
+
+      // Draw lines every 1m of head increase
+      // We know gradient = delta_h / delta_x => delta_x = delta_h / gradient
+      const pixelsPerMeter = 1 / gradient;
+      
+      let currentHead = Math.ceil(lakeHead + 0.1);
+      const maxHead = lakeHead + gradient * 600;
+      
+      while (currentHead <= maxHead) {
+        const xPos = 200 + (currentHead - lakeHead) * pixelsPerMeter;
+        if (xPos > 200 && xPos < 800) {
+          ctx.beginPath();
+          ctx.moveTo(xPos, 0);
+          ctx.lineTo(xPos, 500);
+          ctx.stroke();
+          
+          ctx.fillStyle = "#0f766e";
+          ctx.font = "14px Arial";
+          ctx.fillText(currentHead + " m", xPos + 5, 30);
+        }
+        currentHead += 1;
+      }
+      ctx.setLineDash([]);
+      
+      // Draw Flow Direction Arrows (from Land to Lake)
+      ctx.strokeStyle = "#2563eb"; // blue-600
+      ctx.fillStyle = "#2563eb";
+      ctx.lineWidth = 2;
+      
+      for(let y = 100; y < 500; y+= 150) {
+        ctx.beginPath();
+        // move from right to left
+        let arrowX = 700 - (offset % 200);
+        ctx.moveTo(arrowX, y);
+        ctx.lineTo(arrowX - 50, y);
+        ctx.stroke();
+        
+        // Arrow head
+        ctx.beginPath();
+        ctx.moveTo(arrowX - 50, y);
+        ctx.lineTo(arrowX - 40, y - 5);
+        ctx.lineTo(arrowX - 40, y + 5);
+        ctx.fill();
+      }
+    }
+
+    // Draw Well A
+    ctx.beginPath();
+    ctx.arc(wellAX, wellAY, 15, 0, Math.PI * 2);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000";
+    ctx.stroke();
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 16px Arial";
+    ctx.fillText("Pozo A", wellAX - 25, wellAY - 25);
+    ctx.fillText(hA.toFixed(1) + " m", wellAX - 20, wellAY + 35);
+
+    // Draw Well B
+    const hB = lakeHead + gradient * (wellBX - 200);
+    ctx.beginPath();
+    ctx.arc(wellBX, wellBY, 15, 0, Math.PI * 2);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000";
+    ctx.stroke();
+    ctx.fillStyle = "#000";
+    ctx.fillText("Pozo B", wellBX - 25, wellBY - 25);
+    if (currentStep >= 2) {
+      ctx.fillText(hB.toFixed(1) + " m", wellBX - 20, wellBY + 35);
+    } else {
+      ctx.fillText("? m", wellBX - 10, wellBY + 35);
+    }
+
+    offset += 0.5;
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+</script>
+<style>
+  .custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e2e8f0;
+    outline: none;
+  }
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3aa6b9;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+  }
+  .custom-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+</style>
