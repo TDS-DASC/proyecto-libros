@@ -1,7 +1,7 @@
 ---
 title: "Exercise 12"
 bookSlug: "book-01"
-lang: 'en'
+lang: "en"
 ---
 
 import "../../../../styles/global.css";
@@ -9,37 +9,130 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
-  <hr class="divisor final"></hr>
+{/* 1. INTRODUCTION */}
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 12</h3>
-  
-  <p>Analyze the provided hydrogeological cross-section, which shows an upper sand unit, an upper clay aquitard, a lower sand unit, and a lower clay unit, with two monitoring wells. Based on the water level measurements shown in the diagram, answer the following questions about groundwater flow.</p>
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  📖 Introduction{" "}
+</span>
+<hr class="divisor final"></hr>
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+<h3 class="book-title text-[var(--book-title-1)] text-4xl">
+  🙋 Example Problem 12
+</h3>
+<p>
+  This exercise integrates several key concepts about{" "}
+  <strong>hydraulic head</strong> and <strong>groundwater flow</strong> in a
+  system with an unconfined aquifer, a confined aquifer, and an aquitard
+  separating them. The cross-section shows an upper sand unit, an upper clay
+  aquitard, a lower sand unit, and a lower clay unit, with two monitoring wells.
+</p>
 
-  {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
-  <hr class="divisor final"></hr>
+<p>Before starting, recall these principles:</p>
+<ul>
+  <li>
+    <strong>Potentiometric contours</strong> connect points of equal hydraulic
+    head. In a homogeneous, isotropic aquifer with predominantly horizontal
+    flow, they are approximately vertical lines.
+  </li>
+  <li>
+    <strong>The potentiometric surface</strong> is the imaginary surface
+    representing the level to which water would rise in a well open to the
+    confined aquifer at any point.
+  </li>
+  <li>
+    <strong>Flow through an aquitard</strong> is vertical (either upward or
+    downward), determined by comparing the head above vs. below the aquitard.
+  </li>
+  <li>
+    <strong>Darcy's law</strong> applies even through low-K aquitards: any
+    hydraulic gradient produces some flow.
+  </li>
+</ul>
 
-  <Ejercicio_12/>
+<hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+{/* 2. EXERCISE */}
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  ✏️ Interactive exercise{" "}
+</span>
+<hr class="divisor final"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 12 Solution</h3>
+<Ejercicio_12/>
 
-  <p>The step-by-step solution can be explored in the interactive exercise above. The key takeaways are:</p>
+<hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  <ul>
-    <li><strong>Potentiometric contours (Part a)</strong> in the lower sand unit are evenly spaced vertical lines based on linear interpolation of head values between the wells — head increases from left (36 m at Well 1) to right (40 m at Well 2), so contours are labeled 36, 37, 38, 39, 40 m from left to right.</li>
-    <li><strong>The potentiometric surface (Part b)</strong> is a planar surface (a straight line in cross-section) connecting the head elevations of the two wells screened in the lower confined aquifer (36 m at Well 1, 40 m at Well 2).</li>
-    <li><strong>The flow direction through the upper clay unit (Part c)</strong> is <em>upward</em>. The potentiometric head in the lower sand at Well 2 is 40 m, which is higher than the water table at that location (~38 m), creating an upward vertical gradient through the clay.</li>
-    <li><strong>The expected vertical head profile (Part d)</strong> near Well 2 shows a slight downward decrease in head through the unconfined aquifer (due to non-horizontal flow), then a sharp upward jump across the aquitard, then a relatively constant head in the lower confined aquifer.</li>
-  </ul>
+{/* 3. SOLUTION */}
+
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  ✅ Solution & Takeaways{" "}
+</span>
+<hr class="divisor final"></hr>
+
+<h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">
+  Problem 12 Solution
+</h3>
+
+<p>
+  The step-by-step solution can be explored in the interactive exercise above.
+  Key takeaways:
+</p>
+
+<ul>
+  <li>
+    <strong>Potentiometric contours (Part a)</strong> in the lower sand unit are
+    evenly spaced vertical lines based on linear interpolation of head values
+    between the wells — head increases from left (36 m at Well 1) to right (40 m
+    at Well 2), so contours are labeled 36, 37, 38, 39, 40 m from left to right.
+    In isotropic media, flow is orthogonal to equipotential lines, confirming
+    predominantly horizontal flow in the confined aquifer.
+  </li>
+  <li>
+    <strong>The potentiometric surface (Part b)</strong> is a planar surface (a
+    straight line in cross-section) connecting the head elevations of the two
+    wells screened in the lower confined aquifer (36 m at Well 1, 40 m at Well
+    2). This surface lies above the water table at Well 2 (where head = 40 m >
+    ~38 m water table), indicating upward flow through the aquitard.
+  </li>
+  <li>
+    <strong>The flow direction through the upper clay unit (Part c)</strong> is{" "}
+    <em>upward</em>. The potentiometric head in the lower sand at Well 2 is 40
+    m, which is higher than the water table at that location (~38 m). Since
+    water flows from higher to lower hydraulic head, flow through the aquitard
+    is directed upward. This is an example of a discharge area where the
+    confined aquifer contributes water to the unconfined aquifer.
+  </li>
+  <li>
+    <strong>The expected vertical head profile (Part d)</strong> near Well 2
+    shows: (1) a slight downward decrease in head through the unconfined aquifer
+    (due to a non-horizontal, upward-flow component), (2) a sharp upward jump
+    across the clay aquitard (because head must increase from ~38 m above to 40
+    m below — flow is upward through the low-K unit), and (3) nearly constant
+    head in the lower confined aquifer (where flow is predominantly horizontal).
+    The head profile across the aquitard is a clear indicator of vertical
+    leakage.
+  </li>
+</ul>
+
+<h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">
+  Conceptual Connections
+</h4>
+<ul>
+  <li>
+    Compare this exercise with Exercise 11, where flow through the aquitard is{" "}
+    <em>downward</em>. The direction is reversed because in Ex. 11 the water
+    table is higher than the potentiometric surface, while here it is lower.
+  </li>
+  <li>
+    The sharp change in head across the aquitard (Part d) is a direct
+    consequence of Darcy's law: the very low hydraulic conductivity of the clay
+    requires a large hydraulic gradient to transmit even a small amount of flow.
+  </li>
+  <li>
+    In both Exercise 11 and 12, the potentiometric surface and equipotential
+    contours are determined by the same principles — they differ only in the
+    specific head values and resulting flow directions.
+  </li>
+</ul>
 
 </section>
