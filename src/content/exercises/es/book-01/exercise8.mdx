@@ -9,13 +9,41 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
-  <hr class="divisor final"></hr>
+  {/* 1. CONTEXT DEL LIBRO */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 5.2 Hidráulica del Flujo en Acuíferos No Confinados</span>
+  <hr class="divisor final" />
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 8</h3>
-  
-  <p>La figura a continuación es una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado), ¿cuál es la elevación esperada del nivel del agua en el Pozo B?</p>
+  <p>
+    El flujo de aguas subterráneas en acuíferos no confinados obedece los mismos principios que el flujo en acuíferos confinados, con un elemento adicional: la elevación de la parte superior de la zona saturada define un <strong>nivel freático</strong>, que es la elevación del agua que se mantiene en un pozo tamizado justo lo suficientemente profundo como para encontrar agua estancada. Por ejemplo, la carga hidráulica del nivel freático interceptado por un pozo somero es el nivel de agua medido en ese pozo.
+  </p>
+
+  <p>
+    Un contorno equipotencial conecta puntos de igual carga hidráulica, la cual se mide utilizando pozos (piezómetros a escala de campo). El nivel freático en sí <em>no</em> es una línea equipotencial; tiene una carga variable porque varía en elevación.
+  </p>
+
+  <p>
+    Es importante destacar que un cuerpo de agua superficial, como un lago, actúa como una <strong>frontera de carga constante</strong>. El nivel del agua en el lago es el mismo en todas partes, por lo que toda la línea de costa representa una única línea equipotencial. Debido a que el flujo subterráneo es perpendicular a las líneas equipotenciales (en medios isotrópicos), las líneas de flujo deben aproximarse a la costa en ángulos rectos.
+  </p>
+
+  <img 
+    src="/proyecto-libros/images/figure22.png" 
+    onerror="this.style.display='none'"
+    alt="Figura 22"
+    class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)] block mb-4">
+    <b>Figura 22</b> <em> – Sección transversal potenciométrica, dirección del flujo subterráneo y mapa de contornos del nivel freático en un acuífero no confinado idealizado. El mapa de contornos representa la topografía del nivel freático y puede usarse para inferir la dirección general del flujo (Cohen y Cherry, 2020).</em>
+  </small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]" />
+
+  {/* 2. ENUNCIADO DEL PROBLEMA */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">🙋 Problema de Ejemplo 8</span>
+  <hr class="divisor final" />
+
+  <p>
+    La figura a continuación es una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado), ¿cuál es la elevación esperada del nivel del agua en el Pozo B?
+  </p>
 
   <img 
     src="/proyecto-libros/images/exercise8-diagram.jpg" 
@@ -23,23 +51,42 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
     class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
   />
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 2. EXERCISE */}
+  {/* 3. EJERCICIO INTERACTIVO */}
   <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
-  <hr class="divisor final"></hr>
+  <hr class="divisor final" />
 
-  <Ejercicio_8/>
+  <Ejercicio_8 lang="es" />
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 3. SOLUTION */}
+  {/* 4. SOLUCIÓN */}
   <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y conclusiones </span>
-  <hr class="divisor final"></hr>
+  <hr class="divisor final" />
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución al Problema 8</h3>
 
-  <p>El nivel del agua en el lago es horizontal. Por lo tanto, la carga hidráulica es la misma en todo el lago, incluso a lo largo de la interfaz costa-lago. Dado que el flujo es ortogonal a las líneas equipotenciales y se asume que el nivel freático es planar, el intervalo de contorno de 2 m se extrapola hacia aguas arriba, resultando así en un nivel de agua de <strong>14 m</strong> en el Pozo B.</p>
+  <p><strong>La respuesta correcta es 14 m.</strong></p>
+
+  <p>
+    El nivel del agua en el lago es horizontal a 10 m. Por lo tanto, la carga hidráulica es la misma en todo el lago, incluida toda la interfaz costa–lago. Esta línea de costa es una <strong>línea equipotencial de 10 m</strong>.
+  </p>
+
+  <p>
+    El Pozo A se encuentra a una cierta distancia perpendicular de la línea de costa y tiene una carga de 12 m. Esto significa que el intervalo de contorno entre la costa (10 m) y el Pozo A es de <strong>2 m</strong>. Como se asume que el nivel freático es planar, el gradiente es constante: cada vez que te alejas la misma distancia perpendicular de la costa, la carga aumenta otros 2 m.
+  </p>
+
+  <p>
+    El Pozo B se encuentra aproximadamente al <strong>doble</strong> de la distancia perpendicular de la línea de costa en comparación con el Pozo A. Por lo tanto, la carga en el Pozo B debe ser <strong>10 m + (2 × 2 m) = 14 m</strong>.
+  </p>
+
+  <p class="mt-4 p-4 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)]">
+    <strong>Por qué las otras opciones son incorrectas:</strong><br />
+    <strong>12 m</strong> — Esto solo sería cierto si el Pozo B estuviera a la misma distancia de la costa que el Pozo A, lo cual no es el caso.<br />
+    <strong>13 m</strong> — Esto asume que la carga aumenta 1 m en la distancia de A a B, ignorando que el lago mismo es la referencia de 10 m y el intervalo de costa a A ya es de 2 m.<br />
+    <strong>Un valor entre 12 y 13 m</strong> — Esto subestima el gradiente planar; el duplicar la distancia desde la frontera de carga constante produce el duplicar la diferencia de carga.
+  </p>
 
   <img 
     src="/proyecto-libros/images/exercise8-solution.png" 

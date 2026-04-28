@@ -9,13 +9,41 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
-  <hr class="divisor final"></hr>
+  {/* 1. BOOK CONTEXT */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 5.2 Hydraulics of Flow in Unconfined Aquifers</span>
+  <hr class="divisor final" />
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 8</h3>
-  
-  <p>The image below is a map view of a lake and shoreline. The water table elevation at Well A is 12 m. Assuming the water table is planar (an inclined plane), what is the expected water level elevation in Well B?</p>
+  <p>
+    Groundwater flow in unconfined aquifers obeys the same principles as flow in confined aquifers with an added element: the elevation of the top of the saturated zone defines a <strong>water table</strong>, which is the elevation of water that stands in a screened well just deep enough to encounter standing water. For example, the hydraulic head of the water table intersected by a shallow well is the water level measured in that well.
+  </p>
+
+  <p>
+    An equipotential contour connects points of equal hydraulic head, which is measured using wells (field-scale piezometers). The water table itself is <em>not</em> an equipotential line; it has a variable head because it varies in elevation.
+  </p>
+
+  <p>
+    Importantly, a body of surface water such as a lake acts as a <strong>constant-head boundary</strong>. The water level in the lake is the same everywhere, so the entire lake shoreline represents a single equipotential line. Because groundwater flow is perpendicular to equipotential lines (in isotropic media), flow lines must approach the lake shore at roughly right angles.
+  </p>
+
+  <img 
+    src="/proyecto-libros/images/figure22.png" 
+    onerror="this.style.display='none'"
+    alt="Figure 22"
+    class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)] block mb-4">
+    <b>Figure 22</b> <em> – Potentiometric cross section, groundwater flow direction, and water table contour map in an idealized unconfined aquifer. The contour map represents the topography of the water table and can be used to infer the general direction of flow (Cohen and Cherry, 2020).</em>
+  </small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]" />
+
+  {/* 2. PROBLEM STATEMENT */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">🙋 Example Problem 8</span>
+  <hr class="divisor final" />
+
+  <p>
+    The figure below is a map view of a lake and shoreline. The water table elevation at Well A is 12 m. Assuming the water table is planar (an inclined plane), what is the expected water level elevation in Well B?
+  </p>
 
   <img 
     src="/proyecto-libros/images/exercise8-diagram.jpg" 
@@ -23,23 +51,42 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
     class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
   />
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 2. EXERCISE */}
+  {/* 3. INTERACTIVE EXERCISE */}
   <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
-  <hr class="divisor final"></hr>
+  <hr class="divisor final" />
 
-  <Ejercicio_8/>
+  <Ejercicio_8 lang="en" />
 
-  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 3. SOLUTION */}
+  {/* 4. SOLUTION */}
   <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <hr class="divisor final" />
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 8 Solution</h3>
 
-  <p>The water level in the lake is horizontal. Therefore, the head is the same everywhere in the lake, including along the length of the lake-shoreline interface. Since flow is orthogonal to equipotential lines and the water table is assumed planar, the contour interval of 2 m is extrapolated upgradient, thereby resulting in a water level of <strong>14 m</strong> at Well B.</p>
+  <p><strong>The correct answer is 14 m.</strong></p>
+
+  <p>
+    The water level in the lake is horizontal at 10 m. Therefore, the hydraulic head is the same everywhere in the lake, including along the entire lake–shoreline interface. This shoreline is a <strong>10 m equipotential line</strong>.
+  </p>
+
+  <p>
+    Well A is located at a certain perpendicular distance from the shoreline and has a head of 12 m. This means the contour interval between the shoreline (10 m) and Well A is <strong>2 m</strong>. Because the water table is assumed planar, the gradient is constant: every time you move the same perpendicular distance away from the shore, the head increases by another 2 m.
+  </p>
+
+  <p>
+    Well B is located at roughly <strong>twice</strong> the perpendicular distance from the shoreline compared with Well A. Therefore, the head at Well B must be <strong>10 m + (2 × 2 m) = 14 m</strong>.
+  </p>
+
+  <p class="mt-4 p-4 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)]">
+    <strong>Why the other choices are wrong:</strong><br />
+    <strong>12 m</strong> — This would only be true if Well B were at the same distance from the shoreline as Well A, which it is not.<br />
+    <strong>13 m</strong> — This assumes the head increases by 1 m over the distance from A to B, ignoring that the lake itself is the 10 m reference and the interval from shore to A is already 2 m.<br />
+    <strong>A value between 12 and 13 m</strong> — This underestimates the planar gradient; the doubling of distance from the constant-head boundary produces a doubling of head difference.
+  </p>
 
   <img 
     src="/proyecto-libros/images/exercise8-solution.png" 
