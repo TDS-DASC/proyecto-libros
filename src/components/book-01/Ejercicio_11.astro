@@ -1,40 +1,43 @@
 ---
+export interface Props {
+  lang?: 'es' | 'en';
+}
+import { useTranslations } from '../../i18n/utils';
 const basePath = import.meta.env.BASE_URL;
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
-<div class="ej11-wrapper">
+<div class="ej11-wrapper" data-lang={lang}>
 
   <!-- ── Progress stepper ── -->
   <div class="ej11-stepper">
-    <div class="ej11-step active" id="stepper-1"><span class="ej11-step-num">1</span><span class="ej11-step-label">Dibuja</span></div>
+    <div class="ej11-step active" id="stepper-1"><span class="ej11-step-num">1</span><span class="ej11-step-label">{t('exercise11.stepper_step1_label')}</span></div>
     <div class="ej11-step-line"></div>
-    <div class="ej11-step" id="stepper-2"><span class="ej11-step-num">2</span><span class="ej11-step-label">Contornos</span></div>
+    <div class="ej11-step" id="stepper-2"><span class="ej11-step-num">2</span><span class="ej11-step-label">{t('exercise11.stepper_step2_label')}</span></div>
     <div class="ej11-step-line"></div>
-    <div class="ej11-step" id="stepper-3"><span class="ej11-step-num">3</span><span class="ej11-step-label">Dirección</span></div>
+    <div class="ej11-step" id="stepper-3"><span class="ej11-step-num">3</span><span class="ej11-step-label">{t('exercise11.stepper_step3_label')}</span></div>
     <div class="ej11-step-line"></div>
-    <div class="ej11-step" id="stepper-4"><span class="ej11-step-num">4</span><span class="ej11-step-label">Perfil</span></div>
+    <div class="ej11-step" id="stepper-4"><span class="ej11-step-num">4</span><span class="ej11-step-label">{t('exercise11.stepper_step4_label')}</span></div>
   </div>
 
   <div class="ej11-card">
-    <h2 class="ej11-title">Ejercicio 11: Flujo de Agua Subterranea y Carga Hidraulica</h2>
-    <p class="ej11-subtitle">Usa el lienzo para esbozar tus respuestas antes de revelar cada solución.</p>
+    <h2 class="ej11-title">{t('exercise11.title')}</h2>
+    <p class="ej11-subtitle">{t('exercise11.subtitle')}</p>
 
     <!-- ══ STEP 1 — Parts A + B (above the canvas) ══ -->
     <div id="step1-ej11" class="ej11-step-card ej11-step-active">
       <div class="ej11-step-header">
         <span class="ej11-badge">1</span>
         <div>
-          <h3 class="ej11-step-title">Partes A y B — Contornos y Superficie Potenciométrica</h3>
-          <p class="ej11-step-text">
-            <strong>A)</strong> Dibuja los <strong>contornos equipotenciales</strong> en la arena inferior a intervalos de 1 m.<br/>
-            <strong>B)</strong> Traza la <strong>superficie potenciométrica</strong> (línea que conecta los niveles de agua en los pozos del acuífero confinado).
-          </p>
+          <h3 class="ej11-step-title">{t('exercise11.step1_title')}</h3>
+          <p class="ej11-step-text" set:html={t('exercise11.step1_text')}></p>
         </div>
       </div>
     </div>
 
     <!-- ── Canvas area ── -->
-    <p class="ej11-canvas-label">Dibuja en el lienzo y luego revela la solucion</p>
+    <p class="ej11-canvas-label">{t('exercise11.canvas_label')}</p>
     <div id="canvas-wrapper-ej11" class="ej11-canvas-wrapper">
       <img id="main-image-ej11" src={`${basePath}images/p47-000.png`}
         alt="Diagrama del Problema 11" class="ej11-diagram-img" draggable="false" />
@@ -47,29 +50,29 @@ const basePath = import.meta.env.BASE_URL;
       <input id="brush-size-ej11" type="range" min="1" max="14" value="3" class="ej11-slider" />
       <label class="ej11-tool-label">Color</label>
       <input id="brush-color-ej11" type="color" value="#2563eb" class="ej11-color-picker" />
-      <button id="btn-pen-ej11"    class="ej11-tool-btn ej11-tool-active">Lapiz</button>
-      <button id="btn-eraser-ej11" class="ej11-tool-btn">Borrador</button>
-      <button id="btn-undo-ej11"   class="ej11-tool-btn">Deshacer</button>
-      <button id="btn-clear-ej11"  class="ej11-tool-btn ej11-tool-danger">Limpiar</button>
+      <button id="btn-pen-ej11"    class="ej11-tool-btn ej11-tool-active">{t('exercise11.tool_button_pen')}</button>
+      <button id="btn-eraser-ej11" class="ej11-tool-btn">{t('exercise11.tool_button_eraser')}</button>
+      <button id="btn-undo-ej11"   class="ej11-tool-btn">{t('exercise11.tool_button_undo')}</button>
+      <button id="btn-clear-ej11"  class="ej11-tool-btn ej11-tool-danger">{t('exercise11.tool_button_clear')}</button>
     </div>
 
     <!-- ══ Reveal + comparison (below toolbar, same step1 card logic via JS) ══ -->
     <div id="step1-actions-ej11" class="ej11-step-card ej11-step-active" style="border-top: none; margin-top: -0.75rem; border-radius: 0 0 0.5rem 0.5rem;">
-      <button id="btn-reveal-ab-ej11" class="ej11-btn-primary">Revelar Solución A y B →</button>
+      <button id="btn-reveal-ab-ej11" class="ej11-btn-primary">{t('exercise11.reveal_ab_button')}</button>
 
       <!-- Side-by-side comparison (hidden until revealed) -->
       <div id="sol-ab-ej11" class="ej11-compare hidden">
         <div class="ej11-compare-panel">
-          <p class="ej11-compare-label">A — Contornos Equipotenciales</p>
+          <p class="ej11-compare-label">{t('exercise11.compare_label_a')}</p>
           <img src={`${basePath}images/p64-000.png`} alt="Solución A: contornos equipotenciales" class="ej11-compare-img" />
         </div>
         <div class="ej11-compare-panel">
-          <p class="ej11-compare-label">B — Superficie Potenciométrica</p>
+          <p class="ej11-compare-label">{t('exercise11.compare_label_b')}</p>
           <img src={`${basePath}images/p64-001.png`} alt="Solución B: superficie potenciométrica" class="ej11-compare-img" />
         </div>
       </div>
 
-      <button id="btn-next-step1-ej11" class="ej11-btn-secondary hidden">Continuar a Parte C →</button>
+      <button id="btn-next-step1-ej11" class="ej11-btn-secondary hidden">{t('exercise11.next_to_c_button')}</button>
     </div>
 
     <!-- ══ STEP 2 — Part C ══ -->
@@ -77,18 +80,18 @@ const basePath = import.meta.env.BASE_URL;
       <div class="ej11-step-header">
         <span class="ej11-badge">2</span>
         <div>
-          <h3 class="ej11-step-title">Parte C — Dirección del Flujo</h3>
-          <p class="ej11-step-text">¿En qué dirección fluye el agua subterránea a través de la <strong>arcilla superior</strong>?</p>
+          <h3 class="ej11-step-title">{t('exercise11.step2_title')}</h3>
+          <p class="ej11-step-text" set:html={t('exercise11.step2_text')}></p>
         </div>
       </div>
       <div class="ej11-choice-row">
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="up">Hacia arriba</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="down">Hacia abajo</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="horizontal">Horizontal</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="none">Sin flujo</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="up">{t('exercise11.choice_up')}</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="down">{t('exercise11.choice_down')}</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="horizontal">{t('exercise11.choice_horizontal')}</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="none">{t('exercise11.choice_none')}</button>
       </div>
       <p id="feedback-c-ej11" class="ej11-feedback hidden"></p>
-      <button id="btn-next-step2-ej11" class="ej11-btn-secondary hidden">Continuar a Parte D →</button>
+      <button id="btn-next-step2-ej11" class="ej11-btn-secondary hidden">{t('exercise11.next_to_d_button')}</button>
     </div>
 
     <!-- ══ STEP 3 — Part D ══ -->
@@ -96,16 +99,16 @@ const basePath = import.meta.env.BASE_URL;
       <div class="ej11-step-header">
         <span class="ej11-badge">3</span>
         <div>
-          <h3 class="ej11-step-title">Parte D — Perfil Vertical de Carga</h3>
-          <p class="ej11-step-text">Usa el lienzo para esbozar el <strong>perfil vertical de carga hidráulica</strong> cerca del Pozo 2 (desde la arena inferior hasta la superficie).</p>
+          <h3 class="ej11-step-title">{t('exercise11.step3_title')}</h3>
+          <p class="ej11-step-text" set:html={t('exercise11.step3_text')}></p>
         </div>
       </div>
-      <button id="btn-reveal-d-ej11" class="ej11-btn-primary">Revelar Solución Final →</button>
+      <button id="btn-reveal-d-ej11" class="ej11-btn-primary">{t('exercise11.reveal_d_button')}</button>
 
       <!-- Solution Part D (hidden until revealed) -->
       <div id="sol-d-ej11" class="ej11-compare hidden">
         <div class="ej11-compare-panel" style="max-width: 340px; margin: 0 auto;">
-          <p class="ej11-compare-label">D — Perfil Vertical de Carga</p>
+          <p class="ej11-compare-label">{t('exercise11.compare_label_d')}</p>
           <img src={`${basePath}images/sol11_final-003.png`} alt="Solución D" class="ej11-compare-img" />
         </div>
       </div>
@@ -114,7 +117,7 @@ const basePath = import.meta.env.BASE_URL;
 
     <!-- ══ Completion ══ -->
     <div id="final-ej11" class="ej11-completion hidden">
-      ¡Has completado el Ejercicio 11! Compara tu dibujo en el lienzo con las soluciones.
+      {t('exercise11.completion_text')}
     </div>
   </div>
 </div>
@@ -256,6 +259,10 @@ const basePath = import.meta.env.BASE_URL;
 </style>
 
 <script>
+  const wrapper = document.querySelector('.ej11-wrapper');
+  const lang = wrapper?.dataset?.lang || 'es';
+  const isEn = lang === 'en';
+
   // ── Image paths ──────────────────────────────────────────────────────────────
   const BASE = (import.meta as any).env?.BASE_URL ?? '/';
   const IMG_PROBLEM = `${BASE}images/p47-000.png`;
@@ -365,7 +372,7 @@ const basePath = import.meta.env.BASE_URL;
   btnRevealAB.addEventListener('click', () => {
     solAB.classList.remove('hidden');
     btnRevealAB.disabled = true;
-    btnRevealAB.textContent = 'Solucion A y B revelada';
+    btnRevealAB.textContent = isEn ? 'Solution A & B revealed' : 'Solución A y B revelada';
     btnNextStep1.classList.remove('hidden');
   });
 
@@ -390,11 +397,11 @@ const basePath = import.meta.env.BASE_URL;
       btn.classList.add(correct ? 'ej11-choice-correct' : 'ej11-choice-wrong');
       feedbackC.classList.remove('hidden', 'ej11-feedback-ok', 'ej11-feedback-err');
       if (correct) {
-        feedbackC.textContent = 'Correcto! La carga en la arena superior es mayor, asi que el flujo a traves de la arcilla superior es descendente.';
+        feedbackC.textContent = isEn ? 'Correct! The head in the upper sand is greater, so flow through the upper clay is downward.' : '¡Correcto! La carga en la arena superior es mayor, así que el flujo a través de la arcilla superior es descendente.';
         feedbackC.classList.add('ej11-feedback-ok');
         btnNextStep2.classList.remove('hidden');
       } else {
-        feedbackC.textContent = 'Incorrecto. Compara la elevacion del nivel freatico con la carga de la arena inferior para determinar la direccion.';
+        feedbackC.textContent = isEn ? 'Incorrect. Compare the water table elevation with the lower sand head to determine the direction.' : 'Incorrecto. Compara la elevación del nivel freático con la carga de la arena inferior para determinar la dirección.';
         feedbackC.classList.add('ej11-feedback-err');
       }
     });
@@ -416,7 +423,7 @@ const basePath = import.meta.env.BASE_URL;
     step3.classList.remove('ej11-step-active');
     step3.classList.add('ej11-step-done');
     btnRevealD.disabled = true;
-    btnRevealD.textContent = 'Solucion Final revelada';
+    btnRevealD.textContent = isEn ? 'Final Solution revealed' : 'Solución Final revelada';
     finalEl.classList.remove('hidden');
     setStep(5); // all done
     finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

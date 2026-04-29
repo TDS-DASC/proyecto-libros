@@ -1,15 +1,16 @@
 ---
-interface Props {
-  lang?: string;
+export interface Props {
+  lang?: 'es' | 'en';
 }
+import { useTranslations } from '../../i18n/utils';
 const { lang = 'es' } = Astro.props;
-const isEn = lang === 'en';
+const t = useTranslations(lang);
 ---
 
 <div data-lang={lang} id="ej8-root">
   <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
     <h1 class="font-semibold text-lg text-[var(--titles)]">
-      {isEn ? 'Simulation: Water Table and Equipotential Lines' : 'Simulacion: Plano Freatico y Lineas Equipotenciales'}
+      {t('exercise8.title')}
     </h1>
 
     <div class="canvas mt-6 mb-8 relative">
@@ -25,44 +26,35 @@ const isEn = lang === 'en';
     <!-- Step 1 UI: Question -->
     <div id="step1-container-ej8" class="mt-4 p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center transition-all duration-300">
       <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
-        {isEn ? 'Step 1: Determine the Water Level' : 'Paso 1: Determinar el Nivel del Agua'}
+        {t('exercise8.step1_heading')}
       </h2>
       <p class="text-[var(--titles)] mb-6 text-lg">
-        {isEn
-          ? 'The figure shows a map view of a lake and its shoreline. The water table elevation at Well A is 12 m. Assuming the water table is planar (an inclined plane) and the lake elevation is 10 m, what is the expected water level elevation in Well B?'
-          : 'La figura muestra una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado) y la elevación del lago es de 10 m, ¿cuál es la elevación esperada del nivel del agua en el Pozo B?'
-        }
+        {t('exercise8.step1_description')}
       </p>
       <div class="flex justify-center gap-4 flex-wrap">
         <button id="btn-12m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>12 m</button>
         <button id="btn-13m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>13 m</button>
         <button id="btn-14m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>14 m</button>
         <button id="btn-between" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>
-          {isEn ? 'A value between 12 and 13 m' : 'Entre 12 y 13 m'}
+          {t('exercise8.step1_between_button')}
         </button>
       </div>
       <p id="step1-feedback-ej8" class="mt-4 font-bold hidden text-lg"></p>
       <p id="step1-hint-ej8" class="mt-2 text-sm text-gray-500">
-        {isEn
-          ? 'Observe the map: the lake is at 10 m and Well A at 12 m. Buttons will activate in a few seconds...'
-          : 'Observa el mapa: el lago está a 10 m y el Pozo A a 12 m. Los botones se activarán en unos segundos...'
-        }
+          {t('exercise8.step1_hint')}
       </p>
     </div>
 
     <!-- Step 2 UI: Reveal Equipotentials -->
     <div id="step2-container-ej8" class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300">
       <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
-        {isEn ? 'Step 2: Equipotential Lines and Flow Direction' : 'Paso 2: Líneas Equipotenciales y Dirección de Flujo'}
+        {t('exercise8.step2_heading')}
       </h2>
       <p id="step2-explanation-ej8" class="text-gray-800 mb-6 text-lg">
-        {isEn
-          ? 'Correct! The water level in the lake is horizontal (10 m). Therefore, the head is the same along the entire shoreline (10 m equipotential line). Because flow is perpendicular to equipotential lines and the water table is assumed planar, the 2 m contour interval is extrapolated upgradient. Well B is twice as far from the shoreline as Well A, resulting in a water level of 14 m.'
-          : '¡Correcto! El nivel del agua en el lago es horizontal (10 m). Por lo tanto, la carga es la misma a lo largo de toda la costa (línea equipotencial de 10 m). Como el flujo es perpendicular a las líneas equipotenciales y se asume que el nivel freático es planar, el intervalo de contorno de 2 m se extrapola hacia aguas arriba. El Pozo B está al doble de distancia de la costa que el Pozo A, resultando en un nivel de agua de 14 m.'
-        }
+        {t('exercise8.step2_explanation')}
       </p>
       <button id="btn-reveal-step3-ej8" class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg">
-        {isEn ? 'Next: Experiment with the Slope' : 'Siguiente: Experimentar con la Pendiente'}
+        {t('exercise8.step2_next_button')}
       </button>
     </div>
 
@@ -70,43 +62,40 @@ const isEn = lang === 'en';
     <div id="step3-container-ej8" class="mt-4 hidden transition-all duration-300">
       <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center">
         <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
-          {isEn ? 'Step 3: Experiment with the Gradient' : 'Paso 3: Experimentar con el Gradiente'}
+          {t('exercise8.step3_heading')}
         </h2>
         <p class="text-[var(--titles)] mb-4 text-lg">
-          {isEn
-            ? 'Adjust the elevation of Well A. Observe how the water table slope (gradient) changes and how the equipotential lines, expected Well B level, and head profile adjust.'
-            : 'Ajusta la elevación del Pozo A. Observa cómo cambia la pendiente del nivel freático (gradiente) y cómo se reajustan las líneas equipotenciales, el nivel esperado en el Pozo B y el perfil de carga.'
-          }
+          {t('exercise8.step3_description')}
         </p>
       </div>
 
       <div class="controls grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
           <h3 class="text-[var(--titles)] font-bold mb-4 text-lg">
-            {isEn ? 'Well A Water Level (m)' : 'Nivel del Agua Pozo A (m)'}
+            {t('exercise8.step3_well_a_label')}
           </h3>
           <input type="range" id="hWellA" min="10.5" max="15" step="0.5" value="12" class="w-full custom-range" />
           <div class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2">
-            <span>{isEn ? 'Shallow (10.5)' : 'Poco profundo (10.5)'}</span>
+            <span>{t('exercise8.step3_shallow_label')}</span>
             <span id="hWellAVal" class="font-bold text-lg">12</span>
-            <span>{isEn ? 'Deep (15)' : 'Más profundo (15)'}</span>
+            <span>{t('exercise8.step3_deep_label')}</span>
           </div>
         </div>
 
         <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm text-center flex flex-col justify-center">
           <h3 class="text-[var(--titles)] font-bold mb-2 text-lg">
-            {isEn ? 'Expected Well B Level:' : 'Nivel Esperado Pozo B:'}
+            {t('exercise8.step3_expected_well_b_label')}
           </h3>
           <span id="expectedWellB" class="font-mono text-3xl text-[#3aa6b9] font-bold">14.0 m</span>
         </div>
 
         <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm text-center flex flex-col justify-center">
           <h3 class="text-[var(--titles)] font-bold mb-2 text-lg">
-            {isEn ? 'Gradient (m/m):' : 'Gradiente (m/m):'}
+            {t('exercise8.step3_gradient_label')}
           </h3>
           <span id="gradientValue" class="font-mono text-2xl text-[#0d9488] font-bold">0.033</span>
           <p class="text-xs text-gray-500 mt-1">
-            {isEn ? 'Δh / ΔL from shoreline to Well A' : 'Δh / ΔL desde la costa hasta el Pozo A'}
+            {t('exercise8.step3_gradient_subtext')}
           </p>
         </div>
       </div>
@@ -119,22 +108,21 @@ const isEn = lang === 'en';
   // TRANSLATIONS (for dynamic / canvas text)
   // ========================
   const root = document.getElementById('ej8-root');
-  const LANG = root?.dataset.lang || 'es';
-  const isEn = LANG === 'en';
+  const lang = root?.dataset.lang || 'es';
 
   const t = {
-    correct_feedback: isEn ? 'Correct! Well B is at 14 m.' : '¡Correcto! El Pozo B est\u00e1 a 14 m.',
-    incorrect_feedback: isEn
+    correct_feedback: lang === 'en' ? 'Correct! Well B is at 14 m.' : '¡Correcto! El Pozo B está a 14 m.',
+    incorrect_feedback: lang === 'en'
       ? 'Incorrect. Review the distance between the shoreline, Well A, and Well B. Remember that the lake is a constant-head boundary (10 m).'
       : 'Incorrecto. Revisa la distancia entre la costa, el Pozo A y el Pozo B. Recuerda que el lago es una frontera de carga constante (10 m).',
-    lake_label: isEn ? 'Lake' : 'Lago',
-    lake_head: isEn ? 'h = 10 m' : 'h = 10 m',
-    well_a: isEn ? 'Well A' : 'Pozo A',
-    well_b: isEn ? 'Well B' : 'Pozo B',
-    profile_title: isEn ? 'Head Profile' : 'Perfil de Carga',
-    distance: isEn ? 'Distance (m)' : 'Distancia (m)',
-    head: isEn ? 'Head (m)' : 'Carga (m)',
-    shoreline: isEn ? 'Shoreline' : 'Costa',
+    lake_label: lang === 'en' ? 'Lake' : 'Lago',
+    lake_head: 'h = 10 m',
+    well_a: lang === 'en' ? 'Well A' : 'Pozo A',
+    well_b: lang === 'en' ? 'Well B' : 'Pozo B',
+    profile_title: lang === 'en' ? 'Head Profile' : 'Perfil de Carga',
+    distance: lang === 'en' ? 'Distance (m)' : 'Distancia (m)',
+    head: lang === 'en' ? 'Head (m)' : 'Carga (m)',
+    shoreline: lang === 'en' ? 'Shoreline' : 'Costa',
   };
 
   // ========================

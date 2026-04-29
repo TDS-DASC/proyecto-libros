@@ -1,47 +1,50 @@
 ---
+export interface Props {
+  lang?: 'es' | 'en';
+}
+import { useTranslations } from '../../i18n/utils';
 const basePath = import.meta.env.BASE_URL;
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
-<div class="ej12-wrapper">
+<div class="ej12-wrapper" data-lang={lang}>
 
   <!-- Progress stepper -->
   <div class="ej12-stepper">
-    <div class="ej12-step active" id="stepper-1-ej12"><span class="ej12-step-num">1</span><span class="ej12-step-label">Dibuja</span></div>
+    <div class="ej12-step active" id="stepper-1-ej12"><span class="ej12-step-num">1</span><span class="ej12-step-label">{t('exercise12.stepper.step1_label')}</span></div>
     <div class="ej12-step-line"></div>
-    <div class="ej12-step" id="stepper-2-ej12"><span class="ej12-step-num">2</span><span class="ej12-step-label">Contornos</span></div>
+    <div class="ej12-step" id="stepper-2-ej12"><span class="ej12-step-num">2</span><span class="ej12-step-label">{t('exercise12.stepper.step2_label')}</span></div>
     <div class="ej12-step-line"></div>
-    <div class="ej12-step" id="stepper-3-ej12"><span class="ej12-step-num">3</span><span class="ej12-step-label">Dirección</span></div>
+    <div class="ej12-step" id="stepper-3-ej12"><span class="ej12-step-num">3</span><span class="ej12-step-label">{t('exercise12.stepper.step3_label')}</span></div>
     <div class="ej12-step-line"></div>
-    <div class="ej12-step" id="stepper-4-ej12"><span class="ej12-step-num">4</span><span class="ej12-step-label">Perfil</span></div>
+    <div class="ej12-step" id="stepper-4-ej12"><span class="ej12-step-num">4</span><span class="ej12-step-label">{t('exercise12.stepper.step4_label')}</span></div>
   </div>
 
   <div class="ej12-card">
-    <h2 class="ej12-title">Ejercicio 12: Flujo de Agua Subterranea y Carga Hidraulica</h2>
-    <p class="ej12-subtitle">Usa el lienzo para esbozar tus respuestas antes de revelar cada solución.</p>
+    <h2 class="ej12-title">{t('exercise12.title')}</h2>
+    <p class="ej12-subtitle">{t('exercise12.subtitle')}</p>
 
     <!-- STEP 1 — Parts A + B -->
     <div id="step1-ej12" class="ej12-step-card ej12-step-active">
       <div class="ej12-step-header">
         <span class="ej12-badge">1</span>
         <div>
-          <h3 class="ej12-step-title">Partes A y B — Contornos y Superficie Potenciométrica</h3>
-          <p class="ej12-step-text">
-            <strong>A)</strong> Dibuja los <strong>contornos equipotenciales</strong> en la arena inferior a intervalos de 1 m.<br/>
-            <strong>B)</strong> Traza la <strong>superficie potenciométrica</strong> (línea que conecta los niveles de agua en los pozos del acuífero confinado inferior).
-          </p>
+          <h3 class="ej12-step-title">{t('exercise12.step1_title')}</h3>
+          <p class="ej12-step-text" set:html={t('exercise12.step1_text')}></p>
         </div>
       </div>
       <details class="ej12-hint">
-        <summary class="ej12-hint-summary">Pista conceptual</summary>
+        <summary class="ej12-hint-summary">{t('exercise12.hint_summary')}</summary>
         <div class="ej12-hint-body">
-          <p><strong>Parte A:</strong> Las líneas equipotenciales conectan puntos de igual carga hidráulica. En un acuífero homogéneo e isotrópico con flujo predominantemente horizontal, los contornos equipotenciales son líneas aproximadamente verticales. Interpola linealmente entre los valores de carga conocidos en los pozos (36 m y 40 m).</p>
-          <p><strong>Parte B:</strong> La superficie potenciométrica es la superficie imaginaria que representaría el nivel al que subiría el agua en un pozo abierto en cualquier punto del acuífero confinado. En sección transversal con dos pozos, es una línea recta que conecta las elevaciones de carga.</p>
+          <p set:html={t('exercise12.step1_hint_a')}></p>
+          <p set:html={t('exercise12.step1_hint_b')}></p>
         </div>
       </details>
     </div>
 
     <!-- Canvas area -->
-    <p class="ej12-canvas-label">Dibuja en el lienzo y luego revela la solucion</p>
+    <p class="ej12-canvas-label">{t('exercise12.canvas_label')}</p>
     <div id="canvas-wrapper-ej12" class="ej12-canvas-wrapper">
       <img id="main-image-ej12" src={`${basePath}images/exercise12-problem.png`}
         alt="Diagrama del Problema 12" class="ej12-diagram-img" draggable="false" />
@@ -50,37 +53,37 @@ const basePath = import.meta.env.BASE_URL;
 
     <!-- Toolbar -->
     <div class="ej12-toolbar">
-      <label class="ej12-tool-label">Grosor</label>
+      <label class="ej12-tool-label">{t('exercise12.toolbar.thickness')}</label>
       <input id="brush-size-ej12" type="range" min="1" max="14" value="3" class="ej12-slider" />
-      <label class="ej12-tool-label">Color</label>
+      <label class="ej12-tool-label">{t('exercise12.toolbar.color')}</label>
       <input id="brush-color-ej12" type="color" value="#2563eb" class="ej12-color-picker" />
-      <button id="btn-pen-ej12"    class="ej12-tool-btn ej12-tool-active">Lapiz</button>
-      <button id="btn-eraser-ej12" class="ej12-tool-btn">Borrador</button>
-      <button id="btn-undo-ej12"   class="ej12-tool-btn">Deshacer</button>
-      <button id="btn-clear-ej12"  class="ej12-tool-btn ej12-tool-danger">Limpiar</button>
+      <button id="btn-pen-ej12"    class="ej12-tool-btn ej12-tool-active">{t('exercise12.toolbar.pen')}</button>
+      <button id="btn-eraser-ej12" class="ej12-tool-btn">{t('exercise12.toolbar.eraser')}</button>
+      <button id="btn-undo-ej12"   class="ej12-tool-btn">{t('exercise12.toolbar.undo')}</button>
+      <button id="btn-clear-ej12"  class="ej12-tool-btn ej12-tool-danger">{t('exercise12.toolbar.clear')}</button>
     </div>
 
     <!-- Reveal A+B -->
     <div id="step1-actions-ej12" class="ej12-step-card ej12-step-active" style="border-top: none; margin-top: -0.75rem; border-radius: 0 0 0.5rem 0.5rem;">
-      <button id="btn-reveal-ab-ej12" class="ej12-btn-primary">Revelar Solución A y B →</button>
+      <button id="btn-reveal-ab-ej12" class="ej12-btn-primary">{t('exercise12.btn_reveal_ab')}</button>
 
       <!-- Side-by-side comparison -->
       <div id="sol-ab-ej12" class="ej12-compare hidden">
         <div class="ej12-compare-panel">
-          <p class="ej12-compare-label">A — Contornos Equipotenciales</p>
+          <p class="ej12-compare-label">{t('exercise12.compare_label_a')}</p>
           <img src={`${basePath}images/exercise12-sol-1.png`} alt="Solución A: contornos equipotenciales en la arena inferior" class="ej12-compare-img" />
         </div>
         <div class="ej12-compare-panel">
-          <p class="ej12-compare-label">B — Superficie Potenciométrica</p>
+          <p class="ej12-compare-label">{t('exercise12.compare_label_b')}</p>
           <img src={`${basePath}images/exercise12-sol-1.png`} alt="Solución B: superficie potenciométrica del acuífero confinado" class="ej12-compare-img" />
         </div>
       </div>
 
       <div id="explanation-ab-ej12" class="ej12-explanation hidden">
-        <p><strong>Explicación:</strong> Los contornos equipotenciales son líneas verticales uniformemente espaciadas en la arena inferior. La carga aumenta de 36 m (Pozo 1, izquierda) a 40 m (Pozo 2, derecha), por lo que los contornos se etiquetan 36, 37, 38, 39, 40 m de izquierda a derecha. La superficie potenciométrica es la línea recta que conecta el nivel del agua en ambos pozos ranurados en el acuífero confinado.</p>
+        <p><strong>{t('exercise12.explanation_label')}</strong> {t('exercise12.explanation_ab')}</p>
       </div>
 
-      <button id="btn-next-step1-ej12" class="ej12-btn-secondary hidden">Continuar a Parte C →</button>
+      <button id="btn-next-step1-ej12" class="ej12-btn-secondary hidden">{t('exercise12.btn_continue_c')}</button>
     </div>
 
     <!-- STEP 2 — Part C (Flow direction) -->
@@ -88,23 +91,23 @@ const basePath = import.meta.env.BASE_URL;
       <div class="ej12-step-header">
         <span class="ej12-badge">2</span>
         <div>
-          <h3 class="ej12-step-title">Parte C — Dirección del Flujo</h3>
-          <p class="ej12-step-text">En el Pozo 2, la carga potenciométrica en la arena inferior es <strong>40 m</strong> y el nivel freático en la arena superior es <strong>~38 m</strong>. ¿Cuál es la dirección del flujo de agua subterránea a través de la <strong>arcilla superior</strong>?</p>
+          <h3 class="ej12-step-title">{t('exercise12.step2_title')}</h3>
+          <p class="ej12-step-text" set:html={t('exercise12.step2_text')}></p>
         </div>
       </div>
       <details class="ej12-hint">
-        <summary class="ej12-hint-summary">Pista conceptual</summary>
+        <summary class="ej12-hint-summary">{t('exercise12.hint_summary')}</summary>
         <div class="ej12-hint-body">
-          <p>Compara la elevación del nivel freático con la carga potenciométrica en el acuífero confinado debajo. El agua fluye desde carga mayor hacia carga menor. ¿Dónde es mayor la carga: arriba o abajo del acuitardo?</p>
+          <p set:html={t('exercise12.step2_hint')}></p>
         </div>
       </details>
       <div class="ej12-choice-row">
-        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="up">Hacia arriba</button>
-        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="down">Hacia abajo</button>
-        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="none">Sin flujo vertical</button>
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="up">{t('exercise12.choice_up')}</button>
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="down">{t('exercise12.choice_down')}</button>
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="none">{t('exercise12.choice_none')}</button>
       </div>
       <p id="feedback-c-ej12" class="ej12-feedback hidden"></p>
-      <button id="btn-next-step2-ej12" class="ej12-btn-secondary hidden">Continuar a Parte D →</button>
+      <button id="btn-next-step2-ej12" class="ej12-btn-secondary hidden">{t('exercise12.btn_continue_d')}</button>
     </div>
 
     <!-- STEP 3 — Part D (Vertical head profile) -->
@@ -112,34 +115,34 @@ const basePath = import.meta.env.BASE_URL;
       <div class="ej12-step-header">
         <span class="ej12-badge">3</span>
         <div>
-          <h3 class="ej12-step-title">Parte D — Perfil Vertical de Carga</h3>
-          <p class="ej12-step-text">Usa el lienzo para esbozar el <strong>perfil vertical de carga hidráulica</strong> cerca del Pozo 2 (desde la arena inferior hasta la superficie).</p>
+          <h3 class="ej12-step-title">{t('exercise12.step3_title')}</h3>
+          <p class="ej12-step-text" set:html={t('exercise12.step3_text')}></p>
         </div>
       </div>
       <details class="ej12-hint">
-        <summary class="ej12-hint-summary">Pista conceptual</summary>
+        <summary class="ej12-hint-summary">{t('exercise12.hint_summary')}</summary>
         <div class="ej12-hint-body">
-          <p>En un acuífero libre con componente vertical de flujo, la carga disminuye ligeramente hacia abajo. A través de un acuitardo con flujo ascendente, la carga experimenta un salto pronunciado. En un acuífero confinado con flujo predominantemente horizontal, la carga es casi constante con la profundidad.</p>
+          <p set:html={t('exercise12.step3_hint')}></p>
         </div>
       </details>
-      <button id="btn-reveal-d-ej12" class="ej12-btn-primary">Revelar Solución Final →</button>
+      <button id="btn-reveal-d-ej12" class="ej12-btn-primary">{t('exercise12.btn_reveal_d')}</button>
 
       <!-- Solution Part D -->
       <div id="sol-d-ej12" class="ej12-compare hidden">
         <div class="ej12-compare-panel" style="max-width: 340px; margin: 0 auto;">
-          <p class="ej12-compare-label">D — Perfil Vertical de Carga</p>
+          <p class="ej12-compare-label">{t('exercise12.compare_label_d')}</p>
           <img src={`${basePath}images/exercise12-sol-2.png`} alt="Solución D: perfil vertical de carga hidráulica" class="ej12-compare-img" />
         </div>
       </div>
 
       <div id="explanation-d-ej12" class="ej12-explanation hidden">
-        <p><strong>Explicación:</strong> El perfil muestra: (1) una ligera disminución de carga hacia abajo en el acuífero libre (debido al componente vertical del flujo), (2) un salto pronunciado ascendente a través del acuitardo de arcilla (la carga aumenta porque el flujo es ascendente), y (3) carga casi constante en el acuífero confinado inferior (donde el flujo es predominantemente horizontal).</p>
+        <p><strong>{t('exercise12.explanation_label')}</strong> {t('exercise12.explanation_d')}</p>
       </div>
     </div>
 
     <!-- Completion -->
     <div id="final-ej12" class="ej12-completion hidden">
-      ¡Has completado el Ejercicio 12! Compara tu dibujo en el lienzo con las soluciones.
+      {t('exercise12.completion')}
     </div>
   </div>
 </div>
@@ -290,6 +293,24 @@ const basePath = import.meta.env.BASE_URL;
 </style>
 
 <script>
+  const wrapper = document.querySelector('.ej12-wrapper');
+  const lang = wrapper?.dataset?.lang || 'es';
+  const isEn = lang === 'en';
+
+  const msgs = {
+    revealedAB: isEn ? 'Solution A and B revealed' : 'Solución A y B revelada',
+    feedbackCorrect: isEn
+      ? 'Correct! The potentiometric head in the lower sand (40 m) is greater than the water table (~38 m), creating an upward vertical gradient through the clay. Water flows from higher to lower head, and since 40 m > 38 m, the flow through the aquitard is upward.'
+      : 'Correcto! La carga potenciometrica en la arena inferior (40 m) es mayor que el nivel freatico (~38 m), creando un gradiente vertical ascendente a traves de la arcilla. El agua fluye de carga mayor a menor, y 40 m > 38 m, por lo que el flujo a traves del acuitardo es ascendente.',
+    feedbackWrongDown: isEn
+      ? 'Incorrect. You may have thought about the horizontal flow direction (from left to right, from higher to lower head). But through the aquitard, the flow direction is <strong>vertical</strong>. Compare the head above (water table ~38 m) with the head below (potentiometric 40 m). Since 40 > 38, the gradient is upward: water flows from below upward through the clay.'
+      : 'Incorrecto. Quizas pensaste en la direccion horizontal del flujo (de izquierda a derecha, de carga mayor a menor). Pero a traves del acuitardo, la direccion del flujo es <strong>vertical</strong>. Compara la carga arriba (nivel freatico ~38 m) con la carga abajo (potenciometrica 40 m). Como 40 > 38, el gradiente es ascendente: el agua fluye de abajo hacia arriba a traves de la arcilla.',
+    feedbackWrongNone: isEn
+      ? 'Incorrect. There is a hydraulic head difference between the confined aquifer (40 m) and the unconfined aquifer (~38 m). Where there is a hydraulic gradient across an aquitard, there is flow \u2014 even if the hydraulic conductivity is very low. Darcy\'s Law applies: any gradient produces some flow.'
+      : 'Incorrecto. Existe una diferencia de carga hidraulica entre el acuifero confinado (40 m) y el acuifero libre (~38 m). Donde hay un gradiente hidraulico a traves de un acuitardo, hay flujo \u2014 incluso si la conductividad hidraulica es muy baja. La ley de Darcy aplica: cualquier gradiente produce algun flujo.',
+    revealedD: isEn ? 'Final Solution revealed' : 'Solución Final revelada',
+  };
+
   const BASE = (import.meta as any).env?.BASE_URL ?? '/';
   const IMG_PROBLEM = `${BASE}images/exercise12-problem.png`;
 
@@ -399,7 +420,7 @@ const basePath = import.meta.env.BASE_URL;
     solAB.classList.remove('hidden');
     explanationAB.classList.remove('hidden');
     btnRevealAB.disabled = true;
-    btnRevealAB.textContent = 'Solucion A y B revelada';
+    btnRevealAB.textContent = msgs.revealedAB;
     btnNextStep1.classList.remove('hidden');
   });
 
@@ -424,18 +445,18 @@ const basePath = import.meta.env.BASE_URL;
         btn.classList.add('ej12-choice-correct');
         feedbackC.classList.remove('hidden', 'ej12-feedback-err');
         feedbackC.classList.add('ej12-feedback-ok');
-        feedbackC.innerHTML = 'Correcto! La carga potenciometrica en la arena inferior (40 m) es mayor que el nivel freatico (~38 m), creando un gradiente vertical ascendente a traves de la arcilla. El agua fluye de carga mayor a menor, y 40 m > 38 m, por lo que el flujo a traves del acuitardo es ascendente.';
+        feedbackC.innerHTML = msgs.feedbackCorrect;
         btnNextStep2.classList.remove('hidden');
       } else if (ans === 'down') {
         btn.classList.add('ej12-choice-wrong');
         feedbackC.classList.remove('hidden', 'ej12-feedback-ok');
         feedbackC.classList.add('ej12-feedback-err');
-        feedbackC.innerHTML = 'Incorrecto. Quizas pensaste en la direccion horizontal del flujo (de izquierda a derecha, de carga mayor a menor). Pero a traves del acuitardo, la direccion del flujo es <strong>vertical</strong>. Compara la carga arriba (nivel freatico ~38 m) con la carga abajo (potenciometrica 40 m). Como 40 > 38, el gradiente es ascendente: el agua fluye de abajo hacia arriba a traves de la arcilla.';
+        feedbackC.innerHTML = msgs.feedbackWrongDown;
       } else {
         btn.classList.add('ej12-choice-wrong');
         feedbackC.classList.remove('hidden', 'ej12-feedback-ok');
         feedbackC.classList.add('ej12-feedback-err');
-        feedbackC.innerHTML = 'Incorrecto. Existe una diferencia de carga hidraulica entre el acuifero confinado (40 m) y el acuifero libre (~38 m). Donde hay un gradiente hidraulico a traves de un acuitardo, hay flujo \u2014 incluso si la conductividad hidraulica es muy baja. La ley de Darcy aplica: cualquier gradiente produce algun flujo.';
+        feedbackC.innerHTML = msgs.feedbackWrongNone;
       }
     });
   });
@@ -457,7 +478,7 @@ const basePath = import.meta.env.BASE_URL;
     step3.classList.remove('ej12-step-active');
     step3.classList.add('ej12-step-done');
     btnRevealD.disabled = true;
-    btnRevealD.textContent = 'Solucion Final revelada';
+    btnRevealD.textContent = msgs.revealedD;
     finalEl.classList.remove('hidden');
     setStep(5);
     finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
