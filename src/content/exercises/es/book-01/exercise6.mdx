@@ -1,0 +1,72 @@
+---
+title: "Ejercicio 6"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.2 Flujo en un Acuífero Libre</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Comprender el flujo de agua subterránea en acuíferos libres es esencial porque este es el contexto más común en el que el agua subterránea interactúa con el agua superficial. La siguiente figura representa una sección transversal de un acuífero libre que se extiende entre dos pozos y un río central. El objetivo es identificar la forma del nivel freático y cómo el agua subterránea descarga hacia el río.
+
+  <img 
+    src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/uploads/sites/14/2020/12/image33.png"
+    alt="Sección transversal de un acuífero libre"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 26</b> – <em>Sección transversal de un acuífero libre entre dos pozos y un río central (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Problema de Ejemplo 6</h3>
+
+  <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> Dibuja el nivel freático.</p>
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>b)</b> Dibuja los contornos equipotenciales de 70 m, 75 m y 80 m y traza varias líneas de flujo.</p>
+    <p class="text-[var(--textoCardCanvas)]">Este problema demuestra la relación entre la carga hidráulica y la geometría del sistema de flujo. Los contornos equipotenciales son líneas de carga hidráulica constante, y las líneas de flujo siguen la dirección de carga decreciente, perpendiculares a las líneas equipotenciales.</p>
+  </div>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Solución Interactiva</h3>
+
+  Este ejercicio interactivo te permite dibujar tanto la línea equipotencial como puntos adicionales sobre la sección transversal del acuífero libre. Selecciona dos puntos para definir una línea equipotencial y observa la diferencia de carga hidráulica. Luego, agrega puntos adicionales para trazar los contornos equipotenciales.
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo guiado </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_6 />
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 6</h3>
+
+  <p>Las conclusiones clave de este ejercicio son:</p>
+
+  <ul>
+    <li><strong>El nivel freático</strong> en un acuífero libre es una réplica atenuada de la topografía, inclinándose hacia el punto de descarga (el río en este caso).</li>
+    <li><strong>Los contornos equipotenciales</strong> son líneas de igual carga hidráulica. En el ejercicio interactivo, se dibujan seleccionando pares de puntos a la misma elevación.</li>
+    <li><strong>Las líneas de flujo</strong> son perpendiculares a las líneas equipotenciales e indican la dirección del flujo de agua subterránea — desde una carga hidráulica mayor hacia una menor.</li>
+    <li><strong>En un acuífero libre cercano a un río</strong>, el agua subterránea fluye hacia el río, que actúa como frontera de descarga. Las líneas equipotenciales se curvan al acercarse al río, reflejando la geometría del sistema de flujo.</li>
+    <li><strong>La carga hidráulica</strong> disminuye a lo largo de una línea de flujo desde el área de recarga hacia el punto de descarga. El ejercicio interactivo permite medir esta diferencia (Δh) entre puntos seleccionados.</li>
+  </ul>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conexiones Conceptuales</h4>
+  <ul>
+    <li>Compara este ejercicio con el <strong>Ejercicio 5</strong>, que discute la representación del nivel freático como una superficie planar con flujo predominantemente horizontal. El Ejercicio 6 proporciona un ejemplo concreto donde el nivel freático interactúa con ríos.</li>
+    <li>Compara con el <strong>Ejercicio 3</strong>, que introduce las líneas equipotenciales y la dirección del flujo en una configuración de columna 1D más simple. El Ejercicio 6 extiende estos conceptos a una sección transversal 2D con condiciones de frontera.</li>
+    <li>La relación entre líneas equipotenciales y líneas de flujo demostrada aquí es la base para comprender las <strong>redes de flujo</strong> — una técnica gráfica utilizada para resolver problemas de flujo de agua subterránea (ver Poeter y Hsieh, 2020).</li>
+  </ul>
+
+</section>

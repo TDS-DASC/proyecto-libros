@@ -1,0 +1,72 @@
+---
+title: "Exercise 6"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.2 Flow in an Unconfined Aquifer</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Understanding groundwater flow in unconfined aquifers is essential because this is the most common setting in which groundwater interacts with surface water. The figure below represents a cross-section of an unconfined aquifer that extends between two wells and a central river. The task is to identify the shape of the water table and how groundwater discharges toward the river.
+
+  <img 
+    src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/uploads/sites/14/2020/12/image33.png"
+    alt="Unconfined aquifer cross-section"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 26</b> – <em>Cross-section of an unconfined aquifer between two wells and a central river (Cohen & Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Example Problem 6</h3>
+
+  <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> Draw the water table.</p>
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>b)</b> Draw the 70 m, 75 m, and 80 m equipotential contours and sketch several flow lines.</p>
+    <p class="text-[var(--textoCardCanvas)]">This problem demonstrates the relationship between hydraulic head and the geometry of the flow system. The equipotential contours are lines of constant hydraulic head, and flow lines follow the direction of decreasing head perpendicular to the equipotential lines.</p>
+  </div>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Interactive Solution</h3>
+
+  This interactive exercise allows you to draw both the equipotential line and additional points over the unconfined aquifer cross-section. Select two points to define an equipotential line and observe the hydraulic head difference. Then, add additional points to trace the equipotential contours.
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Guided interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_6 />
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 6 Solution</h3>
+
+  <p>The key takeaways from this exercise are:</p>
+
+  <ul>
+    <li><strong>The water table</strong> in an unconfined aquifer is a subdued replica of the topography, sloping toward the discharge point (the river in this case).</li>
+    <li><strong>Equipotential contours</strong> are lines of equal hydraulic head. In the interactive exercise, they are drawn by selecting pairs of points at the same elevation.</li>
+    <li><strong>Flow lines</strong> are perpendicular to equipotential lines and indicate the direction of groundwater flow — from higher hydraulic head to lower hydraulic head.</li>
+    <li><strong>In an unconfined aquifer near a river</strong>, groundwater flows toward the river, which acts as a discharge boundary. The equipotential lines curve as they approach the river, reflecting the geometry of the flow system.</li>
+    <li><strong>The hydraulic head</strong> decreases along a flow line from the recharge area toward the discharge point. The interactive exercise lets you measure this difference (Δh) between selected points.</li>
+  </ul>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conceptual Connections</h4>
+  <ul>
+    <li>Compare this exercise with <strong>Exercise 5</strong>, which discusses the representation of the water table as a planar surface with predominantly horizontal flow. Exercise 6 provides a concrete example where the water table interacts with rivers.</li>
+    <li>Compare with <strong>Exercise 3</strong>, which introduces equipotential lines and flow direction in a simpler 1D column setup. Exercise 6 extends these concepts to a 2D cross-section with boundary conditions.</li>
+    <li>The relationship between equipotential lines and flow lines demonstrated here is the foundation for understanding <strong>flow nets</strong> — a graphical technique used to solve groundwater flow problems (see Poeter & Hsieh, 2020).</li>
+  </ul>
+
+</section>
