@@ -9,7 +9,7 @@ const isEn = lang === 'en';
 <div data-lang={lang} id="ej8-root">
   <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
     <h1 class="font-semibold text-lg text-[var(--titles)]">
-      {isEn ? '🗺️ Simulation: Water Table and Equipotential Lines' : '🗺️ Simulación: Plano Freático y Líneas Equipotenciales'}
+      {isEn ? 'Simulation: Water Table and Equipotential Lines' : 'Simulacion: Plano Freatico y Lineas Equipotenciales'}
     </h1>
 
     <div class="canvas mt-6 mb-8 relative">
@@ -123,10 +123,10 @@ const isEn = lang === 'en';
   const isEn = LANG === 'en';
 
   const t = {
-    correct_feedback: isEn ? '✅ Correct! Well B is at 14 m.' : '✅ ¡Correcto! El Pozo B está a 14 m.',
+    correct_feedback: isEn ? 'Correct! Well B is at 14 m.' : '¡Correcto! El Pozo B est\u00e1 a 14 m.',
     incorrect_feedback: isEn
-      ? '❌ Incorrect. Review the distance between the shoreline, Well A, and Well B. Remember that the lake is a constant-head boundary (10 m).'
-      : '❌ Incorrecto. Revisa la distancia entre la costa, el Pozo A y el Pozo B. Recuerda que el lago es una frontera de carga constante (10 m).',
+      ? 'Incorrect. Review the distance between the shoreline, Well A, and Well B. Remember that the lake is a constant-head boundary (10 m).'
+      : 'Incorrecto. Revisa la distancia entre la costa, el Pozo A y el Pozo B. Recuerda que el lago es una frontera de carga constante (10 m).',
     lake_label: isEn ? 'Lake' : 'Lago',
     lake_head: isEn ? 'h = 10 m' : 'h = 10 m',
     well_a: isEn ? 'Well A' : 'Pozo A',

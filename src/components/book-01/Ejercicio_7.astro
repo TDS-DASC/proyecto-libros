@@ -14,7 +14,7 @@
   </div>
 
   <div class="ej7-card">
-    <h2 class="ej7-title">🌊 Ejercicio 7: Flujo a través de Sedimento y Carga Hidráulica</h2>
+    <h2 class="ej7-title">Ejercicio 7: Flujo a traves de Sedimento y Carga Hidraulica</h2>
     <p class="ej7-subtitle">Observa la sección transversal, determina la dirección del flujo y explora la Ley de Darcy.</p>
 
     <!-- ══ STEP 1 — Observar y Responder ══ -->
@@ -30,21 +30,21 @@
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">Pista conceptual</summary>
         <div class="ej7-hint-body">
           <p>El agua siempre fluye desde donde la <strong>carga hidráulica es mayor</strong> hacia donde es menor. Compara el nivel del agua en el lago con el nivel del agua en el piezómetro. Si el piezómetro está más alto, la carga del acuífero es mayor y el flujo es ascendente. Si está más bajo, el flujo es descendente.</p>
         </div>
       </details>
       <div class="ej7-choice-row">
         <button id="btn-answer-up-ej7" class="ej7-choice-btn" disabled>
-          <span class="ej7-btn-icon">⬆</span> Hacia arriba
+          <span class="ej7-btn-icon"></span> Hacia arriba
         </button>
         <button id="btn-answer-down-ej7" class="ej7-choice-btn" disabled>
-          <span class="ej7-btn-icon">⬇</span> Hacia abajo
+          <span class="ej7-btn-icon"></span> Hacia abajo
         </button>
       </div>
       <div id="countdown-ej7" class="ej7-countdown">
-        <span class="ej7-countdown-label">🔍 Observa los niveles del agua</span>
+        <span class="ej7-countdown-label">Observa los niveles del agua</span>
         <span id="countdown-val-ej7" class="ej7-countdown-val">3</span>
       </div>
       <p id="feedback-step1-ej7" class="ej7-feedback hidden"></p>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">Pista conceptual</summary>
         <div class="ej7-hint-body">
           <p>En el <strong>perfil vertical de carga</strong> (gráfica de la derecha), la carga se mantiene constante en el lago y en el acuífero, pero cambia a través del sedimiento. La pendiente de esa línea representa el <strong>gradiente hidráulico</strong>. Una pendiente ascendente indica flujo ascendente; una pendiente descendente indica flujo descendente.</p>
         </div>
@@ -82,7 +82,7 @@
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">Pista conceptual</summary>
         <div class="ej7-hint-body">
           <p>¿Qué pasa si la <strong>conductividad del sedimento es muy baja</strong> (arcilla)? El flujo sigue existiendo (la Ley de Darcy aplica siempre que haya un gradiente), pero la velocidad es muy pequeña. ¿Y si el acuífero y el lago tienen la <strong>misma carga</strong>? El gradiente es cero, por lo que no hay flujo neto.</p>
         </div>
@@ -111,11 +111,11 @@
 
     <!-- Completion -->
     <div id="final-ej7" class="ej7-completion hidden">
-      ✅ ¡Has completado el Ejercicio 7! Ahora comprendes cómo la carga hidráulica determina la dirección del flujo a través de un sedimento.
+      ¡Has completado el Ejercicio 7! Ahora comprendes cómo la carga hidráulica determina la dirección del flujo a través de un sedimento.
     </div>
 
     <!-- ══ Canvas Area ══ -->
-    <p class="ej7-canvas-label">📐 Simulación visual</p>
+    <p class="ej7-canvas-label">Simulacion visual</p>
     <div class="ej7-canvas-wrapper">
       <canvas id="ej7-canvas" style="touch-action:none;"></canvas>
     </div>
@@ -452,7 +452,7 @@
       const clicked = selectedUp ? btnUp : btnDown;
       clicked.classList.add('ej7-choice-correct');
       feedback1.className = 'ej7-feedback ej7-feedback-ok';
-      feedback1.innerHTML = `✅ ¡Correcto! El agua fluye de mayor a menor carga hidráulica. ${isAquiferHigher
+      feedback1.innerHTML = `¡Correcto! El agua fluye de mayor a menor carga hidráulica. ${isAquiferHigher
         ? 'La carga del acuífero (' + initialHAq + ') es mayor que la del lago (150), por lo que el flujo es <strong>ascendente</strong>.'
         : 'La carga del lago (150) es mayor que la del acuífero (' + initialHAq + '), por lo que el flujo es <strong>descendente</strong>.'}`;
 
@@ -477,7 +477,7 @@
       const clicked = selectedUp ? btnUp : btnDown;
       clicked.classList.add('ej7-choice-wrong');
       feedback1.className = 'ej7-feedback ej7-feedback-err';
-      feedback1.innerHTML = `❌ Incorrecto. Quizás confundiste la <strong>profundidad visible del agua</strong> con la <strong>carga hidráulica total</strong>. El piezómetro mide la carga hidráulica en el acuífero (h<sub>acuífero</sub> = ${initialHAq} m), que debe compararse con la carga del lago (h<sub>lago</sub> = 150 m). Como ${initialHAq} ${isAquiferHigher ? '>' : '<'} 150, el agua fluye desde ${isAquiferHigher ? 'el acuífero hacia el lago (ascendente)' : 'el lago hacia el acuífero (descendente)'}.`;
+      feedback1.innerHTML = `Incorrecto. Quizás confundiste la <strong>profundidad visible del agua</strong> con la <strong>carga hidráulica total</strong>. El piezómetro mide la carga hidráulica en el acuífero (h<sub>acuífero</sub> = ${initialHAq} m), que debe compararse con la carga del lago (h<sub>lago</sub> = 150 m). Como ${initialHAq} ${isAquiferHigher ? '>' : '<'} 150, el agua fluye desde ${isAquiferHigher ? 'el acuífero hacia el lago (ascendente)' : 'el lago hacia el acuífero (descendente)'}.`;
     }
   }
 

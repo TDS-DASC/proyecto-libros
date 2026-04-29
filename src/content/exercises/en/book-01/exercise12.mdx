@@ -12,12 +12,12 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 {/* 1. INTRODUCTION */}
 
 <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
-  📖 Introduction{" "}
+   Introduction{" "}
 </span>
 <hr class="divisor final"></hr>
 
 <h3 class="book-title text-[var(--book-title-1)] text-4xl">
-  🙋 Example Problem 12
+   Example Problem 12
 </h3>
 <p>
   This exercise integrates several key concepts about{" "}
@@ -54,7 +54,7 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 {/* 2. EXERCISE */}
 
 <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
-  ✏️ Interactive exercise{" "}
+   Interactive exercise{" "}
 </span>
 <hr class="divisor final"></hr>
 
@@ -62,12 +62,10 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 
 <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-{/* 3. SOLUTION */}
-
-<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
-  ✅ Solution & Takeaways{" "}
-</span>
-<hr class="divisor final"></hr>
+<details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+  <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+    Show solution
+  </summary>
 
 <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">
   Problem 12 Solution
@@ -134,5 +132,7 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
     specific head values and resulting flow directions.
   </li>
 </ul>
+
+</details>
 
 </section>

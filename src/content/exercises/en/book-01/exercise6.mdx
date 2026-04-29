@@ -9,7 +9,7 @@ import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
 
 <section class="book-section">
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.2 Flow in an Unconfined Aquifer</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.2 Flow in an Unconfined Aquifer</h3>
   
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
@@ -24,7 +24,7 @@ import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Example Problem 6</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 6</h3>
 
   <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
     <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> Draw the water table.</p>
@@ -34,21 +34,23 @@ import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Interactive Solution</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6"> Interactive Solution</h3>
 
   This interactive exercise allows you to draw both the equipotential line and additional points over the unconfined aquifer cross-section. Select two points to define an equipotential line and observe the hydraulic head difference. Then, add additional points to trace the equipotential contours.
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Guided interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Guided interactive exercise </span>
   <hr class="divisor final"></hr>
 
   <Ejercicio_6 />
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+<details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+  <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+    Show solution
+  </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 6 Solution</h3>
 
@@ -68,5 +70,7 @@ import Ejercicio_6 from "../../../../components/book-01/Ejercicio_6.astro";
     <li>Compare with <strong>Exercise 3</strong>, which introduces equipotential lines and flow direction in a simpler 1D column setup. Exercise 6 extends these concepts to a 2D cross-section with boundary conditions.</li>
     <li>The relationship between equipotential lines and flow lines demonstrated here is the foundation for understanding <strong>flow nets</strong> — a graphical technique used to solve groundwater flow problems (see Poeter & Hsieh, 2020).</li>
   </ul>
+
+</details>
 
 </section>

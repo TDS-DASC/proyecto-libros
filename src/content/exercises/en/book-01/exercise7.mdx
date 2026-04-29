@@ -9,7 +9,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
 <section class="book-section">
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.3 Flow Across Aquitards</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Flow Across Aquitards</h3>
   
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
@@ -26,7 +26,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Example Problem 7</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 7</h3>
 
   <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
     <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> A piezometer is inserted into an aquifer beneath sediment (low K) of a lake, and water rises to a stable level as shown below. A water table is present but not shown. Is water flowing upward or downward through the sediment? Explain.</p>
@@ -35,7 +35,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Interactive Solution</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6"> Interactive Solution</h3>
 
   This interactive exercise illustrates the solution to the previous problem. A piezometer is installed in the aquifer to measure hydraulic head (h<sub>aquifer</sub>). Water can flow upward or downward through the sediment depending on the hydraulic head difference between the aquifer and the lake. In this simulation, we will discover which is the case.
 
@@ -43,16 +43,17 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Guided interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Guided interactive exercise </span>
   <hr class="divisor final"></hr>
 
   <Ejercicio_7/>
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  {/* Solution & Takeaways */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 7 Solution</h3>
 
@@ -73,5 +74,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
     <li>The sharp change in head across the sediment (Part b) is a direct consequence of Darcy's Law: low-K material requires a steep hydraulic gradient to transmit even a small flow. This same principle explains the head jumps seen in Exercise 12 across the clay aquitard.</li>
     <li>Figure 27 from Cohen & Cherry (2020) — shown in the introduction — directly illustrates both cases: (a) downward flow when the water table is above the potentiometric surface, and (b) upward flow when the potentiometric surface is above the water table.</li>
   </ul>
+
+</details>
 
 </section>

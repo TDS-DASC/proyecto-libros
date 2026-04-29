@@ -9,7 +9,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
 <section class="book-section">
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.3 Flujo a través de Acuitardos</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Flujo a través de Acuitardos</h3>
   
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
@@ -26,7 +26,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Problema de ejemplo 7</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Problema de ejemplo 7</h3>
 
   <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
     <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> Se inserta un piezómetro en un acuífero debajo del sedimento (baja K) de un lago, y el agua sube a un nivel estable como se muestra a continuación. Hay un nivel freático presente pero no se muestra. ¿El agua fluye hacia arriba o hacia abajo a través del sedimento? Explique.</p>
@@ -35,7 +35,7 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Solución Interactiva</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6"> Solución Interactiva</h3>
 
   Este ejercicio interactivo ilustra la solución al problema anterior. Un piezómetro está instalado en el acuífero para medir la carga hidráulica (h<sub>acuífero</sub>). El agua puede fluir hacia arriba o hacia abajo a través del sedimento dependiendo de la diferencia de carga hidráulica entre el acuífero y el lago. En esta simulación descubriremos cuál es el caso.
 
@@ -43,16 +43,17 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo guiado </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Ejercicio interactivo guiado </span>
   <hr class="divisor final"></hr>
 
   <Ejercicio_7/>
 
   <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-  {/* Solución y Conclusiones */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Mostrar solución
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 7</h3>
 
@@ -73,5 +74,8 @@ import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
     <li>El cambio brusco de carga a través del sedimento (Parte b) es una consecuencia directa de la Ley de Darcy: un material de baja K requiere un gradiente hidráulico pronunciado para transmitir incluso un flujo pequeño. Este mismo principio explica los saltos de carga observados en el Ejercicio 12 a través del acuitardo de arcilla.</li>
     <li>La Figura 27 de Cohen y Cherry (2020) — mostrada en la introducción — ilustra directamente ambos casos: (a) flujo descendente cuando el nivel freático está por encima de la superficie potenciométrica, y (b) flujo ascendente cuando la superficie potenciométrica está por encima del nivel freático.</li>
   </ul>
+
+
+</details>
 
 </section>

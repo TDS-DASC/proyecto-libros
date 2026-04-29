@@ -14,7 +14,7 @@
   </div>
 
   <div class="ej9-card">
-    <h2 class="ej9-title">🗺️ Ejercicio 9: Flujo Horizontal y Acuíferos Múltiples</h2>
+    <h2 class="ej9-title">Ejercicio 9: Flujo Horizontal y Acuiferos Multiples</h2>
     <p class="ej9-subtitle">Estima los niveles de agua, determina el flujo vertical y experimenta con las fronteras constantes.</p>
 
     <!-- ══ STEP 1 — Estimar Niveles y Flujo ══ -->
@@ -29,7 +29,7 @@
         </div>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">Pista conceptual</summary>
         <div class="ej9-hint-body">
           <p>Si el nivel freático disminuye linealmente de 54 m a 50 m, ¿cuáles son las cargas a 1/4, 1/2 y 3/4 de la distancia? Ahora compara esos valores con las cargas en el acuífero confinado inferior — ambos comparten las <strong>mismas fronteras de carga constante</strong>. Si la carga es igual arriba y abajo de la arcilla en cada ubicación, ¿hay gradiente vertical?</p>
         </div>
@@ -68,7 +68,7 @@
         <p>El acuífero confinado inferior comparte las mismas fronteras de carga hidráulica constante (54 m y 50 m). Por lo tanto, el gradiente horizontal es el <strong>mismo en ambos acuíferos</strong>. Como la carga es igual por encima y por debajo de la arcilla en cualquier ubicación (por ejemplo, 53 m en ambos acuíferos en el pozo izquierdo), <strong>no hay gradiente vertical</strong> y, en consecuencia, no hay flujo vertical a través de la arcilla.</p>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">Pista conceptual</summary>
         <div class="ej9-hint-body">
           <p>El <strong>gradiente vertical</strong> se define como la diferencia de carga dividida por el espesor del acuitardo: <em>i<sub>v</sub> = (h<sub>arriba</sub> − h<sub>abajo</sub>) / L<sub>arcilla</sub></em>. Si h<sub>arriba</sub> = h<sub>abajo</sub> en cada punto x, entonces i<sub>v</sub> = 0 y, por la Ley de Darcy, el flujo vertical Q<sub>v</sub> = 0.</p>
         </div>
@@ -88,7 +88,7 @@
         </div>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">Pista conceptual</summary>
         <div class="ej9-hint-body">
           <p>¿Qué pasa si haces que la <strong>frontera izquierda sea más alta</strong> que la derecha? El gradiente horizontal se invierte, pero mientras ambos acuíferos compartan los mismos valores de frontera, la carga arriba y abajo de la arcilla seguirá siendo igual en cada punto x. El flujo vertical permanece cero.</p>
         </div>
@@ -117,11 +117,11 @@
 
     <!-- Completion -->
     <div id="final-ej9" class="ej9-completion hidden">
-      ✅ ¡Has completado el Ejercicio 9! Comprendes que cuando dos acuíferos comparten las mismas fronteras de carga constante, no hay gradiente vertical a través del acuitardo.
+      ¡Has completado el Ejercicio 9! Comprendes que cuando dos acuíferos comparten las mismas fronteras de carga constante, no hay gradiente vertical a través del acuitardo.
     </div>
 
     <!-- ══ Canvas Area ══ -->
-    <p class="ej9-canvas-label">📐 Simulación visual</p>
+    <p class="ej9-canvas-label">Simulacion visual</p>
     <div class="ej9-canvas-wrapper">
       <canvas id="ej9-canvas" style="touch-action:none;"></canvas>
     </div>
@@ -354,7 +354,7 @@
     if (opt === '2') {
       clicked.classList.add('ej9-choice-correct');
       feedback1.className = 'ej9-feedback ej9-feedback-ok';
-      feedback1.innerHTML = '✅ ¡Correcto! Los niveles son 53 m, 52 m y 51 m, y como la carga es igual arriba y abajo de la arcilla en cada ubicación, <strong>no hay gradiente vertical</strong> ni flujo vertical.';
+      feedback1.innerHTML = '¡Correcto! Los niveles son 53 m, 52 m y 51 m, y como la carga es igual arriba y abajo de la arcilla en cada ubicación, <strong>no hay gradiente vertical</strong> ni flujo vertical.';
 
       setTimeout(function() {
         currentStep = 2;
@@ -367,15 +367,15 @@
     } else if (opt === '1') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) están bien, pero la dirección del flujo está mal. Si la carga es <strong>igual arriba y abajo de la arcilla</strong> en cada ubicación (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), el <strong>gradiente vertical es cero</strong>. Sin gradiente vertical no puede haber flujo en ninguna dirección, ni hacia abajo ni hacia arriba.';
+      feedback1.innerHTML = 'Incorrecto. Los niveles (53, 52, 51) estan bien, pero la direccion del flujo esta mal. Si la carga es <strong>igual arriba y abajo de la arcilla</strong> en cada ubicacion (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), el <strong>gradiente vertical es cero</strong>. Sin gradiente vertical no puede haber flujo en ninguna direccion, ni hacia abajo ni hacia arriba.';
     } else if (opt === '4') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) son correctos, pero elegiste la dirección equivocada. Con cargas iguales arriba y abajo de la arcilla en cada punto, el gradiente vertical es <strong>cero</strong>. No hay flujo vertical — ni ascendente ni descendente.';
+      feedback1.innerHTML = 'Incorrecto. Los niveles (53, 52, 51) son correctos, pero elegiste la direccion equivocada. Con cargas iguales arriba y abajo de la arcilla en cada punto, el gradiente vertical es <strong>cero</strong>. No hay flujo vertical \u2014 ni ascendente ni descendente.';
     } else if (opt === '3') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles están mal (la caída es lineal de 54 a 50, así que los valores intermedios son 53, 52, 51 — no 54, 52, 50). Además, la dirección también está mal. Recuerda: cuando ambos acuíferos comparten las mismas fronteras de carga constante, la carga es idéntica arriba y abajo en cada punto x, por lo que <strong>no hay gradiente vertical ni flujo</strong>.';
+      feedback1.innerHTML = 'Incorrecto. Los niveles estan mal (la caida es lineal de 54 a 50, asi que los valores intermedios son 53, 52, 51 \u2014 no 54, 52, 50). Ademas, la direccion tambien esta mal. Recuerda: cuando ambos acuiferos comparten las mismas fronteras de carga constante, la carga es identica arriba y abajo en cada punto x, por lo que <strong>no hay gradiente vertical ni flujo</strong>.';
     }
   }
 

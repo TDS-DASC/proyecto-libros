@@ -16,7 +16,7 @@ const basePath = import.meta.env.BASE_URL;
   </div>
 
   <div class="ej11-card">
-    <h2 class="ej11-title">🗺️ Ejercicio 11: Flujo de Agua Subterránea y Carga Hidráulica</h2>
+    <h2 class="ej11-title">Ejercicio 11: Flujo de Agua Subterranea y Carga Hidraulica</h2>
     <p class="ej11-subtitle">Usa el lienzo para esbozar tus respuestas antes de revelar cada solución.</p>
 
     <!-- ══ STEP 1 — Parts A + B (above the canvas) ══ -->
@@ -34,7 +34,7 @@ const basePath = import.meta.env.BASE_URL;
     </div>
 
     <!-- ── Canvas area ── -->
-    <p class="ej11-canvas-label">📐 Dibuja en el lienzo y luego revela la solución</p>
+    <p class="ej11-canvas-label">Dibuja en el lienzo y luego revela la solucion</p>
     <div id="canvas-wrapper-ej11" class="ej11-canvas-wrapper">
       <img id="main-image-ej11" src={`${basePath}images/p47-000.png`}
         alt="Diagrama del Problema 11" class="ej11-diagram-img" draggable="false" />
@@ -47,10 +47,10 @@ const basePath = import.meta.env.BASE_URL;
       <input id="brush-size-ej11" type="range" min="1" max="14" value="3" class="ej11-slider" />
       <label class="ej11-tool-label">Color</label>
       <input id="brush-color-ej11" type="color" value="#2563eb" class="ej11-color-picker" />
-      <button id="btn-pen-ej11"    class="ej11-tool-btn ej11-tool-active">✏️ Lápiz</button>
-      <button id="btn-eraser-ej11" class="ej11-tool-btn">🧹 Borrador</button>
-      <button id="btn-undo-ej11"   class="ej11-tool-btn">↩ Deshacer</button>
-      <button id="btn-clear-ej11"  class="ej11-tool-btn ej11-tool-danger">🗑️ Limpiar</button>
+      <button id="btn-pen-ej11"    class="ej11-tool-btn ej11-tool-active">Lapiz</button>
+      <button id="btn-eraser-ej11" class="ej11-tool-btn">Borrador</button>
+      <button id="btn-undo-ej11"   class="ej11-tool-btn">Deshacer</button>
+      <button id="btn-clear-ej11"  class="ej11-tool-btn ej11-tool-danger">Limpiar</button>
     </div>
 
     <!-- ══ Reveal + comparison (below toolbar, same step1 card logic via JS) ══ -->
@@ -82,10 +82,10 @@ const basePath = import.meta.env.BASE_URL;
         </div>
       </div>
       <div class="ej11-choice-row">
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="up">⬆ Hacia arriba</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="down">⬇ Hacia abajo</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="horizontal">➡ Horizontal</button>
-        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="none">⊘ Sin flujo</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="up">Hacia arriba</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="down">Hacia abajo</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="horizontal">Horizontal</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="none">Sin flujo</button>
       </div>
       <p id="feedback-c-ej11" class="ej11-feedback hidden"></p>
       <button id="btn-next-step2-ej11" class="ej11-btn-secondary hidden">Continuar a Parte D →</button>
@@ -114,7 +114,7 @@ const basePath = import.meta.env.BASE_URL;
 
     <!-- ══ Completion ══ -->
     <div id="final-ej11" class="ej11-completion hidden">
-      ✅ ¡Has completado el Ejercicio 11! Compara tu dibujo en el lienzo con las soluciones.
+      ¡Has completado el Ejercicio 11! Compara tu dibujo en el lienzo con las soluciones.
     </div>
   </div>
 </div>
@@ -365,7 +365,7 @@ const basePath = import.meta.env.BASE_URL;
   btnRevealAB.addEventListener('click', () => {
     solAB.classList.remove('hidden');
     btnRevealAB.disabled = true;
-    btnRevealAB.textContent = '✅ Solución A y B revelada';
+    btnRevealAB.textContent = 'Solucion A y B revelada';
     btnNextStep1.classList.remove('hidden');
   });
 
@@ -390,11 +390,11 @@ const basePath = import.meta.env.BASE_URL;
       btn.classList.add(correct ? 'ej11-choice-correct' : 'ej11-choice-wrong');
       feedbackC.classList.remove('hidden', 'ej11-feedback-ok', 'ej11-feedback-err');
       if (correct) {
-        feedbackC.textContent = '✅ ¡Correcto! La carga en la arena superior es mayor, así que el flujo a través de la arcilla superior es descendente.';
+        feedbackC.textContent = 'Correcto! La carga en la arena superior es mayor, asi que el flujo a traves de la arcilla superior es descendente.';
         feedbackC.classList.add('ej11-feedback-ok');
         btnNextStep2.classList.remove('hidden');
       } else {
-        feedbackC.textContent = '❌ Incorrecto. Compara la elevación del nivel freático con la carga de la arena inferior para determinar la dirección.';
+        feedbackC.textContent = 'Incorrecto. Compara la elevacion del nivel freatico con la carga de la arena inferior para determinar la direccion.';
         feedbackC.classList.add('ej11-feedback-err');
       }
     });
@@ -416,7 +416,7 @@ const basePath = import.meta.env.BASE_URL;
     step3.classList.remove('ej11-step-active');
     step3.classList.add('ej11-step-done');
     btnRevealD.disabled = true;
-    btnRevealD.textContent = '✅ Solución Final revelada';
+    btnRevealD.textContent = 'Solucion Final revelada';
     finalEl.classList.remove('hidden');
     setStep(5); // all done
     finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

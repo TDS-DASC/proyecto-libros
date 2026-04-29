@@ -14,7 +14,7 @@ const basePath = import.meta.env.BASE_URL;
   </div>
 
   <div class="ej10-card">
-    <h2 class="ej10-title">🗺️ Simulación: Identificación de Líneas Equipotenciales</h2>
+    <h2 class="ej10-title">Simulacion: Identificacion de Lineas Equipotenciales</h2>
     <p class="ej10-subtitle">Analiza los datos de nivel de agua y selecciona el esquema correcto. Luego experimenta con el simulador interactivo.</p>
 
     <!-- ══ STEP 1 — Multiple Choice ══ -->
@@ -135,12 +135,12 @@ const basePath = import.meta.env.BASE_URL;
         </div>
       </div>
 
-      <button id="btn-reset-ej10" class="ej10-btn-outline">↻ Restablecer Valores</button>
+      <button id="btn-reset-ej10" class="ej10-btn-outline">Restablecer Valores</button>
     </div>
 
     <!-- ══ Completion ══ -->
     <div id="final-ej10" class="ej10-completion hidden">
-      ✅ ¡Has completado el Ejercicio 10! Experimenta con el simulador para entender mejor los gradientes verticales.
+      ¡Has completado el Ejercicio 10! Experimenta con el simulador para entender mejor los gradientes verticales.
     </div>
   </div>
 </div>
@@ -366,7 +366,7 @@ const basePath = import.meta.env.BASE_URL;
         answeredCorrectly = true;
         btn.classList.add("correct");
         optionBtns.forEach(b => { if (b !== btn) b.classList.add("disabled"); });
-        feedback.textContent = "✅ ¡Correcto! Las equipotenciales son verticales y el flujo es horizontal.";
+        feedback.textContent = "¡Correcto! Las equipotenciales son verticales y el flujo es horizontal.";
         feedback.className = "ej10-feedback ej10-feedback-ok";
         btnReveal.classList.remove("hidden");
         step1Actions.classList.remove("hidden");
@@ -376,7 +376,7 @@ const basePath = import.meta.env.BASE_URL;
         if (choice === "a") reason = "La línea equipotencial no tiene la inflexión correcta en el acuitardo.";
         if (choice === "c") reason = "Los valores representan la altura de la columna de agua, no la carga hidráulica.";
         if (choice === "d") reason = "Los valores representan la elevación del punto de medición, no la carga hidráulica.";
-        feedback.textContent = `❌ Incorrecto. ${reason}`;
+        feedback.textContent = `Incorrecto. ${reason}`;
         feedback.className = "ej10-feedback ej10-feedback-err";
       }
     });

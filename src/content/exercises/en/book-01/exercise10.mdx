@@ -10,26 +10,27 @@ import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
 <section class="book-section">
 
   {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Introduction </span>
   <hr class="divisor final"></hr>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 10</h3>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 10</h3>
   
   <p>Based on the water level data shown in the schematic, determine which of the options best represents the equipotential lines and flow direction through the two sand layers and the clay aquitard.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
   {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Interactive exercise </span>
   <hr class="divisor final"></hr>
 
   <Ejercicio_10/>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 10 Solution</h3>
 
@@ -40,5 +41,7 @@ import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
     <li><strong>Choice "c"</strong> CANNOT be the correct answer, because the head values plotted at the points of measurement do not represent hydraulic head. Instead, they represent the height of the water column in each well.</li>
     <li><strong>Choice "d"</strong> CANNOT be the correct answer, because the values plotted at the points of measurement do not represent hydraulic head; instead, they are the elevations of the points of measurement.</li>
   </ul>
+
+</details>
 
 </section>
