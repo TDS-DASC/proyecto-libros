@@ -1,36 +1,23 @@
 ---
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+import { useTranslations } from '../../../i18n/utils';
 import img1 from "./img/img1.png";
 import img2 from "./img/img2.png";
 import img3 from "./img/img3.png";
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="info-section">
-    <h2>Flujo de Agua en Medio Poroso</h2>
+    <h2 set:html={t('exercise2.info.title')} />
 
-    <p>
-        El aparato consiste en un cilindro de área transversal <b>A</b> que está
-        lleno de un medio poroso, como arena. El agua se introduce lentamente en
-        el recipiente de la izquierda y fluye a través del cilindro lleno de arena
-        hasta que los poros se saturan completamente.
-    </p>
-
-    <p>
-        A medida que el agua continúa ingresando, los niveles de agua en ambos
-        recipientes suben gradualmente hasta que el agua en el recipiente
-        derecho alcanza el borde superior y comienza a desbordarse. En ese
-        punto, aunque el agua sigue entrando por el lado izquierdo, el nivel
-        derecho se mantiene constante. El nivel izquierdo continúa aumentando
-        hasta que el caudal de entrada <b>Q<sub>in</sub></b> es igual al caudal de
-        salida <b>Q<sub>out</sub></b>.
-    </p>
-
-    <p>
-        En ese momento se alcanza una condición de <b
-            >flujo en estado estacionario</b
-        >, donde la cantidad de agua que entra es igual a la que sale. El valor
-        de <b>Q</b> representa el caudal volumétrico del agua a través del cilindro
-        (es decir, volumen por unidad de tiempo, como m³/s, L/s o gal/min).
-    </p>
+    <p set:html={t('exercise2.info.para1')} />
+    <p set:html={t('exercise2.info.para2')} />
+    <p set:html={t('exercise2.info.para3')} />
 
     <img
         src={img1.src}
@@ -38,24 +25,13 @@ import img3 from "./img/img3.png";
         class="info-image"
     />
 
-    <p>
-        En este experimento, el flujo de agua se mueve desde una zona de mayor
-        energía hidráulica hacia una de menor energía. Esta diferencia de
-        energía se denomina <b>gradiente hidráulico</b>, y puede expresarse
-        mediante la relación:
-    </p>
+    <p set:html={t('exercise2.info.para4')} />
 
     <p class="formula">
         <b>i = ∆h / ∆L</b>
     </p>
 
-    <p>
-        donde <b>∆h</b> es la diferencia de carga hidráulica entre los dos puntos,
-        y
-        <b>∆L</b> es la distancia entre los piezómetros. El flujo es paralelo al
-        eje del cilindro y depende de las propiedades del medio (porosidad y conductividad
-        hidráulica).
-    </p>
+    <p set:html={t('exercise2.info.para5')} />
 
     <img
         src={img2.src}
@@ -63,36 +39,16 @@ import img3 from "./img/img3.png";
         class="info-image"
     />
 
-    <p>
-        En condiciones naturales, el flujo subterráneo se desarrolla dentro de
-        un medio tridimensional mucho más complejo. Los gradientes hidráulicos y
-        las direcciones de flujo pueden variar tanto en magnitud como en
-        dirección dependiendo de la estructura del subsuelo, la presencia de
-        capas confinantes y la heterogeneidad del terreno.
-    </p>
-
-    <p>
-        Si instalamos pozos para medir el gradiente hidráulico sin conocer la
-        orientación del estrato o la inclinación del medio, sólo podemos deducir
-        que hay un componente de flujo horizontal. Sin embargo, el flujo también
-        podría tener una componente vertical (ascendente o descendente)
-        dependiendo de la inclinación del medio o de la disposición de los
-        límites confinantes.
-    </p>
-
-    <p>
-        En algunos casos, la inclinación puede ser tan pronunciada que el flujo
-        se acerca a una dirección vertical. Este análisis subraya la importancia
-        de conocer la <b>orientación de los límites confinantes</b> y otras características
-        geológicas para interpretar correctamente los datos de carga hidráulica y
-        determinar la dirección real del flujo.
-    </p>
+    <p set:html={t('exercise2.info.para6')} />
+    <p set:html={t('exercise2.info.para7')} />
 
     <img
         src={img3.src}
         alt="Casos de inclinación y dirección del flujo"
         class="info-image"
     />
+
+    <p set:html={t('exercise2.info.para8')} />
 </div>
 
 <style>

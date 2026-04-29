@@ -1,3 +1,20 @@
+---
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+import { useTranslations } from '../../i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const tModeLabel = t('exercise4.mode_label');
+const tModeInter = t('exercise4.mode_interactive');
+const tModeManual = t('exercise4.mode_manual');
+const tDepthL = t('exercise4.depth_water_l');
+const tDepthR = t('exercise4.depth_water_r');
+---
+
 <!--
   Interactive Aquifer Diagram — "Deluxe" v3 (skin azul con líneas al frente)
   - Mantiene IDs/estructura y toda la lógica original (interactivo/manual)
@@ -6,12 +23,8 @@
 
 <section class="mx-auto max-w-7xl p-4 md:p-6">
   <header class="mb-4">
-    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
-      Interactive Aquifer Diagram
-    </h1>
-    <p class="text-slate-600 mt-1">
-      Ajusta los parámetros (o usa modo Manual). El diagrama reacciona en tiempo real; a la derecha verás fórmulas y resultados.
-    </p>
+    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900" set:html={t('exercise4.title')} />
+    <p class="text-slate-600 mt-1" set:html={t('exercise4.intro')} />
   </header>
 
   <div class="grid lg:grid-cols-12 gap-6 items-start">
@@ -22,9 +35,9 @@
       <div class="flex items-center justify-between mb-2 text-xs md:text-sm text-slate-600 relative z-[1]">
         <div class="inline-flex items-center gap-2">
           <span class="size-2.5 rounded-full bg-sky-500 shadow-[0_0_0_3px_rgba(14,165,233,.15)]"></span>
-          <span class="font-medium text-slate-800">Perfil Hidrogeológico</span>
+          <span class="font-medium text-slate-800">{t('exercise4.profile')}</span>
         </div>
-        <div class="text-slate-500">Superficie del terreno (referencia)</div>
+        <div class="text-slate-500">{t('exercise4.ground_ref')}</div>
       </div>
 
       <div class="flex justify-center items-center relative z-[1]">
@@ -99,10 +112,10 @@
 
           <!-- Etiquetas de capas -->
           <g font-size="16" fill="#0f172a" opacity="0.9">
-            <text id="lbl-U"  x="200" y="210">Acuífero No Confinado</text>
-            <text id="lbl-UA" x="200" y="345">Acuitardo Superior</text>
-            <text id="lbl-C"  x="200" y="460">Acuífero Confinado</text>
-            <text id="lbl-LA" x="200" y="615">Acuitardo Inferior</text>
+            <text id="lbl-U"  x="200" y="210">{t('exercise4.unconfined_aq')}</text>
+            <text id="lbl-UA" x="200" y="345">{t('exercise4.upper_aquitard')}</text>
+            <text id="lbl-C"  x="200" y="460">{t('exercise4.confined_aq')}</text>
+            <text id="lbl-LA" x="200" y="615">{t('exercise4.lower_aquitard')}</text>
           </g>
 
           <!-- Regla vertical -->
@@ -112,8 +125,8 @@
 
           <!-- Lecturas de profundidad -->
           <g font-size="14" fill="#0f172a">
-            <text id="dtw-left"  x="392" y="158">Depth to water (L): — m</text>
-            <text id="dtw-right" x="968" y="178">Depth to water (R): — m</text>
+            <text id="dtw-left"  x="392" y="158">{t('exercise4.depth_water_l')} — m</text>
+            <text id="dtw-right" x="968" y="178">{t('exercise4.depth_water_r')} — m</text>
           </g>
 
           <!-- ===== LÍNEAS AL FRENTE ===== -->
@@ -137,7 +150,7 @@
           <g id="bubble" transform="translate(820,104)">
             <rect x="0" y="0" width="298" height="76" rx="12" fill="#ffffff" stroke="#e5e7eb"
                   style="filter: drop-shadow(0 6px 18px rgba(2,6,23,.12));"/>
-            <text x="16" y="28" font-size="14" fill="#0f172a" font-weight="600">Gradiente & Flujo (Darcy)</text>
+            <text x="16" y="28" font-size="14" fill="#0f172a" font-weight="600">{t('exercise4.gradient_flow')}</text>
             <text id="bubble-i" x="16"  y="50" font-size="13" fill="#0f172a">iₚₛ = —</text>
             <text id="bubble-Q" x="156" y="50" font-size="13" fill="#0f172a">Q = — m³/s</text>
           </g>
@@ -147,10 +160,10 @@
             <rect x="860" y="22" width="340" height="64" rx="14" fill="#f8fafc" stroke="#e5e7eb" />
             <rect x="878" y="38" width="124" height="28" rx="999" fill="#fff" stroke="#e2e8f0" />
             <line x1="892" y1="52" x2="924" y2="52" stroke="#0ea5e9" stroke-width="4" />
-            <text x="932" y="56">Water Table</text>
+            <text x="932" y="56">{t('exercise4.water_table')}</text>
             <rect x="1012" y="38" width="174" height="28" rx="999" fill="#fff" stroke="#e2e8f0" />
             <line x1="1026" y1="52" x2="1058" y2="52" stroke="#06b6d4" stroke-width="3.5" class="dash-anim-2" />
-            <text x="1066" y="56">Potentiometric Surface</text>
+            <text x="1066" y="56">{t('exercise4.potentiometric')}</text>
           </g>
         </svg>
       </div>
@@ -159,20 +172,20 @@
     <!-- ===== Results ===== -->
     <div class="lg:col-span-4 self-start flex flex-col gap-4 h-fit">
       <div class="rounded-2xl border border-slate-200 bg-white/75 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-[0_10px_35px_rgba(2,6,23,0.10)] p-4 transition-colors duration-300">
-        <h3 class="text-lg font-semibold text-slate-900 mb-3">Fórmulas & Resultados</h3>
+        <h3 class="text-lg font-semibold text-slate-900 mb-3">{t('exercise4.formulas_results')}</h3>
         <div class="grid gap-3 text-sm">
           <div class="rounded-xl border border-slate-200 p-4 bg-white/80">
-            <div class="font-semibold text-slate-900 mb-2">Water Table</div>
+            <div class="font-semibold text-slate-900 mb-2">{t('exercise4.water_table')}</div>
             <p class="text-slate-700">Δh<sub>wt</sub> = h<sub>L</sub> − h<sub>R</sub> = <span id="f-wt-dh" class="tabular-nums">—</span> m</p>
             <p class="text-slate-700">i<sub>wt</sub> = Δh<sub>wt</sub> / ΔL = <span id="f-wt-i" class="tabular-nums">—</span> (m/m)</p>
           </div>
           <div class="rounded-xl border border-slate-200 p-4 bg-white/80">
-            <div class="font-semibold text-slate-900 mb-2">Potentiometric Surface</div>
+            <div class="font-semibold text-slate-900 mb-2">{t('exercise4.potentiometric')}</div>
             <p class="text-slate-700">Δh<sub>ps</sub> = h<sub>L</sub> − h<sub>R</sub> = <span id="f-ps-dh" class="tabular-nums">—</span> m</p>
             <p class="text-slate-700">i<sub>ps</sub> = Δh<sub>ps</sub> / ΔL = <span id="f-ps-i" class="tabular-nums">—</span> (m/m)</p>
           </div>
           <div class="rounded-xl border border-slate-200 p-4 bg-white/80">
-            <div class="font-semibold text-slate-900 mb-2">Descarga (confinado)</div>
+            <div class="font-semibold text-slate-900 mb-2">{t('exercise4.discharge')}</div>
             <p class="text-slate-700">Q = K · i<sub>ps</sub> · A</p>
             <p class="mt-1 text-slate-700">Q = <span id="f-Q" class="tabular-nums">—</span> m³/s <span class="text-slate-500">(K=<span id="f-K" class="tabular-nums">—</span> m/s, A=<span id="f-A" class="tabular-nums">—</span> m²)</span></p>
           </div>
@@ -184,31 +197,31 @@
   <!-- =================== PARAMETERS TOOLBAR =================== -->
   <div class="mt-6 rounded-2xl border border-slate-200 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/65 shadow-[0_10px_35px_rgba(2,6,23,0.10)] p-3 lg:p-4">
     <div class="flex items-center justify-between mb-2">
-      <h3 class="text-base font-semibold text-slate-900">Parámetros</h3>
+      <h3 class="text-base font-semibold text-slate-900">{t('exercise4.parameters')}</h3>
       <div class="hidden lg:flex gap-2">
-        <button id="btn-toggle" class="rounded-xl border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">Modo: Interactivo</button>
-        <button id="btn-reset" class="rounded-xl border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">Reset</button>
-        <button id="btn-rand" class="rounded-xl bg-slate-900 text-white px-3 py-1.5 text-sm hover:opacity-90">Random</button>
+        <button id="btn-toggle" class="rounded-xl border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">{t('exercise4.mode_label')} {t('exercise4.mode_interactive')}</button>
+        <button id="btn-reset" class="rounded-xl border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">{t('exercise4.reset')}</button>
+        <button id="btn-rand" class="rounded-xl bg-slate-900 text-white px-3 py-1.5 text-sm hover:opacity-90">{t('exercise4.random')}</button>
       </div>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       <!-- Distance -->
       <div>
-        <label for="ctl-L" class="block font-semibold text-slate-900">Distance L (m)</label>
+        <label for="ctl-L" class="block font-semibold text-slate-900">{t('exercise4.distance')}</label>
         <input id="ctl-L" type="range" min="100" max="1500" value="700" class="w-full accent-slate-900" />
         <input data-linked="L" type="number" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
-        <div class="text-xs text-slate-500">Between wells: <span id="val-L">700</span> m</div>
+        <div class="text-xs text-slate-500">{t('exercise4.between_wells')} <span id="val-L">700</span> m</div>
       </div>
 
       <!-- Water Table -->
       <div>
-        <div class="font-semibold text-slate-900">Water Table</div>
-        <div class="text-xs text-slate-500 mb-1">Left elevation (m)</div>
+        <div class="font-semibold text-slate-900">{t('exercise4.water_table')}</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.left_elevation')}</div>
         <input id="ctl-wtLeft" type="range" min="10" max="40" value="20" class="w-full accent-slate-900" />
         <input data-linked="wtLeft" type="number" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500 mb-2">h<sub>L</sub>: <span id="val-wtLeft">20</span> m</div>
-        <div class="text-xs text-slate-500 mb-1">Slope (m per 100 m → right)</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.slope')}</div>
         <input id="ctl-wtSlope" type="range" min="-5" max="5" value="2.8" step="0.1" class="w-full accent-slate-900" />
         <input data-linked="wtSlope" type="number" step="0.1" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500">Δh/100m: <span id="val-wtSlope">2.8</span></div>
@@ -216,12 +229,12 @@
 
       <!-- Potentiometric -->
       <div>
-        <div class="font-semibold text-slate-900">Potentiometric Surface</div>
-        <div class="text-xs text-slate-500 mb-1">Left elevation (m)</div>
+        <div class="font-semibold text-slate-900">{t('exercise4.potentiometric')}</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.left_elevation')}</div>
         <input id="ctl-psLeft" type="range" min="10" max="40" value="18" class="w-full accent-slate-900" />
         <input data-linked="psLeft" type="number" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500 mb-2">h<sub>L</sub>: <span id="val-psLeft">18</span> m</div>
-        <div class="text-xs text-slate-500 mb-1">Slope (m per 100 m → right)</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.slope')}</div>
         <input id="ctl-psSlope" type="range" min="-5" max="5" value="1.2" step="0.1" class="w-full accent-slate-900" />
         <input data-linked="psSlope" type="number" step="0.1" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500">Δh/100m: <span id="val-psSlope">1.2</span></div>
@@ -229,12 +242,12 @@
 
       <!-- Hydraulics -->
       <div>
-        <div class="font-semibold text-slate-900">Hydraulic Parameters</div>
-        <div class="text-xs text-slate-500 mb-1">Conductivity K (m/s)</div>
+        <div class="font-semibold text-slate-900">{t('exercise4.hydraulic_params')}</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.conductivity')}</div>
         <input id="ctl-K" type="range" min="0.0001" max="0.1" value="0.00825" step="0.0001" class="w-full accent-slate-900" />
         <input data-linked="K" type="number" step="0.0001" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500 mb-2"><span id="val-K">0.00825</span> m/s</div>
-        <div class="text-xs text-slate-500 mb-1">Cross-sectional area A (m²)</div>
+        <div class="text-xs text-slate-500 mb-1">{t('exercise4.area')}</div>
         <input id="ctl-A" type="range" min="0.02" max="2.0" value="0.20" step="0.01" class="w-full accent-slate-900" />
         <input data-linked="A" type="number" step="0.01" class="mt-1 w-full rounded-lg border border-slate-300 px-2 py-1 text-sm hidden" />
         <div class="text-xs text-slate-500"><span id="val-A">0.20</span> m²</div>
@@ -243,7 +256,7 @@
   </div>
 </section>
 
-<script type="module">
+<script type="module" define:vars={{ tModeLabel, tModeInter, tModeManual, tDepthL, tDepthR }}>
 let interactiveMode = true;
 const svg = document.getElementById('hydro-svg');
 const toggleBtn = document.getElementById('btn-toggle');
@@ -401,8 +414,8 @@ if (!svg || Object.values(ctl).some(v => !v) || Object.values(refs).some(v => !v
 
     const depthL_m = (yWT_atLeft - GY) / PX_PER_M;
     const depthR_m = (yPS_atRight - GY) / PX_PER_M;
-    refs.dtwL.textContent = `Depth to water (L): ${fnum(depthL_m)} m`;
-    refs.dtwR.textContent = `Depth to water (R): ${fnum(depthR_m)} m`;
+    refs.dtwL.textContent = `${tDepthL} ${fnum(depthL_m)} m`;
+    refs.dtwR.textContent = `${tDepthR} ${fnum(depthR_m)} m`;
 
     const dH_wt = wtL - wtR, i_wt = dH_wt / Lm;
     const dH_ps = psL - psR, i_ps = dH_ps / Lm;
@@ -429,7 +442,7 @@ if (!svg || Object.values(ctl).some(v => !v) || Object.values(refs).some(v => !v
 
   function toggleInputs() {
     interactiveMode = !interactiveMode;
-    if (toggleBtn) toggleBtn.textContent = `Modo: ${interactiveMode ? 'Interactivo' : 'Manual'}`;
+    if (toggleBtn) toggleBtn.textContent = `${tModeLabel} ${interactiveMode ? tModeInter : tModeManual}`;
 
     Object.entries(ctl).forEach(([key, el]) => {
       if (!el) return;
