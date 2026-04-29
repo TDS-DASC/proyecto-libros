@@ -9,23 +9,29 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 
 <section class="book-section">
 
-{/* 1. INTRODUCTION */}
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Aquifers and Aquitards</h3>
 
-<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
-   Introduction{" "}
-</span>
-<hr class="divisor final"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-<h3 class="book-title text-[var(--book-title-1)] text-4xl">
-   Example Problem 12
-</h3>
-<p>
-  This exercise integrates several key concepts about{" "}
-  <strong>hydraulic head</strong> and <strong>groundwater flow</strong> in a
-  system with an unconfined aquifer, a confined aquifer, and an aquitard
-  separating them. The cross-section shows an upper sand unit, an upper clay
-  aquitard, a lower sand unit, and a lower clay unit, with two monitoring wells.
-</p>
+  Like Exercise 11, this system consists of an upper unconfined aquifer, a clay aquitard, and a lower confined aquifer. However, the key difference lies in the <strong>flow direction</strong> through the aquitard. As seen in <strong>Figure 27b</strong>, when the potentiometric surface of the confined aquifer lies above the water table, flow through the clay is <strong>upward</strong> — this represents a discharge area where the confined aquifer contributes water to the upper unconfined aquifer.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figure 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 27</b> <em> – Head profile across aquitards resulting in: a) downward and b) upward flow. Compare (a) with Exercise 11 and (b) with this exercise (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 12</h3>
+  <p>
+   This exercise integrates several key concepts about{" "}
+   <strong>hydraulic head</strong> and <strong>groundwater flow</strong> in a
+   system with an unconfined aquifer, a confined aquifer, and an aquitard
+   separating them. The cross-section shows an upper sand unit, an upper clay
+   aquitard, a lower sand unit, and a lower clay unit, with two monitoring wells.
+  </p>
 
 <p>Before starting, recall these principles:</p>
 <ul>

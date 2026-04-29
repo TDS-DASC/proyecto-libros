@@ -9,12 +9,49 @@ import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Introducción </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Acuíferos y Acuitardos</h3>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Los escenarios de flujo y gradiente hidráulico mostrados en las figuras anteriores también están presentes en acuíferos separados por un acuitardo. Como se muestra en la Figura 26, el gradiente horizontal en el acuífero no confinado y en el acuífero confinado están definidos por el nivel freático y la superficie potenciométrica, respectivamente. La carga hidráulica disminuye hacia la derecha en ambos acuíferos. Sin embargo, existe una diferencia de carga hidráulica arriba y abajo del acuitardo.
+
+  <img 
+    src="/proyecto-libros/images/figure26.png" 
+    alt="Figura 26"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 26</b> <em> – Ejemplo de flujo horizontal y perfil de carga vertical asociado en: a) un acuífero no confinado y b) un acuífero confinado, y el gradiente vertical asociado en un acuitardo (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Existe un cambio distintivo en la carga hidráulica a través del acuitardo, lo cual es indicativo de una zona de menor conductividad hidráulica. Aunque la mayor parte del flujo en los acuíferos es horizontal, una fracción fluye a través del acuitardo (de mayor carga a menor carga). Es importante notar que el gradiente vertical no significa necesariamente que el flujo a través del acuitardo sea vertical — solo indica que existe una componente vertical del flujo. Si no se conociera la presencia de un intervalo de baja K, las cargas hidráulicas podrían malinterpretarse como indicación de flujo vertical en toda la zona saturada. Esto ejemplifica la necesidad de considerar las características geológicas conocidas del subsuelo al interpretar datos de carga.
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  La Figura 27 muestra que la dirección del flujo en el acuitardo depende de las elevaciones relativas del nivel freático y de la superficie potenciométrica.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figura 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 27</b> <em> – Perfil de carga a través de acuitardos resultando en: a) flujo descendente y b) flujo ascendente (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Un acuitardo es una formación semipermeable que restringe el flujo entre los acuíferos suprayacentes y/o subyacentes. En algunos casos, la conductividad hidráulica del acuitardo es menos restrictiva y algo de agua subterránea puede fluir entre los acuíferos (acuitardo con fugas). En cualquier caso, el agua subterránea está presente y satura completamente el acuitardo, por lo que existe conexión hidráulica entre los acuíferos. Por consiguiente, hay un gradiente hidráulico en el acuitardo, como se muestra en la Figura 28.
+
+  <img 
+    src="/proyecto-libros/images/figure28.png" 
+    alt="Figura 28"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 28</b> <em> – Líneas de contorno potenciométrico en un acuífero no confinado y un acuífero confinado separados por un acuitardo (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
   <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Problema de Ejemplo 10</h3>
-  
+
   <p>Basado en los datos de nivel de agua mostrados en el esquema, determina cuál de las opciones representa mejor las líneas equipotenciales y la dirección del flujo a través de las dos capas de arena y el acuitardo de arcilla.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>

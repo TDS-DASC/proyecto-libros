@@ -9,25 +9,31 @@ import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
 
 <section class="book-section">
 
-{/* 1. INTRODUCCIÓN */}
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Acuíferos y Aquitardos</h3>
 
-<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
-   Introducción{" "}
-</span>
-<hr class="divisor final"></hr>
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
-<h3 class="book-title text-[var(--book-title-1)] text-4xl">
-   Problema de Ejemplo 12
-</h3>
-<p>
-  Este ejercicio integra varios conceptos clave sobre la{" "}
-  <strong>carga hidráulica</strong> y el{" "}
-  <strong>flujo de agua subterránea</strong> en un sistema con un acuífero
-  libre, un acuífero confinado y un acuitardo que los separa. La sección
-  transversal muestra una unidad superior de arena, un acuitardo de arcilla
-  superior, una unidad inferior de arena y una unidad inferior de arcilla, con
-  dos pozos de monitoreo.
-</p>
+  Al igual que en el Ejercicio 11, este sistema consta de un acuífero libre superior, un acuitardo de arcilla, y un acuífero confinado inferior. Sin embargo, la diferencia clave está en la <strong>dirección del flujo</strong> a través del acuitardo. Como se observa en la <strong>Figura 27b</strong>, cuando la superficie potenciométrica del acuífero confinado está por encima del nivel freático, el flujo a través de la arcilla es <strong>ascendente</strong> — esto representa un área de descarga donde el acuífero confinado aporta agua al acuífero libre superior.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figura 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 27</b> <em> – Perfil de carga a través de acuitardos resultando en: a) flujo descendente y b) flujo ascendente. Compárese (a) con el Ejercicio 11 y (b) con el presente ejercicio (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Problema de Ejemplo 12</h3>
+  <p>
+   Este ejercicio integra varios conceptos clave sobre la{" "}
+   <strong>carga hidráulica</strong> y el{" "}
+   <strong>flujo de agua subterránea</strong> en un sistema con un acuífero
+   libre, un acuífero confinado y un acuitardo que los separa. La sección
+   transversal muestra una unidad superior de arena, un acuitardo de arcilla
+   superior, una unidad inferior de arena y una unidad inferior de arcilla, con
+   dos pozos de monitoreo.
+  </p>
 
 <p>Antes de comenzar, repasa estos principios:</p>
 <ul>

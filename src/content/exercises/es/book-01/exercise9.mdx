@@ -9,12 +9,34 @@ import Ejercicio_9 from "../../../../components/book-01/Ejercicio_9.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Introducción </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.2 Hidráulica del Flujo en Acuíferos No Confinados</h3>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  El flujo de aguas subterráneas en acuíferos no confinados obedece los mismos principios que el flujo en acuíferos confinados, con un elemento adicional: la elevación de la parte superior de la zona saturada define el <strong>nivel freático</strong>, que es la elevación del agua en un pozo ranurado lo suficientemente profundo como para encontrar agua estancada. Un contorno equipotencial conecta puntos de igual carga hidráulica. El nivel freático en sí <em>no</em> es una línea equipotencial; tiene una carga variable porque varía en elevación.
+
+  <img 
+    src="/proyecto-libros/images/figure21.png" 
+    alt="Figura 21"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 21</b> <em> – Contornos equipotenciales en un acuífero no confinado; las líneas de contorno conectan puntos de igual carga hidráulica y se extienden hasta el nivel freático de la misma elevación (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  A escala de campo, la carga hidráulica puede medirse utilizando pozos. La sección transversal para este problema muestra un acuífero no confinado superior, un acuitardo de arcilla, y un acuífero confinado inferior. Cuerpos de agua superficial en ambos extremos actúan como <strong>fronteras de carga constante</strong>. En la práctica, el flujo horizontal en acuíferos no confinados a menudo se aproxima como puramente horizontal, y el nivel freático puede aproximarse como una superficie planar cuando se evalúa lejos de las condiciones de frontera (ver Figura 25).
+
+  <img 
+    src="/proyecto-libros/images/figure25.png" 
+    alt="Figura 25"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 25</b> <em> – Nivel freático representado como una superficie planar con flujo predominantemente horizontal a lo largo de la sección transversal (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
 
   <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Problema de Ejemplo 9</h3>
-  
+
   <p>Estima el nivel de agua en cada pozo y determina si existe flujo vertical a través del acuitardo de arcilla. Considera un sistema en el que un acuífero confinado horizontal debajo de una capa de arcilla está delimitado en ambos lados por fronteras de carga constante, que corresponden a las elevaciones del nivel de agua en los cuerpos de agua no confinados a la izquierda y a la derecha.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
