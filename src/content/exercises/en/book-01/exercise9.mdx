@@ -1,0 +1,52 @@
+---
+title: "Exercise 9"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_9 from "../../../../components/book-01/Ejercicio_9.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 9</h3>
+  
+  <p>Estimate the water level in each well and determine if there is vertical flow through the clay aquitard. Consider a system where a horizontal confined aquifer beneath a clay layer is bounded on both sides by constant head boundaries, which correspond to the water level elevations in the unconfined water bodies at the left and right.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_9/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 9 Solution</h3>
+
+  <p><strong>Step 1:</strong> As an approximation, assume the water table is linear. By linear interpolation, the water level in the center is 52 m. The well on the right is half the distance from the right side to the middle, so the water level is 51 m. Similarly, the water table elevation at the location of the well on the left side is 53 m.</p>
+
+  <p><strong>Step 2:</strong> The horizontal confined aquifer beneath the clay is bounded on both sides by constant head boundaries, the values of which correspond to the water level elevation in each water body (see analogous scenarios). Flow is horizontal based on the geometry of the confined aquifer and the position of the boundaries (on either end).</p>
+
+  <p><strong>Step 3:</strong> The medium is homogeneous, so the gradient is constant, meaning that the spacing between the equipotential lines is constant. The spacing between the lines and their values are determined by linear interpolation.</p>
+
+  <p><strong>Step 4:</strong> The well on the left side is screened in the confined aquifer where the head is 53 m. At this same location, the water table elevation is also 53 m. We simplified by assuming a linear decline of the water table. Because we are assuming a linear gradient in both the confined and unconfined aquifer, the head at each location will be the same above and below the clay. As a result, there is no vertical gradient and so, no vertical flow across the clay.</p>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conceptual Connections</h4>
+  <ul>
+    <li>Compare this exercise with <strong>Exercise 7</strong>, which also analyzes vertical flow through a low-K layer — but in a lake-sediment-aquifer system. The key difference: in Exercise 7, the confined aquifer and the lake have <em>different</em> boundary heads, creating a vertical gradient. In Exercise 9, both aquifers share the <em>same</em> boundary heads, so the vertical gradient is zero.</li>
+    <li>Compare with <strong>Exercise 12</strong>, where upward flow occurs through a clay aquitard. In Exercise 12, the potentiometric head in the lower confined aquifer (40 m) exceeds the water table in the upper unconfined aquifer (~38 m), creating an upward vertical gradient. Exercise 9 represents the special case where heads are perfectly balanced.</li>
+    <li>The condition of <strong>zero vertical flow</strong> across an aquitard requires that the hydraulic head above equals the hydraulic head below at every horizontal position. This is an idealized scenario; in real aquifers, slight differences in boundary conditions, heterogeneity, or recharge/discharge create small but non-zero vertical gradients.</li>
+    <li>This exercise illustrates why <strong>nested or multi-port wells</strong> are essential for hydrogeological characterization: without measuring head at multiple depths, one might incorrectly assume vertical flow exists based on water table measurements alone.</li>
+  </ul>
+
+</section>

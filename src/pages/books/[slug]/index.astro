@@ -1,61 +1,13 @@
 ---
-// Importa las funciones y tipos necesarios
-import { getCollection, type CollectionEntry } from "astro:content";
-import BookLayout from "../../../layouts/BookLayout.astro";
+import { getBookStaticPaths } from "../../../lib/i18n-routing";
+import BookDetail from "../../../components/BookDetail.astro";
 
 export async function getStaticPaths() {
-  const allBooks = await getCollection("books");
-  const allExercises = await getCollection("exercises");
-
-  return allBooks.map((book: { slug: any }) => {
-    const filteredExercises = allExercises.filter(
-      (exercise: { data: { bookSlug: any } }) =>
-        exercise.data.bookSlug === book.slug,
-    );
-
-    return {
-      params: {
-        slug: book.slug,
-      },
-      props: {
-        book,
-        exercises: filteredExercises,
-      },
-    };
-  });
+  const paths = await getBookStaticPaths('es');
+  return paths.map(p => ({ params: { slug: p.params.slug }, props: p.props }));
 }
 
-// Define el tipo de los props
-type Props = {
-  book: CollectionEntry<"books">;
-  exercises: CollectionEntry<"exercises">[];
-};
-
-// Desestructura los props
-const { book, exercises } = Astro.props as Props;
-const { Content } = await book.render();
-
-const currentBookSlug = book.slug;
+const { book, exercises } = Astro.props;
 ---
 
-<BookLayout exercises={exercises} currentBookSlug={currentBookSlug}>
-  <div slot="sidebar-li">
-    {
-      exercises.map((exercise) => (
-        <li>
-          <a
-            href={`/proyecto-libros/books/${exercise.data.bookSlug}/${exercise.slug.split("/").pop()}`}
-          >
-            {exercise.data.title}
-          </a>
-        </li>
-      ))
-    }
-  </div>
-
-  <div slot="introduction">
-    <h1>{book.data.title}</h1>
-    <Content />
-    <br />
-  </div>
-</BookLayout>
+<BookDetail book={book} exercises={exercises} />

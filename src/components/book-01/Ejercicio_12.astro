@@ -1,0 +1,465 @@
+---
+const basePath = import.meta.env.BASE_URL;
+---
+
+<div class="ej12-wrapper">
+
+  <!-- Progress stepper -->
+  <div class="ej12-stepper">
+    <div class="ej12-step active" id="stepper-1-ej12"><span class="ej12-step-num">1</span><span class="ej12-step-label">Dibuja</span></div>
+    <div class="ej12-step-line"></div>
+    <div class="ej12-step" id="stepper-2-ej12"><span class="ej12-step-num">2</span><span class="ej12-step-label">Contornos</span></div>
+    <div class="ej12-step-line"></div>
+    <div class="ej12-step" id="stepper-3-ej12"><span class="ej12-step-num">3</span><span class="ej12-step-label">Dirección</span></div>
+    <div class="ej12-step-line"></div>
+    <div class="ej12-step" id="stepper-4-ej12"><span class="ej12-step-num">4</span><span class="ej12-step-label">Perfil</span></div>
+  </div>
+
+  <div class="ej12-card">
+    <h2 class="ej12-title">🗺️ Ejercicio 12: Flujo de Agua Subterránea y Carga Hidráulica</h2>
+    <p class="ej12-subtitle">Usa el lienzo para esbozar tus respuestas antes de revelar cada solución.</p>
+
+    <!-- STEP 1 — Parts A + B -->
+    <div id="step1-ej12" class="ej12-step-card ej12-step-active">
+      <div class="ej12-step-header">
+        <span class="ej12-badge">1</span>
+        <div>
+          <h3 class="ej12-step-title">Partes A y B — Contornos y Superficie Potenciométrica</h3>
+          <p class="ej12-step-text">
+            <strong>A)</strong> Dibuja los <strong>contornos equipotenciales</strong> en la arena inferior a intervalos de 1 m.<br/>
+            <strong>B)</strong> Traza la <strong>superficie potenciométrica</strong> (línea que conecta los niveles de agua en los pozos del acuífero confinado inferior).
+          </p>
+        </div>
+      </div>
+      <details class="ej12-hint">
+        <summary class="ej12-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej12-hint-body">
+          <p><strong>Parte A:</strong> Las líneas equipotenciales conectan puntos de igual carga hidráulica. En un acuífero homogéneo e isotrópico con flujo predominantemente horizontal, los contornos equipotenciales son líneas aproximadamente verticales. Interpola linealmente entre los valores de carga conocidos en los pozos (36 m y 40 m).</p>
+          <p><strong>Parte B:</strong> La superficie potenciométrica es la superficie imaginaria que representaría el nivel al que subiría el agua en un pozo abierto en cualquier punto del acuífero confinado. En sección transversal con dos pozos, es una línea recta que conecta las elevaciones de carga.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Canvas area -->
+    <p class="ej12-canvas-label">📐 Dibuja en el lienzo y luego revela la solución</p>
+    <div id="canvas-wrapper-ej12" class="ej12-canvas-wrapper">
+      <img id="main-image-ej12" src={`${basePath}images/exercise12-problem.png`}
+        alt="Diagrama del Problema 12" class="ej12-diagram-img" draggable="false" />
+      <canvas id="drawing-canvas-ej12" style="touch-action:none;"></canvas>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="ej12-toolbar">
+      <label class="ej12-tool-label">Grosor</label>
+      <input id="brush-size-ej12" type="range" min="1" max="14" value="3" class="ej12-slider" />
+      <label class="ej12-tool-label">Color</label>
+      <input id="brush-color-ej12" type="color" value="#2563eb" class="ej12-color-picker" />
+      <button id="btn-pen-ej12"    class="ej12-tool-btn ej12-tool-active">✏️ Lápiz</button>
+      <button id="btn-eraser-ej12" class="ej12-tool-btn">🧹 Borrador</button>
+      <button id="btn-undo-ej12"   class="ej12-tool-btn">↩ Deshacer</button>
+      <button id="btn-clear-ej12"  class="ej12-tool-btn ej12-tool-danger">🗑️ Limpiar</button>
+    </div>
+
+    <!-- Reveal A+B -->
+    <div id="step1-actions-ej12" class="ej12-step-card ej12-step-active" style="border-top: none; margin-top: -0.75rem; border-radius: 0 0 0.5rem 0.5rem;">
+      <button id="btn-reveal-ab-ej12" class="ej12-btn-primary">Revelar Solución A y B →</button>
+
+      <!-- Side-by-side comparison -->
+      <div id="sol-ab-ej12" class="ej12-compare hidden">
+        <div class="ej12-compare-panel">
+          <p class="ej12-compare-label">A — Contornos Equipotenciales</p>
+          <img src={`${basePath}images/exercise12-sol-1.png`} alt="Solución A: contornos equipotenciales en la arena inferior" class="ej12-compare-img" />
+        </div>
+        <div class="ej12-compare-panel">
+          <p class="ej12-compare-label">B — Superficie Potenciométrica</p>
+          <img src={`${basePath}images/exercise12-sol-1.png`} alt="Solución B: superficie potenciométrica del acuífero confinado" class="ej12-compare-img" />
+        </div>
+      </div>
+
+      <div id="explanation-ab-ej12" class="ej12-explanation hidden">
+        <p><strong>Explicación:</strong> Los contornos equipotenciales son líneas verticales uniformemente espaciadas en la arena inferior. La carga aumenta de 36 m (Pozo 1, izquierda) a 40 m (Pozo 2, derecha), por lo que los contornos se etiquetan 36, 37, 38, 39, 40 m de izquierda a derecha. La superficie potenciométrica es la línea recta que conecta el nivel del agua en ambos pozos ranurados en el acuífero confinado.</p>
+      </div>
+
+      <button id="btn-next-step1-ej12" class="ej12-btn-secondary hidden">Continuar a Parte C →</button>
+    </div>
+
+    <!-- STEP 2 — Part C (Flow direction) -->
+    <div id="step2-ej12" class="ej12-step-card hidden">
+      <div class="ej12-step-header">
+        <span class="ej12-badge">2</span>
+        <div>
+          <h3 class="ej12-step-title">Parte C — Dirección del Flujo</h3>
+          <p class="ej12-step-text">En el Pozo 2, la carga potenciométrica en la arena inferior es <strong>40 m</strong> y el nivel freático en la arena superior es <strong>~38 m</strong>. ¿Cuál es la dirección del flujo de agua subterránea a través de la <strong>arcilla superior</strong>?</p>
+        </div>
+      </div>
+      <details class="ej12-hint">
+        <summary class="ej12-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej12-hint-body">
+          <p>Compara la elevación del nivel freático con la carga potenciométrica en el acuífero confinado debajo. El agua fluye desde carga mayor hacia carga menor. ¿Dónde es mayor la carga: arriba o abajo del acuitardo?</p>
+        </div>
+      </details>
+      <div class="ej12-choice-row">
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="up">⬆ Hacia arriba</button>
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="down">⬇ Hacia abajo</button>
+        <button class="flow-btn-ej12 ej12-choice-btn" data-ans="none">⊘ Sin flujo vertical</button>
+      </div>
+      <p id="feedback-c-ej12" class="ej12-feedback hidden"></p>
+      <button id="btn-next-step2-ej12" class="ej12-btn-secondary hidden">Continuar a Parte D →</button>
+    </div>
+
+    <!-- STEP 3 — Part D (Vertical head profile) -->
+    <div id="step3-ej12" class="ej12-step-card hidden">
+      <div class="ej12-step-header">
+        <span class="ej12-badge">3</span>
+        <div>
+          <h3 class="ej12-step-title">Parte D — Perfil Vertical de Carga</h3>
+          <p class="ej12-step-text">Usa el lienzo para esbozar el <strong>perfil vertical de carga hidráulica</strong> cerca del Pozo 2 (desde la arena inferior hasta la superficie).</p>
+        </div>
+      </div>
+      <details class="ej12-hint">
+        <summary class="ej12-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej12-hint-body">
+          <p>En un acuífero libre con componente vertical de flujo, la carga disminuye ligeramente hacia abajo. A través de un acuitardo con flujo ascendente, la carga experimenta un salto pronunciado. En un acuífero confinado con flujo predominantemente horizontal, la carga es casi constante con la profundidad.</p>
+        </div>
+      </details>
+      <button id="btn-reveal-d-ej12" class="ej12-btn-primary">Revelar Solución Final →</button>
+
+      <!-- Solution Part D -->
+      <div id="sol-d-ej12" class="ej12-compare hidden">
+        <div class="ej12-compare-panel" style="max-width: 340px; margin: 0 auto;">
+          <p class="ej12-compare-label">D — Perfil Vertical de Carga</p>
+          <img src={`${basePath}images/exercise12-sol-2.png`} alt="Solución D: perfil vertical de carga hidráulica" class="ej12-compare-img" />
+        </div>
+      </div>
+
+      <div id="explanation-d-ej12" class="ej12-explanation hidden">
+        <p><strong>Explicación:</strong> El perfil muestra: (1) una ligera disminución de carga hacia abajo en el acuífero libre (debido al componente vertical del flujo), (2) un salto pronunciado ascendente a través del acuitardo de arcilla (la carga aumenta porque el flujo es ascendente), y (3) carga casi constante en el acuífero confinado inferior (donde el flujo es predominantemente horizontal).</p>
+      </div>
+    </div>
+
+    <!-- Completion -->
+    <div id="final-ej12" class="ej12-completion hidden">
+      ✅ ¡Has completado el Ejercicio 12! Compara tu dibujo en el lienzo con las soluciones.
+    </div>
+  </div>
+</div>
+
+<style>
+  .ej12-wrapper { font-family: inherit; }
+
+  .ej12-stepper {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 1.25rem; padding: 0 0.5rem;
+  }
+  .ej12-step {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    opacity: 0.35; transition: opacity 0.3s;
+  }
+  .ej12-step.active  { opacity: 1; }
+  .ej12-step.done    { opacity: 0.8; }
+  .ej12-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.75rem;
+  }
+  .ej12-step.done .ej12-step-num { background: #22c55e; }
+  .ej12-step-label { font-size: 0.65rem; color: var(--titles); white-space: nowrap; }
+  .ej12-step-line { flex: 1; height: 2px; background: #d1d5db; min-width: 1.5rem; }
+
+  .ej12-card {
+    padding: 1.25rem; border: 1px solid var(--borderEjercicio);
+    border-radius: 0.5rem; background: var(--cardEjercicio); box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+  .ej12-title { font-size: 1.05rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej12-subtitle { font-size: 0.8rem; color: var(--sidebarText); margin-bottom: 1rem; }
+  .ej12-canvas-label { font-size: 0.75rem; font-weight: 600; color: var(--sidebarText); margin-bottom: 0.35rem; }
+
+  .ej12-canvas-wrapper {
+    position: relative; max-width: 720px; margin: 0 auto 0.75rem;
+    border: 1px solid #d1d5db; border-radius: 0.375rem; overflow: hidden;
+  }
+  .ej12-diagram-img { display: block; width: 100%; user-select: none; }
+  #drawing-canvas-ej12 {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    cursor: crosshair; border-radius: 0.375rem;
+  }
+
+  .ej12-toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    padding: 0.6rem 0.75rem; background: var(--subtitle-bg);
+    border: 1px solid var(--borderEjercicio); border-radius: 0.375rem; margin-bottom: 1.25rem;
+  }
+  .ej12-tool-label { font-size: 0.7rem; font-weight: 600; color: var(--titles); }
+  .ej12-slider { width: 5rem; accent-color: #7dc6d9; }
+  .ej12-color-picker { width: 2rem; height: 2rem; border-radius: 0.25rem; cursor: pointer; border: 1px solid #d1d5db; padding: 1px; }
+  .ej12-tool-btn {
+    padding: 0.2rem 0.65rem; font-size: 0.72rem; font-weight: 700;
+    border-radius: 0.3rem; border: 1px solid #d1d5db;
+    background: #fff; color: #374151; cursor: pointer; transition: all 0.15s;
+  }
+  .ej12-tool-btn:hover { background: #f3f4f6; }
+  .ej12-tool-active { background: #7dc6d9 !important; color: #fff !important; border-color: #7dc6d9 !important; }
+  .ej12-tool-danger { border-color: #f87171; color: #ef4444; }
+  .ej12-tool-danger:hover { background: #fef2f2; }
+
+  .ej12-step-card {
+    padding: 1rem 1.1rem; margin-bottom: 0.75rem;
+    border: 1px solid var(--borderEjercicio); border-radius: 0.5rem;
+    background: var(--subtitle-bg); transition: all 0.25s;
+  }
+  .ej12-step-card.ej12-step-active { border-left: 4px solid #7dc6d9; }
+  .ej12-step-card.ej12-step-done   { border-left: 4px solid #22c55e; opacity: 0.85; }
+  .ej12-step-header { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.75rem; }
+  .ej12-badge {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.8rem;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .ej12-step-done .ej12-badge { background: #22c55e; }
+  .ej12-step-title { font-size: 0.95rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej12-step-text  { font-size: 0.85rem; color: var(--titles); line-height: 1.5; }
+
+  .ej12-btn-primary {
+    padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 700;
+    background: #7dc6d9; color: #fff; border: none; border-radius: 0.375rem;
+    cursor: pointer; transition: background 0.15s; margin-top: 0.25rem;
+  }
+  .ej12-btn-primary:hover { background: #3aa6b9; }
+  .ej12-btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+  .ej12-btn-secondary {
+    padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 700;
+    background: transparent; color: #7dc6d9; border: 2px solid #7dc6d9;
+    border-radius: 0.375rem; cursor: pointer; transition: all 0.15s; margin-top: 0.6rem;
+  }
+  .ej12-btn-secondary:hover { background: #7dc6d9; color: #fff; }
+
+  .ej12-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+    margin: 0.85rem 0 0.75rem;
+  }
+  .ej12-compare-panel { display: flex; flex-direction: column; gap: 0.3rem; }
+  .ej12-compare-label {
+    font-size: 0.75rem; font-weight: 700; color: #2563eb;
+    padding: 0.2rem 0.5rem; background: #eff6ff; border-radius: 0.25rem; text-align: center;
+  }
+  .ej12-compare-img { width: 100%; border-radius: 0.375rem; border: 1px solid #bfdbfe; }
+  @media (max-width: 560px) { .ej12-compare { grid-template-columns: 1fr; } }
+
+  .ej12-choice-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem; }
+  .ej12-choice-btn {
+    padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600;
+    border: 1px solid #d1d5db; border-radius: 0.375rem;
+    background: #fff; color: #374151; cursor: pointer; transition: all 0.15s;
+  }
+  .ej12-choice-btn:hover { background: #f3f4f6; }
+  .ej12-choice-correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+  .ej12-choice-wrong   { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+  .ej12-feedback { font-size: 0.82rem; font-weight: 600; padding: 0.5rem 0.75rem; border-radius: 0.375rem; margin-bottom: 0.5rem; }
+  .ej12-feedback-ok  { background: #dcfce7; color: #15803d; }
+  .ej12-feedback-err { background: #fee2e2; color: #b91c1c; }
+
+  .ej12-hint {
+    margin: 0.5rem 0 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem;
+    background: #f9fafb;
+  }
+  .ej12-hint-summary {
+    cursor: pointer; padding: 0.5rem 0.75rem; font-size: 0.82rem; font-weight: 600;
+    color: #6b7280; list-style: none; display: flex; align-items: center; gap: 0.35rem;
+  }
+  .ej12-hint-summary::-webkit-details-marker { display: none; }
+  .ej12-hint-summary::before { content: '▸'; font-size: 0.75rem; transition: transform 0.2s; }
+  .ej12-hint[open] .ej12-hint-summary::before { transform: rotate(90deg); }
+  .ej12-hint-body { padding: 0 0.75rem 0.65rem; }
+  .ej12-hint-body p { font-size: 0.8rem; color: #4b5563; line-height: 1.55; margin-bottom: 0.35rem; }
+  .ej12-hint-body p:last-child { margin-bottom: 0; }
+
+  .ej12-explanation {
+    margin: 0.75rem 0; padding: 0.65rem 0.85rem;
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.375rem;
+  }
+  .ej12-explanation p { font-size: 0.82rem; color: #1e40af; line-height: 1.55; margin: 0; }
+
+  .ej12-completion {
+    margin-top: 0.75rem; padding: 0.85rem; background: #dcfce7;
+    border: 1px solid #bbf7d0; border-radius: 0.5rem;
+    text-align: center; font-weight: 600; color: #15803d; font-size: 0.9rem;
+  }
+
+  .hidden { display: none !important; }
+</style>
+
+<script>
+  const BASE = (import.meta as any).env?.BASE_URL ?? '/';
+  const IMG_PROBLEM = `${BASE}images/exercise12-problem.png`;
+
+  const imgEl    = document.getElementById('main-image-ej12') as HTMLImageElement;
+  const canvasEl = document.getElementById('drawing-canvas-ej12') as HTMLCanvasElement;
+
+  const step1    = document.getElementById('step1-ej12')!;
+  const step2    = document.getElementById('step2-ej12')!;
+  const step3    = document.getElementById('step3-ej12')!;
+  const finalEl  = document.getElementById('final-ej12')!;
+
+  const solAB        = document.getElementById('sol-ab-ej12')!;
+  const explanationAB = document.getElementById('explanation-ab-ej12')!;
+  const solD         = document.getElementById('sol-d-ej12')!;
+  const explanationD = document.getElementById('explanation-d-ej12')!;
+  const feedbackC    = document.getElementById('feedback-c-ej12')!;
+
+  const btnRevealAB   = document.getElementById('btn-reveal-ab-ej12')  as HTMLButtonElement;
+  const btnNextStep1  = document.getElementById('btn-next-step1-ej12') as HTMLButtonElement;
+  const btnNextStep2  = document.getElementById('btn-next-step2-ej12') as HTMLButtonElement;
+  const btnRevealD    = document.getElementById('btn-reveal-d-ej12')   as HTMLButtonElement;
+  const flowBtns      = document.querySelectorAll<HTMLButtonElement>('.flow-btn-ej12');
+
+  const brushSize  = document.getElementById('brush-size-ej12')  as HTMLInputElement;
+  const brushColor = document.getElementById('brush-color-ej12') as HTMLInputElement;
+  const btnPen     = document.getElementById('btn-pen-ej12')!;
+  const btnEraser  = document.getElementById('btn-eraser-ej12')!;
+  const btnUndo    = document.getElementById('btn-undo-ej12')!;
+  const btnClear   = document.getElementById('btn-clear-ej12')!;
+
+  const steppers = [1,2,3,4].map(n => document.getElementById(`stepper-${n}-ej12`)!);
+
+  // ── Canvas ───────────────────────────────────────────────────────────
+  const ctx = canvasEl.getContext('2d')!;
+  let drawing = false, erasing = false, lx = 0, ly = 0;
+  const undoStack: ImageData[] = [];
+
+  function resizeCanvas() {
+    const r = imgEl.getBoundingClientRect();
+    if (!r.width) return;
+    const tmp = document.createElement('canvas');
+    tmp.width = canvasEl.width; tmp.height = canvasEl.height;
+    tmp.getContext('2d')!.drawImage(canvasEl, 0, 0);
+    canvasEl.width = r.width; canvasEl.height = r.height;
+    ctx.drawImage(tmp, 0, 0, r.width, r.height);
+    applyCtx();
+  }
+  function applyCtx() {
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.lineWidth = +brushSize.value;
+    if (erasing) { ctx.globalCompositeOperation = 'destination-out'; ctx.strokeStyle = 'rgba(0,0,0,1)'; }
+    else          { ctx.globalCompositeOperation = 'source-over';     ctx.strokeStyle = brushColor.value; }
+  }
+  function pt(e: MouseEvent | Touch): [number,number] {
+    const r = canvasEl.getBoundingClientRect();
+    const sx = canvasEl.width / r.width, sy = canvasEl.height / r.height;
+    const cx = (e as MouseEvent).clientX ?? (e as Touch).clientX;
+    const cy = (e as MouseEvent).clientY ?? (e as Touch).clientY;
+    return [(cx - r.left) * sx, (cy - r.top) * sy];
+  }
+  function saveUndo() {
+    undoStack.push(ctx.getImageData(0, 0, canvasEl.width, canvasEl.height));
+    if (undoStack.length > 40) undoStack.shift();
+  }
+  function startDraw(e: MouseEvent | Touch) { drawing = true; saveUndo(); [lx, ly] = pt(e); applyCtx(); }
+  function moveDraw(e: MouseEvent | Touch) {
+    if (!drawing) return;
+    const [x, y] = pt(e);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(x, y); ctx.stroke();
+    [lx, ly] = [x, y];
+  }
+  canvasEl.addEventListener('mousedown', e => startDraw(e));
+  canvasEl.addEventListener('mousemove', e => moveDraw(e));
+  canvasEl.addEventListener('mouseup',    () => { drawing = false; });
+  canvasEl.addEventListener('mouseleave', () => { drawing = false; });
+  canvasEl.addEventListener('touchstart', e => { e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
+  canvasEl.addEventListener('touchmove',  e => { e.preventDefault(); moveDraw(e.touches[0]);  }, { passive: false });
+  canvasEl.addEventListener('touchend',   () => { drawing = false; });
+
+  brushSize.addEventListener('input',  applyCtx);
+  brushColor.addEventListener('input', () => { erasing = false; setToolActive(btnPen, btnEraser); applyCtx(); });
+
+  function setToolActive(active: Element, inactive: Element) {
+    active.classList.add('ej12-tool-active');
+    inactive.classList.remove('ej12-tool-active');
+  }
+  btnPen.addEventListener('click',    () => { erasing = false; setToolActive(btnPen, btnEraser); applyCtx(); });
+  btnEraser.addEventListener('click', () => { erasing = true;  setToolActive(btnEraser, btnPen); applyCtx(); });
+  btnClear.addEventListener('click',  () => { saveUndo(); ctx.clearRect(0, 0, canvasEl.width, canvasEl.height); });
+  btnUndo.addEventListener('click',   () => { if (undoStack.length) ctx.putImageData(undoStack.pop()!, 0, 0); });
+
+  imgEl.addEventListener('load', () => setTimeout(resizeCanvas, 50));
+  window.addEventListener('resize', resizeCanvas);
+  if (imgEl.complete) setTimeout(resizeCanvas, 50);
+
+  // ── Stepper helper ───────────────────────────────────────────────────
+  function setStep(n: number) {
+    steppers.forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n)  s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+  }
+
+  // ── Step 1 → Reveal A+B ───────────────────────────────────────────
+  btnRevealAB.addEventListener('click', () => {
+    solAB.classList.remove('hidden');
+    explanationAB.classList.remove('hidden');
+    btnRevealAB.disabled = true;
+    btnRevealAB.textContent = '✅ Solución A y B revelada';
+    btnNextStep1.classList.remove('hidden');
+  });
+
+  btnNextStep1.addEventListener('click', () => {
+    step1.classList.remove('ej12-step-active');
+    step1.classList.add('ej12-step-done');
+    const actionsCard = document.getElementById('step1-actions-ej12');
+    actionsCard?.classList.remove('ej12-step-active');
+    actionsCard?.classList.add('ej12-step-done');
+    step2.classList.remove('hidden');
+    step2.classList.add('ej12-step-active');
+    setStep(2);
+    step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // ── Step 2 → Multiple choice (Part C) ──────────────────────────────
+  flowBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      flowBtns.forEach(b => b.classList.remove('ej12-choice-correct', 'ej12-choice-wrong'));
+      const ans = btn.getAttribute('data-ans');
+      if (ans === 'up') {
+        btn.classList.add('ej12-choice-correct');
+        feedbackC.classList.remove('hidden', 'ej12-feedback-err');
+        feedbackC.classList.add('ej12-feedback-ok');
+        feedbackC.innerHTML = '✅ ¡Correcto! La carga potenciométrica en la arena inferior (40 m) es mayor que el nivel freático (~38 m), creando un gradiente vertical ascendente a través de la arcilla. El agua fluye de carga mayor a menor, y 40 m > 38 m, por lo que el flujo a través del acuitardo es ascendente.';
+        btnNextStep2.classList.remove('hidden');
+      } else if (ans === 'down') {
+        btn.classList.add('ej12-choice-wrong');
+        feedbackC.classList.remove('hidden', 'ej12-feedback-ok');
+        feedbackC.classList.add('ej12-feedback-err');
+        feedbackC.innerHTML = '❌ Incorrecto. Quizás pensaste en la dirección horizontal del flujo (de izquierda a derecha, de carga mayor a menor). Pero a través del acuitardo, la dirección del flujo es <strong>vertical</strong>. Compara la carga arriba (nivel freático ~38 m) con la carga abajo (potenciométrica 40 m). Como 40 > 38, el gradiente es ascendente: el agua fluye de abajo hacia arriba a través de la arcilla.';
+      } else {
+        btn.classList.add('ej12-choice-wrong');
+        feedbackC.classList.remove('hidden', 'ej12-feedback-ok');
+        feedbackC.classList.add('ej12-feedback-err');
+        feedbackC.innerHTML = '❌ Incorrecto. Existe una diferencia de carga hidráulica entre el acuífero confinado (40 m) y el acuífero libre (~38 m). Donde hay un gradiente hidráulico a través de un acuitardo, hay flujo — incluso si la conductividad hidráulica es muy baja. La ley de Darcy aplica: cualquier gradiente produce algún flujo.';
+      }
+    });
+  });
+
+  btnNextStep2.addEventListener('click', () => {
+    step2.classList.remove('ej12-step-active');
+    step2.classList.add('ej12-step-done');
+    step3.classList.remove('hidden');
+    step3.classList.add('ej12-step-active');
+    imgEl.src = IMG_PROBLEM;
+    setStep(3);
+    step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // ── Step 3 → Reveal D ─────────────────────────────────────────────
+  btnRevealD.addEventListener('click', () => {
+    solD.classList.remove('hidden');
+    explanationD.classList.remove('hidden');
+    step3.classList.remove('ej12-step-active');
+    step3.classList.add('ej12-step-done');
+    btnRevealD.disabled = true;
+    btnRevealD.textContent = '✅ Solución Final revelada';
+    finalEl.classList.remove('hidden');
+    setStep(5);
+    finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+</script>

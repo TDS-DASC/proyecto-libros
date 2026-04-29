@@ -1,0 +1,707 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'es' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<div data-lang={lang} id="ej8-root">
+  <div class="p-4 my-6 border border-[var(--borderEjercicio)] shadow-md rounded-md bg-[var(--cardEjercicio)]">
+    <h1 class="font-semibold text-lg text-[var(--titles)]">
+      {isEn ? '🗺️ Simulation: Water Table and Equipotential Lines' : '🗺️ Simulación: Plano Freático y Líneas Equipotenciales'}
+    </h1>
+
+    <div class="canvas mt-6 mb-8 relative">
+      <canvas
+        id="ej8Canvas"
+        width="800"
+        height="500"
+        style="border:1px solid var(--borderEjercicio); margin: 0 auto; background-color: #ffffff; display: block;"
+        class="rounded shadow-sm max-w-full h-auto"
+      ></canvas>
+    </div>
+
+    <!-- Step 1 UI: Question -->
+    <div id="step1-container-ej8" class="mt-4 p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] text-center transition-all duration-300">
+      <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+        {isEn ? 'Step 1: Determine the Water Level' : 'Paso 1: Determinar el Nivel del Agua'}
+      </h2>
+      <p class="text-[var(--titles)] mb-6 text-lg">
+        {isEn
+          ? 'The figure shows a map view of a lake and its shoreline. The water table elevation at Well A is 12 m. Assuming the water table is planar (an inclined plane) and the lake elevation is 10 m, what is the expected water level elevation in Well B?'
+          : 'La figura muestra una vista en planta de un lago y su línea costera. La elevación del nivel freático en el Pozo A es de 12 m. Suponiendo que el nivel freático es planar (un plano inclinado) y la elevación del lago es de 10 m, ¿cuál es la elevación esperada del nivel del agua en el Pozo B?'
+        }
+      </p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <button id="btn-12m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>12 m</button>
+        <button id="btn-13m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>13 m</button>
+        <button id="btn-14m" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>14 m</button>
+        <button id="btn-between" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-md shadow-md transition-colors text-lg opacity-50 cursor-not-allowed" disabled>
+          {isEn ? 'A value between 12 and 13 m' : 'Entre 12 y 13 m'}
+        </button>
+      </div>
+      <p id="step1-feedback-ej8" class="mt-4 font-bold hidden text-lg"></p>
+      <p id="step1-hint-ej8" class="mt-2 text-sm text-gray-500">
+        {isEn
+          ? 'Observe the map: the lake is at 10 m and Well A at 12 m. Buttons will activate in a few seconds...'
+          : 'Observa el mapa: el lago está a 10 m y el Pozo A a 12 m. Los botones se activarán en unos segundos...'
+        }
+      </p>
+    </div>
+
+    <!-- Step 2 UI: Reveal Equipotentials -->
+    <div id="step2-container-ej8" class="mt-4 p-6 bg-[#e6f4f1] rounded-md border border-[#3aa6b9] text-center hidden transition-all duration-300">
+      <h2 class="text-xl font-bold text-[#2c7a88] mb-4">
+        {isEn ? 'Step 2: Equipotential Lines and Flow Direction' : 'Paso 2: Líneas Equipotenciales y Dirección de Flujo'}
+      </h2>
+      <p id="step2-explanation-ej8" class="text-gray-800 mb-6 text-lg">
+        {isEn
+          ? 'Correct! The water level in the lake is horizontal (10 m). Therefore, the head is the same along the entire shoreline (10 m equipotential line). Because flow is perpendicular to equipotential lines and the water table is assumed planar, the 2 m contour interval is extrapolated upgradient. Well B is twice as far from the shoreline as Well A, resulting in a water level of 14 m.'
+          : '¡Correcto! El nivel del agua en el lago es horizontal (10 m). Por lo tanto, la carga es la misma a lo largo de toda la costa (línea equipotencial de 10 m). Como el flujo es perpendicular a las líneas equipotenciales y se asume que el nivel freático es planar, el intervalo de contorno de 2 m se extrapola hacia aguas arriba. El Pozo B está al doble de distancia de la costa que el Pozo A, resultando en un nivel de agua de 14 m.'
+        }
+      </p>
+      <button id="btn-reveal-step3-ej8" class="bg-[#7dc6d9] hover:bg-[#3aa6b9] text-white font-bold py-3 px-8 rounded-md shadow-lg transition-colors text-lg">
+        {isEn ? 'Next: Experiment with the Slope' : 'Siguiente: Experimentar con la Pendiente'}
+      </button>
+    </div>
+
+    <!-- Step 3 UI: Sliders -->
+    <div id="step3-container-ej8" class="mt-4 hidden transition-all duration-300">
+      <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 text-center">
+        <h2 class="text-xl font-bold text-[var(--titles)] mb-4">
+          {isEn ? 'Step 3: Experiment with the Gradient' : 'Paso 3: Experimentar con el Gradiente'}
+        </h2>
+        <p class="text-[var(--titles)] mb-4 text-lg">
+          {isEn
+            ? 'Adjust the elevation of Well A. Observe how the water table slope (gradient) changes and how the equipotential lines, expected Well B level, and head profile adjust.'
+            : 'Ajusta la elevación del Pozo A. Observa cómo cambia la pendiente del nivel freático (gradiente) y cómo se reajustan las líneas equipotenciales, el nivel esperado en el Pozo B y el perfil de carga.'
+          }
+        </p>
+      </div>
+
+      <div class="controls grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm">
+          <h3 class="text-[var(--titles)] font-bold mb-4 text-lg">
+            {isEn ? 'Well A Water Level (m)' : 'Nivel del Agua Pozo A (m)'}
+          </h3>
+          <input type="range" id="hWellA" min="10.5" max="15" step="0.5" value="12" class="w-full custom-range" />
+          <div class="flex justify-between text-sm text-[var(--textoCardCanvas)] mt-2">
+            <span>{isEn ? 'Shallow (10.5)' : 'Poco profundo (10.5)'}</span>
+            <span id="hWellAVal" class="font-bold text-lg">12</span>
+            <span>{isEn ? 'Deep (15)' : 'Más profundo (15)'}</span>
+          </div>
+        </div>
+
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm text-center flex flex-col justify-center">
+          <h3 class="text-[var(--titles)] font-bold mb-2 text-lg">
+            {isEn ? 'Expected Well B Level:' : 'Nivel Esperado Pozo B:'}
+          </h3>
+          <span id="expectedWellB" class="font-mono text-3xl text-[#3aa6b9] font-bold">14.0 m</span>
+        </div>
+
+        <div class="section-card p-5 bg-[rgba(255,255,255,0.02)] border border-gray-200 rounded-xl shadow-sm text-center flex flex-col justify-center">
+          <h3 class="text-[var(--titles)] font-bold mb-2 text-lg">
+            {isEn ? 'Gradient (m/m):' : 'Gradiente (m/m):'}
+          </h3>
+          <span id="gradientValue" class="font-mono text-2xl text-[#0d9488] font-bold">0.033</span>
+          <p class="text-xs text-gray-500 mt-1">
+            {isEn ? 'Δh / ΔL from shoreline to Well A' : 'Δh / ΔL desde la costa hasta el Pozo A'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========================
+  // TRANSLATIONS (for dynamic / canvas text)
+  // ========================
+  const root = document.getElementById('ej8-root');
+  const LANG = root?.dataset.lang || 'es';
+  const isEn = LANG === 'en';
+
+  const t = {
+    correct_feedback: isEn ? '✅ Correct! Well B is at 14 m.' : '✅ ¡Correcto! El Pozo B está a 14 m.',
+    incorrect_feedback: isEn
+      ? '❌ Incorrect. Review the distance between the shoreline, Well A, and Well B. Remember that the lake is a constant-head boundary (10 m).'
+      : '❌ Incorrecto. Revisa la distancia entre la costa, el Pozo A y el Pozo B. Recuerda que el lago es una frontera de carga constante (10 m).',
+    lake_label: isEn ? 'Lake' : 'Lago',
+    lake_head: isEn ? 'h = 10 m' : 'h = 10 m',
+    well_a: isEn ? 'Well A' : 'Pozo A',
+    well_b: isEn ? 'Well B' : 'Pozo B',
+    profile_title: isEn ? 'Head Profile' : 'Perfil de Carga',
+    distance: isEn ? 'Distance (m)' : 'Distancia (m)',
+    head: isEn ? 'Head (m)' : 'Carga (m)',
+    shoreline: isEn ? 'Shoreline' : 'Costa',
+  };
+
+  // ========================
+  // STATE & DOM
+  // ========================
+  let currentStep = 1;
+  const canvas = document.getElementById("ej8Canvas");
+  const ctx = canvas.getContext("2d");
+
+  const step1Container = document.getElementById("step1-container-ej8");
+  const btn12m = document.getElementById("btn-12m");
+  const btn13m = document.getElementById("btn-13m");
+  const btn14m = document.getElementById("btn-14m");
+  const btnBetween = document.getElementById("btn-between");
+  const step1Feedback = document.getElementById("step1-feedback-ej8");
+  const step1Hint = document.getElementById("step1-hint-ej8");
+
+  const step2Container = document.getElementById("step2-container-ej8");
+  const btnRevealStep3 = document.getElementById("btn-reveal-step3-ej8");
+
+  const step3Container = document.getElementById("step3-container-ej8");
+  const hWellASlider = document.getElementById("hWellA");
+  const hWellAVal = document.getElementById("hWellAVal");
+  const expectedWellB = document.getElementById("expectedWellB");
+  const gradientValue = document.getElementById("gradientValue");
+
+  // ========================
+  // FORCED OBSERVATION
+  // ========================
+  let forcedObservationStart = 0;
+  const FORCED_DURATION = 3500; // ms
+  let observationComplete = false;
+
+  function enableButtons() {
+    observationComplete = true;
+    [btn12m, btn13m, btn14m, btnBetween].forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove("opacity-50", "cursor-not-allowed", "bg-gray-200", "text-gray-800");
+      btn.classList.add("bg-[#3aa6b9]", "hover:bg-[#2c7a88]", "text-white");
+    });
+    step1Hint.style.display = 'none';
+  }
+
+  // ========================
+  // SHORELINE GEOMETRY
+  // ========================
+  // Shoreline: S1 -> S2 (diagonal)
+  const S1 = { x: 40, y: 420 };
+  const S2 = { x: 180, y: 60 };
+  const D = { x: S2.x - S1.x, y: S2.y - S1.y };
+  const D_LEN = Math.sqrt(D.x * D.x + D.y * D.y);
+  const u = { x: D.x / D_LEN, y: D.y / D_LEN };        // unit vector along shore
+  const n = { x: -u.y, y: u.x };                        // unit normal into land (rotate +90°)
+
+  // Well positions (perpendicular distances)
+  const dA = 70;   // distance of Well A from shore (px)
+  const dB = 140;  // distance of Well B from shore (px) ~ 2x
+
+  const midShore = { x: (S1.x + S2.x) / 2, y: (S1.y + S2.y) / 2 };
+  const posA = { x: midShore.x + n.x * dA, y: midShore.y + n.y * dA };
+  const posB = { x: midShore.x + n.x * dB, y: midShore.y + n.y * dB };
+
+  const lakeHead = 10; // m
+  let hA = 12; // m (default)
+
+  // ========================
+  // PROFILE INSET GEOMETRY
+  // ========================
+  const profX0 = 560;   // left edge of profile
+  const profY0 = 420;   // bottom baseline
+  const profW = 220;    // width
+  const profH = 320;    // height (upward from baseline)
+  const profRight = profX0 + profW;
+  const profTop = profY0 - profH;
+
+  // ========================
+  // ANIMATION STATE
+  // ========================
+  let animTime = 0;
+  let equipotentialRevealProgress = 0; // 0 -> 1 during Step 2
+
+  // ========================
+  // EVENT HANDLERS
+  // ========================
+  function handleAnswer(answer) {
+    step1Feedback.classList.remove("hidden");
+    if (answer === 14) {
+      step1Feedback.textContent = t.correct_feedback;
+      step1Feedback.className = "mt-4 font-bold text-lg text-green-600";
+      btn14m.classList.add("bg-green-500", "text-white");
+      setTimeout(() => {
+        currentStep = 2;
+        step1Container.classList.add("hidden");
+        equipotentialRevealProgress = 0;
+        setTimeout(() => {
+          step2Container.classList.remove("hidden");
+        }, 300);
+      }, 1500);
+    } else {
+      step1Feedback.textContent = t.incorrect_feedback;
+      step1Feedback.className = "mt-4 font-bold text-lg text-red-500";
+      const btn = answer === 12 ? btn12m : answer === 13 ? btn13m : btnBetween;
+      btn.classList.add("bg-red-200");
+      setTimeout(() => btn.classList.remove("bg-red-200"), 1000);
+    }
+  }
+
+  btn12m.addEventListener("click", () => handleAnswer(12));
+  btn13m.addEventListener("click", () => handleAnswer(13));
+  btn14m.addEventListener("click", () => handleAnswer(14));
+  btnBetween.addEventListener("click", () => handleAnswer(12.5));
+
+  btnRevealStep3.addEventListener("click", () => {
+    currentStep = 3;
+    step2Container.classList.add("hidden");
+    step3Container.classList.remove("hidden");
+  });
+
+  hWellASlider.addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value);
+    hWellAVal.textContent = val;
+    hA = val;
+    const gradient = (val - lakeHead) / dA; // m per px
+    const hB = lakeHead + gradient * dB;
+    expectedWellB.textContent = hB.toFixed(1) + " m";
+    gradientValue.textContent = gradient.toFixed(4);
+  });
+
+  // ========================
+  // DRAWING HELPERS
+  // ========================
+  function drawLake() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(S1.x, S1.y);
+    ctx.lineTo(S2.x, S2.y);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fillStyle = "#bae6fd";
+    ctx.fill();
+
+    // Lake waves
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < 12; i++) {
+      const wy = 30 + i * 40;
+      const phase = (animTime * 0.05 + i) % (Math.PI * 2);
+      ctx.beginPath();
+      ctx.moveTo(10, wy);
+      for (let x = 10; x < S1.x - 10; x += 15) {
+        ctx.lineTo(x, wy + Math.sin((x / 30) + phase) * 4);
+      }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // Precompute land texture dots so they don't flicker
+  const landDots = [];
+  for (let i = 0; i < 200; i++) {
+    const rx = 180 + Math.random() * 600;
+    const ry = Math.random() * 500;
+    if (pointSideOfLine(rx, ry, S1, S2) > 0) {
+      landDots.push({ x: rx, y: ry });
+    }
+  }
+
+  function drawLand() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(canvas.width, 0);
+    ctx.lineTo(S2.x, S2.y);
+    ctx.lineTo(S1.x, S1.y);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.closePath();
+    ctx.fillStyle = "#e5e7eb";
+    ctx.fill();
+
+    // Texture dots
+    ctx.fillStyle = "#d1d5db";
+    landDots.forEach(d => ctx.fillRect(d.x, d.y, 2, 2));
+    ctx.restore();
+  }
+
+  function pointSideOfLine(px, py, a, b) {
+    return (b.x - a.x) * (py - a.y) - (b.y - a.y) * (px - a.x);
+  }
+
+  function drawShoreline() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(S1.x, S1.y);
+    ctx.lineTo(S2.x, S2.y);
+    ctx.strokeStyle = "#0284c7";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.fillStyle = "#0369a1";
+    ctx.font = "bold 14px Arial";
+    ctx.save();
+    ctx.translate(S1.x + 20, S1.y - 30);
+    ctx.rotate(Math.atan2(D.y, D.x));
+    ctx.fillText(t.shoreline, 0, 0);
+    ctx.restore();
+    ctx.restore();
+  }
+
+  function drawEquipotentialLine(head, alpha = 1) {
+    const val = currentStep >= 3 ? parseFloat(hWellASlider.value) : 12;
+    const gradient = (val - lakeHead) / dA;
+    const distFromShore = (head - lakeHead) / gradient;
+
+    if (distFromShore < 0 || !isFinite(distFromShore)) return;
+
+    const cx = midShore.x + n.x * distFromShore;
+    const cy = midShore.y + n.y * distFromShore;
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = "#0d9488";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([8, 8]);
+    ctx.beginPath();
+    ctx.moveTo(cx - u.x * 200, cy - u.y * 200);
+    ctx.lineTo(cx + u.x * 300, cy + u.y * 300);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#0f766e";
+    ctx.font = "bold 13px Arial";
+    ctx.fillText(head + " m", cx + n.x * 12 + 5, cy + n.y * 12 - 5);
+    ctx.restore();
+  }
+
+  function drawFlowArrows() {
+    const val = currentStep >= 3 ? parseFloat(hWellASlider.value) : 12;
+    if (val <= lakeHead) return;
+
+    ctx.save();
+    ctx.strokeStyle = "#2563eb";
+    ctx.fillStyle = "#2563eb";
+    ctx.lineWidth = 2;
+
+    const speed = 0.5;
+    const offset = (animTime * speed) % 80;
+
+    for (let d = 30; d < 180; d += 50) {
+      const cx = midShore.x + n.x * d;
+      const cy = midShore.y + n.y * d;
+      const tStart = -80;
+      const tEnd = 120;
+
+      for (let t = tStart + offset; t < tEnd; t += 80) {
+        const x1 = cx + u.x * t;
+        const y1 = cy + u.y * t;
+        const x2 = x1 - n.x * 30;
+        const y2 = y1 - n.y * 30;
+
+        if (x1 < 180 || x1 > 750 || y1 < 20 || y1 > 480) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        const angle = Math.atan2(-n.y, -n.x);
+        ctx.beginPath();
+        ctx.moveTo(x2, y2);
+        ctx.lineTo(x2 + Math.cos(angle + 0.4) * 8, y2 + Math.sin(angle + 0.4) * 8);
+        ctx.lineTo(x2 + Math.cos(angle - 0.4) * 8, y2 + Math.sin(angle - 0.4) * 8);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  function drawWell(pos, label, headValue, showHead) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 12, 0, Math.PI * 2);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = "#1f2937";
+    ctx.stroke();
+
+    ctx.fillStyle = "#1f2937";
+    ctx.font = "bold 14px Arial";
+    const labelX = pos.x + (pos.x < 400 ? -55 : 18);
+    const labelY = pos.y - 18;
+    ctx.fillText(label, labelX, labelY);
+
+    const valText = showHead ? headValue.toFixed(1) + " m" : "? m";
+    ctx.font = "bold 13px Arial";
+    ctx.fillStyle = showHead ? "#0d9488" : "#9ca3af";
+    ctx.fillText(valText, pos.x + 16, pos.y + 5);
+
+    ctx.strokeStyle = "#4b5563";
+    ctx.lineWidth = 1;
+    for (let i = -8; i <= 8; i += 4) {
+      ctx.beginPath();
+      ctx.moveTo(pos.x - 10, pos.y + 14 + i);
+      ctx.lineTo(pos.x + 10, pos.y + 14 + i);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawProfileInset() {
+    ctx.save();
+    ctx.fillStyle = "#f8fafc";
+    ctx.fillRect(profX0, profTop, profW, profH);
+    ctx.strokeStyle = "#94a3b8";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(profX0, profTop, profW, profH);
+
+    ctx.fillStyle = "#334155";
+    ctx.font = "bold 13px Arial";
+    ctx.fillText(t.profile_title, profX0 + 10, profTop + 20);
+
+    const val = currentStep >= 3 ? parseFloat(hWellASlider.value) : 12;
+    const gradient = (val - lakeHead) / dA;
+    const hB = lakeHead + gradient * dB;
+
+    const plotLeft = profX0 + 45;
+    const plotRight = profRight - 15;
+    const plotBottom = profY0 - 30;
+    const plotTop = profTop + 35;
+    const plotW = plotRight - plotLeft;
+    const plotH = plotBottom - plotTop;
+
+    ctx.strokeStyle = "#64748b";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(plotLeft, plotTop);
+    ctx.lineTo(plotLeft, plotBottom);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(plotLeft, plotBottom);
+    ctx.lineTo(plotRight, plotBottom);
+    ctx.stroke();
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "11px Arial";
+    ctx.fillText(t.distance, plotLeft + plotW / 2 - 25, plotBottom + 20);
+    ctx.save();
+    ctx.translate(profX0 + 12, plotTop + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(t.head, -20, 0);
+    ctx.restore();
+
+    const yMin = 8;
+    const yMax = Math.max(16, val + 1);
+    const yRange = yMax - yMin;
+    ctx.fillStyle = "#64748b";
+    ctx.font = "10px Arial";
+    for (let h = Math.ceil(yMin); h <= yMax; h += 1) {
+      const py = plotBottom - ((h - yMin) / yRange) * plotH;
+      ctx.beginPath();
+      ctx.moveTo(plotLeft - 4, py);
+      ctx.lineTo(plotLeft, py);
+      ctx.stroke();
+      ctx.fillText(h, plotLeft - 22, py + 3);
+    }
+
+    const xMaxDist = 160;
+    ctx.fillStyle = "#64748b";
+    for (let d = 0; d <= xMaxDist; d += 40) {
+      const px = plotLeft + (d / xMaxDist) * plotW;
+      ctx.beginPath();
+      ctx.moveTo(px, plotBottom);
+      ctx.lineTo(px, plotBottom + 4);
+      ctx.stroke();
+      ctx.fillText(d, px - 6, plotBottom + 16);
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(plotLeft, plotBottom - ((lakeHead - yMin) / yRange) * plotH);
+    ctx.lineTo(
+      plotLeft + (dA / xMaxDist) * plotW,
+      plotBottom - ((val - yMin) / yRange) * plotH
+    );
+    ctx.lineTo(
+      plotLeft + (dB / xMaxDist) * plotW,
+      plotBottom - ((hB - yMin) / yRange) * plotH
+    );
+    ctx.strokeStyle = "#1d4ed8";
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    function drawPoint(px, py, color) {
+      ctx.beginPath();
+      ctx.arc(px, py, 4, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    const pLakeY = plotBottom - ((lakeHead - yMin) / yRange) * plotH;
+    const pAY = plotBottom - ((val - yMin) / yRange) * plotH;
+    const pBY = plotBottom - ((hB - yMin) / yRange) * plotH;
+
+    drawPoint(plotLeft, pLakeY, "#0284c7");
+    drawPoint(plotLeft + (dA / xMaxDist) * plotW, pAY, "#0d9488");
+    drawPoint(plotLeft + (dB / xMaxDist) * plotW, pBY, "#0d9488");
+
+    ctx.setLineDash([3, 3]);
+    ctx.strokeStyle = "rgba(100,116,139,0.4)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(plotLeft + (dA / xMaxDist) * plotW, plotBottom);
+    ctx.lineTo(plotLeft + (dA / xMaxDist) * plotW, pAY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(plotLeft + (dB / xMaxDist) * plotW, plotBottom);
+    ctx.lineTo(plotLeft + (dB / xMaxDist) * plotW, pBY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#0284c7";
+    ctx.font = "10px Arial";
+    ctx.fillText("10 m", plotLeft + 4, pLakeY - 6);
+    ctx.fillStyle = "#0d9488";
+    ctx.fillText(val.toFixed(1) + " m", plotLeft + (dA / xMaxDist) * plotW + 4, pAY - 6);
+    ctx.fillText(hB.toFixed(1) + " m", plotLeft + (dB / xMaxDist) * plotW + 4, pBY - 6);
+
+    ctx.restore();
+  }
+
+  function drawForcedObservation(elapsed) {
+    const alpha = Math.max(0, 1 - elapsed / FORCED_DURATION);
+    const pulse = Math.sin(elapsed / 150) * 4;
+
+    ctx.save();
+
+    ctx.globalAlpha = 0.3 + alpha * 0.4;
+    ctx.strokeStyle = "#ef4444";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 6]);
+    ctx.beginPath();
+    ctx.arc(60, 250, 18 + pulse, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = "#ef4444";
+    ctx.font = "bold 13px Arial";
+    ctx.fillText(t.lake_head, 20, 220);
+
+    ctx.beginPath();
+    ctx.arc(posA.x, posA.y, 18 + pulse, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillText("h = 12 m", posA.x - 30, posA.y - 30);
+
+    ctx.beginPath();
+    ctx.moveTo(60, 250);
+    ctx.lineTo(posA.x, posA.y);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  function drawLakeLabel() {
+    ctx.save();
+    ctx.fillStyle = "#0369a1";
+    ctx.font = "bold 16px Arial";
+    ctx.fillText(t.lake_label, 20, 40);
+    ctx.fillText(t.lake_head, 20, 62);
+    ctx.restore();
+  }
+
+  // ========================
+  // MAIN DRAW LOOP
+  // ========================
+  function draw(timestamp) {
+    if (!forcedObservationStart) forcedObservationStart = timestamp;
+    const elapsed = timestamp - forcedObservationStart;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const val = currentStep >= 3 ? parseFloat(hWellASlider.value) : 12;
+    hA = val;
+
+    drawLake();
+    drawLand();
+    drawShoreline();
+    drawLakeLabel();
+
+    if (currentStep >= 2) {
+      if (currentStep === 2) {
+        equipotentialRevealProgress = Math.min(1, equipotentialRevealProgress + 0.015);
+      } else {
+        equipotentialRevealProgress = 1;
+      }
+
+      const heads = [];
+      for (let h = 11; h <= Math.ceil(val + 0.1); h++) {
+        heads.push(h);
+      }
+
+      heads.forEach((h, idx) => {
+        const threshold = (idx + 1) / heads.length;
+        const alpha = equipotentialRevealProgress >= threshold ? 1 : Math.max(0, (equipotentialRevealProgress - (threshold - 0.2)) / 0.2);
+        drawEquipotentialLine(h, alpha);
+      });
+
+      if (equipotentialRevealProgress > 0.5) {
+        drawFlowArrows();
+      }
+    }
+
+    const showBHead = currentStep >= 2;
+    const gradient = (val - lakeHead) / dA;
+    const hB = lakeHead + gradient * dB;
+    drawWell(posA, t.well_a, val, true);
+    drawWell(posB, t.well_b, hB, showBHead);
+
+    if (currentStep >= 2) {
+      drawProfileInset();
+      ctx.save();
+      ctx.strokeStyle = "#cbd5e1";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(540, 10);
+      ctx.lineTo(540, 490);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    if (currentStep === 1 && !observationComplete) {
+      drawForcedObservation(elapsed);
+      if (elapsed > FORCED_DURATION) {
+        enableButtons();
+      }
+    }
+
+    animTime += 1;
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+</script>
+
+<style>
+  .custom-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e2e8f0;
+    outline: none;
+  }
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3aa6b9;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+  }
+  .custom-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+</style>

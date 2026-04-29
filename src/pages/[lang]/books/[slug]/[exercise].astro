@@ -1,17 +1,16 @@
 ---
 import { getCollection } from "astro:content";
-import { getExerciseStaticPaths } from "../../../lib/i18n-routing";
-import ExerciseDetail from "../../../components/ExerciseDetail.astro";
+import { getExerciseStaticPaths } from "../../../../lib/i18n-routing";
+import ExerciseDetail from "../../../../components/ExerciseDetail.astro";
 
 export async function getStaticPaths() {
-  const paths = await getExerciseStaticPaths('es');
-  return paths.map(p => ({ params: { slug: p.params.slug, exercise: p.params.exercise }, props: p.props }));
+  return await getExerciseStaticPaths('en');
 }
 
 const { exercise } = Astro.props;
 
 // Filter exercises for the sidebar (must be from the same language)
-const allExercises = await getCollection("exercises", (ex) => ex.data.lang === 'es');
+const allExercises = await getCollection("exercises", (ex) => ex.data.lang === 'en');
 const bookExercises = allExercises.filter(
   (ex) => ex.data.bookSlug === exercise.data.bookSlug
 ).sort((a, b) => {

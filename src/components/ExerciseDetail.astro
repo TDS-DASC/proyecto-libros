@@ -1,0 +1,20 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import BookLayout from "../layouts/BookLayout.astro";
+
+interface Props {
+  exercise: CollectionEntry<"exercises">;
+  bookExercises: CollectionEntry<"exercises">[];
+}
+
+const { exercise, bookExercises } = Astro.props;
+const { Content } = await render(exercise);
+
+const currentBookSlug = exercise.data.bookSlug;
+---
+
+<BookLayout exercises={bookExercises} currentBookSlug={currentBookSlug}>
+  <div slot="introduction">
+    <Content />
+  </div>
+</BookLayout>

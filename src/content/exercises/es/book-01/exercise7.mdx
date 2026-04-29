@@ -1,0 +1,77 @@
+---
+title: "Ejercicio 7"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.3 Flujo a través de Acuitardos</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  En algunos casos, la conductividad hidráulica del acuitardo es menos restrictiva y parte del agua subterránea puede fluir entre los acuíferos suprayacentes y subyacentes. Tal formación puede denominarse acuitardo con fugas. En las cercanías de un área de recarga o descarga, el agua subterránea tanto en acuíferos no confinados como confinados puede tener una componente de flujo vertical significativa incluso en presencia de un acuitardo.
+
+  La Figura 27 muestra que la dirección del flujo en el acuitardo depende de las elevaciones relativas del nivel freático y de la superficie potenciométrica. La dirección del flujo está determinada por el gradiente hidráulico entre los acuíferos.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figura 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 27</b> <em> – Perfil de carga a través de acuitardos resultando en: a) flujo descendente y b) flujo ascendente (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Problema de ejemplo 7</h3>
+
+  <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> Se inserta un piezómetro en un acuífero debajo del sedimento (baja K) de un lago, y el agua sube a un nivel estable como se muestra a continuación. Hay un nivel freático presente pero no se muestra. ¿El agua fluye hacia arriba o hacia abajo a través del sedimento? Explique.</p>
+    <p class="text-[var(--titles)] text-lg"><b>b)</b> Dibuje una representación esquemática del perfil de carga vertical, extendiéndose desde el nivel del agua del lago hasta la rejilla del pozo.</p>
+  </div>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Solución Interactiva</h3>
+
+  Este ejercicio interactivo ilustra la solución al problema anterior. Un piezómetro está instalado en el acuífero para medir la carga hidráulica (h<sub>acuífero</sub>). El agua puede fluir hacia arriba o hacia abajo a través del sedimento dependiendo de la diferencia de carga hidráulica entre el acuífero y el lago. En esta simulación descubriremos cuál es el caso.
+
+  Exploraremos cómo la **carga hidráulica del acuífero** y la **conductividad hidráulica del sedimento (K<sub>sedimento</sub>)** afectan la dirección y velocidad del flujo y el perfil vertical de carga hidráulica, basándonos en la Ley de Darcy.
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo guiado </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_7/>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  {/* Solución y Conclusiones */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 7</h3>
+
+  <p>La solución paso a paso puede explorarse en el ejercicio interactivo anterior. Las conclusiones clave son:</p>
+
+  <ul>
+    <li><strong>La dirección del flujo a través de un acuitardo</strong> está determinada por el <em>gradiente hidráulico vertical</em> — la diferencia de carga hidráulica entre el acuífero y el cuerpo de agua superficial (lago o acuífero libre). El agua siempre fluye de carga mayor a carga menor.</li>
+    <li><strong>En un área de descarga</strong>, la carga potenciométrica en el acuífero confinado es mayor que el nivel freático (o del lago). Esto crea un <em>gradiente vertical ascendente</em>, forzando al agua a filtrarse hacia arriba a través del sedimento de baja K hacia el lago.</li>
+    <li><strong>En un área de recarga</strong>, el nivel freático (o del lago) es mayor que la carga potenciométrica en el acuífero confinado. Esto crea un <em>gradiente vertical descendente</em>, y el agua se infiltra hacia abajo a través del sedimento hacia el acuífero.</li>
+    <li><strong>La Ley de Darcy aplica incluso a través de sedimentos de baja K.</strong> Mientras exista una diferencia de carga hidráulica (Δh), habrá flujo — la velocidad simplemente escala con el gradiente (Δh/ΔL) y la conductividad hidráulica (K). Una K muy baja significa un flujo muy lento, pero no cero.</li>
+    <li><strong>El perfil vertical de carga</strong> muestra carga constante en el lago y en el acuífero (donde el flujo es predominantemente horizontal), con un gradiente lineal a través del sedimento (donde el flujo es vertical). La pendiente de la línea del perfil indica la dirección: pendiente ascendente = flujo ascendente.</li>
+  </ul>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conexiones Conceptuales</h4>
+  <ul>
+    <li>Compara este ejercicio con el <strong>Ejercicio 9</strong>, que también trata con gradientes verticales a través de un acuitardo — pero en un sistema de dos acuíferos (libre sobre confinado) con múltiples pozos. El principio subyacente es idéntico: compara las cargas arriba y abajo del acuitardo para determinar la dirección del flujo.</li>
+    <li>Compara con el <strong>Ejercicio 12</strong>, donde el flujo ascendente a través de un acuitardo de arcilla conecta un acuífero confinado con un acuífero libre superior. En el Ejercicio 7, el "acuífero superior" es simplemente un lago; en el Ejercicio 12, es un acuífero libre completo con su propio nivel freático y flujo horizontal.</li>
+    <li>El cambio brusco de carga a través del sedimento (Parte b) es una consecuencia directa de la Ley de Darcy: un material de baja K requiere un gradiente hidráulico pronunciado para transmitir incluso un flujo pequeño. Este mismo principio explica los saltos de carga observados en el Ejercicio 12 a través del acuitardo de arcilla.</li>
+    <li>La Figura 27 de Cohen y Cherry (2020) — mostrada en la introducción — ilustra directamente ambos casos: (a) flujo descendente cuando el nivel freático está por encima de la superficie potenciométrica, y (b) flujo ascendente cuando la superficie potenciométrica está por encima del nivel freático.</li>
+  </ul>
+
+</section>

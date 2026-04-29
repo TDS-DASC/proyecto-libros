@@ -1,0 +1,44 @@
+---
+title: "Exercise 10"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 10</h3>
+  
+  <p>Based on the water level data shown in the schematic, determine which of the options best represents the equipotential lines and flow direction through the two sand layers and the clay aquitard.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_10/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 10 Solution</h3>
+
+  <p><strong>The correct answer is choice "b":</strong> The head at each screened interval is equal to the elevation of the water level in each well. Based on the head data in the sand zones, hydraulic head decreases toward the right, and vertical flow will be restricted due to the aquitard. Accordingly, flow in the sand zones is mainly horizontal, and the potentiometric contours are nearly vertical because flow is orthogonal to potentiometric contours in isotropic media.</p>
+
+  <ul>
+    <li><strong>Choice "a"</strong> is NOT the correct answer. The head value plotted at each point is correct because it is the elevation of the water in the well. However, this cannot be the correct answer, because the equipotential line does not have an inflection at the top and bottom of the low-K interval.</li>
+    <li><strong>Choice "c"</strong> CANNOT be the correct answer, because the head values plotted at the points of measurement do not represent hydraulic head. Instead, they represent the height of the water column in each well.</li>
+    <li><strong>Choice "d"</strong> CANNOT be the correct answer, because the values plotted at the points of measurement do not represent hydraulic head; instead, they are the elevations of the points of measurement.</li>
+  </ul>
+
+</section>

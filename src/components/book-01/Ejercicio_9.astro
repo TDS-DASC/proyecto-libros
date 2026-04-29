@@ -1,0 +1,657 @@
+---
+// Ejercicio_9.astro — Flujo Horizontal y Carga en Acuíferos Múltiples
+---
+
+<div class="ej9-wrapper">
+
+  <!-- Progress stepper -->
+  <div class="ej9-stepper">
+    <div class="ej9-step active" id="stepper-1-ej9"><span class="ej9-step-num">1</span><span class="ej9-step-label">Estimar</span></div>
+    <div class="ej9-step-line"></div>
+    <div class="ej9-step" id="stepper-2-ej9"><span class="ej9-step-num">2</span><span class="ej9-step-label">Explicación</span></div>
+    <div class="ej9-step-line"></div>
+    <div class="ej9-step" id="stepper-3-ej9"><span class="ej9-step-num">3</span><span class="ej9-step-label">Experimentar</span></div>
+  </div>
+
+  <div class="ej9-card">
+    <h2 class="ej9-title">🗺️ Ejercicio 9: Flujo Horizontal y Acuíferos Múltiples</h2>
+    <p class="ej9-subtitle">Estima los niveles de agua, determina el flujo vertical y experimenta con las fronteras constantes.</p>
+
+    <!-- ══ STEP 1 — Estimar Niveles y Flujo ══ -->
+    <div id="step1-ej9" class="ej9-step-card ej9-step-active">
+      <div class="ej9-step-header">
+        <span class="ej9-badge">1</span>
+        <div>
+          <h3 class="ej9-step-title">Paso 1: Estimar Niveles y Determinar Flujo Vertical</h3>
+          <p class="ej9-step-text">
+            Considera un acuífero no confinado sobre un acuitardo de arcilla, y un acuífero confinado debajo. El sistema está flanqueado por cuerpos de agua (54 m a la izquierda, 50 m a la derecha). Asumiendo una disminución <strong>lineal</strong> del nivel freático, estima el nivel en cada pozo (Izquierdo, Centro, Derecho) y determina si hay flujo vertical a través de la arcilla.
+          </p>
+        </div>
+      </div>
+      <details class="ej9-hint">
+        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej9-hint-body">
+          <p>Si el nivel freático disminuye linealmente de 54 m a 50 m, ¿cuáles son las cargas a 1/4, 1/2 y 3/4 de la distancia? Ahora compara esos valores con las cargas en el acuífero confinado inferior — ambos comparten las <strong>mismas fronteras de carga constante</strong>. Si la carga es igual arriba y abajo de la arcilla en cada ubicación, ¿hay gradiente vertical?</p>
+        </div>
+      </details>
+      <div class="ej9-choice-grid">
+        <button id="btn-opt1-ej9" class="ej9-choice-btn" data-opt="1">
+          <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
+          <span class="ej9-choice-sub">Flujo vertical hacia abajo</span>
+        </button>
+        <button id="btn-opt2-ej9" class="ej9-choice-btn" data-opt="2">
+          <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
+          <span class="ej9-choice-sub">Sin flujo vertical</span>
+        </button>
+        <button id="btn-opt3-ej9" class="ej9-choice-btn" data-opt="3">
+          <span class="ej9-choice-main">54 m, 52 m, 50 m</span>
+          <span class="ej9-choice-sub">Flujo vertical hacia arriba</span>
+        </button>
+        <button id="btn-opt4-ej9" class="ej9-choice-btn" data-opt="4">
+          <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
+          <span class="ej9-choice-sub">Flujo vertical hacia arriba</span>
+        </button>
+      </div>
+      <p id="feedback-step1-ej9" class="ej9-feedback hidden"></p>
+    </div>
+
+    <!-- ══ STEP 2 — Explicación ══ -->
+    <div id="step2-ej9" class="ej9-step-card hidden">
+      <div class="ej9-step-header">
+        <span class="ej9-badge">2</span>
+        <div>
+          <h3 class="ej9-step-title">Paso 2: Explicación del Gradiente Lineal</h3>
+        </div>
+      </div>
+      <div class="ej9-explanation-body">
+        <p>¡Correcto! Al asumir una disminución lineal del nivel freático de 54 m a 50 m, los pozos espaciados equitativamente tienen niveles de <strong>53 m, 52 m y 51 m</strong> respectivamente.</p>
+        <p>El acuífero confinado inferior comparte las mismas fronteras de carga hidráulica constante (54 m y 50 m). Por lo tanto, el gradiente horizontal es el <strong>mismo en ambos acuíferos</strong>. Como la carga es igual por encima y por debajo de la arcilla en cualquier ubicación (por ejemplo, 53 m en ambos acuíferos en el pozo izquierdo), <strong>no hay gradiente vertical</strong> y, en consecuencia, no hay flujo vertical a través de la arcilla.</p>
+      </div>
+      <details class="ej9-hint">
+        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej9-hint-body">
+          <p>El <strong>gradiente vertical</strong> se define como la diferencia de carga dividida por el espesor del acuitardo: <em>i<sub>v</sub> = (h<sub>arriba</sub> − h<sub>abajo</sub>) / L<sub>arcilla</sub></em>. Si h<sub>arriba</sub> = h<sub>abajo</sub> en cada punto x, entonces i<sub>v</sub> = 0 y, por la Ley de Darcy, el flujo vertical Q<sub>v</sub> = 0.</p>
+        </div>
+      </details>
+      <button id="btn-next-step2-ej9" class="ej9-btn-primary">Siguiente: Experimentar con el Gradiente →</button>
+    </div>
+
+    <!-- ══ STEP 3 — Experimentar ══ -->
+    <div id="step3-ej9" class="ej9-step-card hidden">
+      <div class="ej9-step-header">
+        <span class="ej9-badge">3</span>
+        <div>
+          <h3 class="ej9-step-title">Paso 3: Experimentar con las Fronteras Constantes</h3>
+          <p class="ej9-step-text">
+            Ajusta los niveles de los cuerpos de agua fronterizos. Observa cómo el nivel freático y las líneas equipotenciales del acuífero confinado cambian en paralelo, manteniendo siempre un <strong>flujo vertical nulo</strong> a través de la arcilla.
+          </p>
+        </div>
+      </div>
+      <details class="ej9-hint">
+        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <div class="ej9-hint-body">
+          <p>¿Qué pasa si haces que la <strong>frontera izquierda sea más alta</strong> que la derecha? El gradiente horizontal se invierte, pero mientras ambos acuíferos compartan los mismos valores de frontera, la carga arriba y abajo de la arcilla seguirá siendo igual en cada punto x. El flujo vertical permanece cero.</p>
+        </div>
+      </details>
+      <div class="ej9-controls">
+        <div class="ej9-control-card">
+          <h4 class="ej9-control-title">Nivel de Agua Izquierdo (m)</h4>
+          <input type="range" id="hLeftBorder-ej9" min="50" max="58" step="1" value="54" class="ej9-slider" />
+          <div class="ej9-slider-labels">
+            <span>50 m</span>
+            <span id="hLeftBorderVal-ej9" class="ej9-slider-val">54</span>
+            <span>58 m</span>
+          </div>
+        </div>
+        <div class="ej9-control-card">
+          <h4 class="ej9-control-title">Nivel de Agua Derecho (m)</h4>
+          <input type="range" id="hRightBorder-ej9" min="46" max="54" step="1" value="50" class="ej9-slider" />
+          <div class="ej9-slider-labels">
+            <span>46 m</span>
+            <span id="hRightBorderVal-ej9" class="ej9-slider-val">50</span>
+            <span>54 m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion -->
+    <div id="final-ej9" class="ej9-completion hidden">
+      ✅ ¡Has completado el Ejercicio 9! Comprendes que cuando dos acuíferos comparten las mismas fronteras de carga constante, no hay gradiente vertical a través del acuitardo.
+    </div>
+
+    <!-- ══ Canvas Area ══ -->
+    <p class="ej9-canvas-label">📐 Simulación visual</p>
+    <div class="ej9-canvas-wrapper">
+      <canvas id="ej9-canvas" style="touch-action:none;"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .ej9-wrapper { font-family: inherit; }
+
+  /* Stepper */
+  .ej9-stepper {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 1.25rem; padding: 0 0.5rem;
+  }
+  .ej9-step {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    opacity: 0.35; transition: opacity 0.3s;
+  }
+  .ej9-step.active  { opacity: 1; }
+  .ej9-step.done    { opacity: 0.8; }
+  .ej9-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.75rem;
+  }
+  .ej9-step.done .ej9-step-num { background: #22c55e; }
+  .ej9-step-label { font-size: 0.65rem; color: var(--titles); white-space: nowrap; }
+  .ej9-step-line { flex: 1; height: 2px; background: #d1d5db; min-width: 1.5rem; }
+
+  /* Card */
+  .ej9-card {
+    padding: 1.25rem; border: 1px solid var(--borderEjercicio);
+    border-radius: 0.5rem; background: var(--cardEjercicio); box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+  .ej9-title { font-size: 1.05rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej9-subtitle { font-size: 0.8rem; color: var(--sidebarText); margin-bottom: 1rem; }
+  .ej9-canvas-label { font-size: 0.75rem; font-weight: 600; color: var(--sidebarText); margin-bottom: 0.35rem; }
+
+  /* Canvas wrapper */
+  .ej9-canvas-wrapper {
+    position: relative; max-width: 900px; margin: 0 auto 0.75rem;
+    border: 1px solid #d1d5db; border-radius: 0.375rem; overflow: hidden;
+    background: #ffffff;
+  }
+  #ej9-canvas { display: block; width: 100%; height: auto; }
+
+  /* Step cards */
+  .ej9-step-card {
+    padding: 1rem 1.1rem; margin-bottom: 0.75rem;
+    border: 1px solid var(--borderEjercicio); border-radius: 0.5rem;
+    background: var(--subtitle-bg); transition: all 0.25s;
+  }
+  .ej9-step-card.ej9-step-active { border-left: 4px solid #7dc6d9; }
+  .ej9-step-card.ej9-step-done   { border-left: 4px solid #22c55e; opacity: 0.85; }
+  .ej9-step-header { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.75rem; }
+  .ej9-badge {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.8rem;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .ej9-step-done .ej9-badge { background: #22c55e; }
+  .ej9-step-title { font-size: 0.95rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej9-step-text  { font-size: 0.85rem; color: var(--titles); line-height: 1.5; }
+
+  /* Explanation body (Step 2) */
+  .ej9-explanation-body { font-size: 0.85rem; color: var(--titles); line-height: 1.6; margin-bottom: 0.75rem; }
+  .ej9-explanation-body p { margin-bottom: 0.5rem; }
+
+  /* Buttons */
+  .ej9-btn-primary {
+    padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 700;
+    background: #7dc6d9; color: #fff; border: none; border-radius: 0.375rem;
+    cursor: pointer; transition: background 0.15s; margin-top: 0.25rem;
+  }
+  .ej9-btn-primary:hover { background: #3aa6b9; }
+
+  /* Choice grid */
+  .ej9-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin: 0.75rem 0; }
+  @media (max-width: 560px) { .ej9-choice-grid { grid-template-columns: 1fr; } }
+  .ej9-choice-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+    padding: 0.6rem 0.8rem; font-size: 0.85rem; font-weight: 600;
+    border: 1px solid #d1d5db; border-radius: 0.375rem;
+    background: #fff; color: #374151; cursor: pointer; transition: all 0.15s;
+    text-align: center;
+  }
+  .ej9-choice-btn:hover { background: #f3f4f6; }
+  .ej9-choice-main { font-size: 0.95rem; font-weight: 700; }
+  .ej9-choice-sub  { font-size: 0.75rem; font-weight: 400; color: #6b7280; }
+  .ej9-choice-correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+  .ej9-choice-wrong   { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+  /* Feedback */
+  .ej9-feedback { font-size: 0.85rem; font-weight: 600; padding: 0.5rem 0.75rem; border-radius: 0.375rem; margin-top: 0.5rem; }
+  .ej9-feedback-ok  { background: #dcfce7; color: #15803d; }
+  .ej9-feedback-err { background: #fee2e2; color: #b91c1c; }
+
+  /* Hints */
+  .ej9-hint {
+    margin: 0.5rem 0 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem;
+    background: #f9fafb;
+  }
+  .ej9-hint-summary {
+    cursor: pointer; padding: 0.5rem 0.75rem; font-size: 0.82rem; font-weight: 600;
+    color: #6b7280; list-style: none; display: flex; align-items: center; gap: 0.35rem;
+  }
+  .ej9-hint-summary::-webkit-details-marker { display: none; }
+  .ej9-hint-summary::before { content: '▸'; font-size: 0.75rem; transition: transform 0.2s; }
+  .ej9-hint[open] .ej9-hint-summary::before { transform: rotate(90deg); }
+  .ej9-hint-body { padding: 0 0.75rem 0.65rem; }
+  .ej9-hint-body p { font-size: 0.8rem; color: #4b5563; line-height: 1.55; margin-bottom: 0.35rem; }
+  .ej9-hint-body p:last-child { margin-bottom: 0; }
+
+  /* Controls (Step 3) */
+  .ej9-controls {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.75rem;
+  }
+  @media (max-width: 560px) { .ej9-controls { grid-template-columns: 1fr; } }
+  .ej9-control-card {
+    padding: 1rem; background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .ej9-control-title { font-size: 0.85rem; font-weight: 700; color: var(--titles); margin-bottom: 0.5rem; }
+  .ej9-slider { width: 100%; height: 8px; border-radius: 5px; background: #e2e8f0; outline: none; -webkit-appearance: none; }
+  .ej9-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #7dc6d9; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+  }
+  .ej9-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  .ej9-slider-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: #6b7283; margin-top: 0.35rem; }
+  .ej9-slider-val { font-weight: 700; color: #374151; font-size: 0.85rem; }
+
+  /* Completion */
+  .ej9-completion {
+    margin-top: 0.75rem; padding: 0.85rem; background: #dcfce7;
+    border: 1px solid #bbf7d0; border-radius: 0.5rem;
+    text-align: center; font-weight: 600; color: #15803d; font-size: 0.9rem;
+  }
+
+  .hidden { display: none !important; }
+</style>
+
+<script>
+  // ── State ─────────────────────────────────────────────────────────────
+  let currentStep = 1;
+  let animId = 0;
+  let isVisible = true;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let offset = 0;
+
+  // ── DOM refs ──────────────────────────────────────────────────────────
+  const canvas = document.getElementById('ej9-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const step1 = document.getElementById('step1-ej9');
+  const step2 = document.getElementById('step2-ej9');
+  const step3 = document.getElementById('step3-ej9');
+  const finalEl = document.getElementById('final-ej9');
+
+  const feedback1 = document.getElementById('feedback-step1-ej9');
+  const btnNextStep2 = document.getElementById('btn-next-step2-ej9');
+
+  const hLeftSlider = document.getElementById('hLeftBorder-ej9');
+  const hRightSlider = document.getElementById('hRightBorder-ej9');
+  const hLeftVal = document.getElementById('hLeftBorderVal-ej9');
+  const hRightVal = document.getElementById('hRightBorderVal-ej9');
+
+  const steppers = [1,2,3].map(n => document.getElementById('stepper-' + n + '-ej9'));
+  const choiceBtns = document.querySelectorAll('.ej9-choice-btn');
+
+  // ── Responsive canvas sizing ──────────────────────────────────────────
+  function resizeCanvas() {
+    const wrapper = canvas.parentElement;
+    if (!wrapper) return;
+    const rect = wrapper.getBoundingClientRect();
+    const w = Math.floor(rect.width);
+    const h = Math.floor(w * 0.56);
+
+    if (canvasWidth && canvasHeight) {
+      const tmp = document.createElement('canvas');
+      tmp.width = canvasWidth; tmp.height = canvasHeight;
+      tmp.getContext('2d').drawImage(canvas, 0, 0);
+      canvas.width = w; canvas.height = h;
+      ctx.drawImage(tmp, 0, 0, w, h);
+    } else {
+      canvas.width = w; canvas.height = h;
+    }
+    canvasWidth = w;
+    canvasHeight = h;
+  }
+
+  const ro = new ResizeObserver(function() { resizeCanvas(); });
+  ro.observe(canvas.parentElement);
+  resizeCanvas();
+
+  // ── IntersectionObserver to pause RAF ─────────────────────────────────
+  const io = new IntersectionObserver(function(entries) {
+    isVisible = entries[0].isIntersecting;
+    if (isVisible && !animId) {
+      animId = requestAnimationFrame(draw);
+    }
+  }, { threshold: 0.1 });
+  io.observe(canvas);
+
+  // ── Stepper helper ────────────────────────────────────────────────────
+  function setStep(n) {
+    steppers.forEach(function(s, i) {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n) s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+  }
+
+  function markDone(el) {
+    el.classList.remove('ej9-step-active');
+    el.classList.add('ej9-step-done');
+  }
+
+  // ── Tailored answer handling ──────────────────────────────────────────
+  function handleAnswer(opt) {
+    feedback1.classList.remove('hidden');
+    choiceBtns.forEach(function(b) { b.classList.remove('ej9-choice-correct', 'ej9-choice-wrong'); });
+
+    var clicked = document.querySelector('[data-opt="' + opt + '"]');
+
+    if (opt === '2') {
+      clicked.classList.add('ej9-choice-correct');
+      feedback1.className = 'ej9-feedback ej9-feedback-ok';
+      feedback1.innerHTML = '✅ ¡Correcto! Los niveles son 53 m, 52 m y 51 m, y como la carga es igual arriba y abajo de la arcilla en cada ubicación, <strong>no hay gradiente vertical</strong> ni flujo vertical.';
+
+      setTimeout(function() {
+        currentStep = 2;
+        markDone(step1);
+        step2.classList.remove('hidden');
+        step2.classList.add('ej9-step-active');
+        setStep(2);
+        step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 1500);
+    } else if (opt === '1') {
+      clicked.classList.add('ej9-choice-wrong');
+      feedback1.className = 'ej9-feedback ej9-feedback-err';
+      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) están bien, pero la dirección del flujo está mal. Si la carga es <strong>igual arriba y abajo de la arcilla</strong> en cada ubicación (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), el <strong>gradiente vertical es cero</strong>. Sin gradiente vertical no puede haber flujo en ninguna dirección, ni hacia abajo ni hacia arriba.';
+    } else if (opt === '4') {
+      clicked.classList.add('ej9-choice-wrong');
+      feedback1.className = 'ej9-feedback ej9-feedback-err';
+      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) son correctos, pero elegiste la dirección equivocada. Con cargas iguales arriba y abajo de la arcilla en cada punto, el gradiente vertical es <strong>cero</strong>. No hay flujo vertical — ni ascendente ni descendente.';
+    } else if (opt === '3') {
+      clicked.classList.add('ej9-choice-wrong');
+      feedback1.className = 'ej9-feedback ej9-feedback-err';
+      feedback1.innerHTML = '❌ Incorrecto. Los niveles están mal (la caída es lineal de 54 a 50, así que los valores intermedios son 53, 52, 51 — no 54, 52, 50). Además, la dirección también está mal. Recuerda: cuando ambos acuíferos comparten las mismas fronteras de carga constante, la carga es idéntica arriba y abajo en cada punto x, por lo que <strong>no hay gradiente vertical ni flujo</strong>.';
+    }
+  }
+
+  choiceBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var opt = btn.getAttribute('data-opt');
+      handleAnswer(opt);
+    });
+  });
+
+  // ── Step 2 to Step 3 ──────────────────────────────────────────────────
+  btnNextStep2.addEventListener('click', function() {
+    currentStep = 3;
+    markDone(step2);
+    step3.classList.remove('hidden');
+    step3.classList.add('ej9-step-active');
+    setStep(3);
+    step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // ── Slider updates ────────────────────────────────────────────────────
+  hLeftSlider.addEventListener('input', function(e) {
+    hLeftVal.textContent = e.target.value;
+  });
+  hRightSlider.addEventListener('input', function(e) {
+    hRightVal.textContent = e.target.value;
+  });
+
+  // ── Drawing ───────────────────────────────────────────────────────────
+  function getGeom() {
+    var w = canvasWidth;
+    var h = canvasHeight;
+    var padX = w * 0.06;
+    var padY = h * 0.05;
+    var startX = padX + w * 0.12;
+    var endX = w - padX - w * 0.12;
+    var dist = endX - startX;
+    return { w: w, h: h, padX: padX, padY: padY, startX: startX, endX: endX, dist: dist };
+  }
+
+  function drawArrow(x, y, dir) {
+    var len = Math.max(12, canvasWidth / 60);
+    ctx.beginPath();
+    ctx.moveTo(x - dir * len, y);
+    ctx.lineTo(x + dir * len, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x + dir * len, y);
+    ctx.lineTo(x + dir * len * 0.6, y - 4);
+    ctx.lineTo(x + dir * len * 0.6, y + 4);
+    ctx.fill();
+  }
+
+  function draw() {
+    if (!isVisible) { animId = 0; return; }
+    animId = requestAnimationFrame(draw);
+
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    var g = getGeom();
+
+    // Current boundary values
+    var hLeft = 54;
+    var hRight = 50;
+    if (currentStep >= 3) {
+      hLeft = parseInt(hLeftSlider.value);
+      hRight = parseInt(hRightSlider.value);
+    }
+
+    // Map heads to Y positions
+    var minH = Math.min(hLeft, hRight) - 5;
+    var maxH = Math.max(hLeft, hRight) + 5;
+    var headRange = maxH - minH;
+    var topPad = g.padY + 20;
+    var botPad = g.h - g.padY;
+    function getY(head) {
+      return botPad - ((head - minH) / headRange) * (botPad - topPad);
+    }
+
+    var yLeft = getY(hLeft);
+    var yRight = getY(hRight);
+
+    // Aquitard vertical positions
+    var aqTopY = topPad + (botPad - topPad) * 0.35;
+    var aqBotY = topPad + (botPad - topPad) * 0.48;
+
+    // Water bodies
+    ctx.fillStyle = '#bae6fd';
+    ctx.fillRect(0, Math.min(yLeft, yRight), g.startX, botPad - Math.min(yLeft, yRight));
+    ctx.fillRect(g.endX, Math.min(yLeft, yRight), g.w - g.endX, botPad - Math.min(yLeft, yRight));
+
+    // Unconfined aquifer
+    ctx.fillStyle = '#fef08a';
+    ctx.beginPath();
+    ctx.moveTo(g.startX, yLeft);
+    ctx.lineTo(g.endX, yRight);
+    ctx.lineTo(g.endX, aqTopY);
+    ctx.lineTo(g.startX, aqTopY);
+    ctx.fill();
+
+    // Aquitard
+    ctx.fillStyle = '#9ca3af';
+    ctx.fillRect(g.startX, aqTopY, g.dist, aqBotY - aqTopY);
+
+    // Confined aquifer
+    ctx.fillStyle = '#fde047';
+    ctx.fillRect(g.startX, aqBotY, g.dist, botPad - aqBotY);
+
+    // Labels
+    var fontSize = Math.max(9, Math.floor(canvasWidth / 75));
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold ' + fontSize + 'px Arial';
+    ctx.fillText('Acuífero No Confinado', g.startX + g.dist * 0.25, aqTopY - 10);
+    ctx.fillStyle = '#fff';
+    ctx.fillText('Acuitardo (Arcilla)', g.startX + g.dist * 0.35, aqTopY + (aqBotY - aqTopY) / 2 + 4);
+    ctx.fillStyle = '#000';
+    ctx.fillText('Acuífero Confinado', g.startX + g.dist * 0.28, botPad - 15);
+
+    // Boundary lines
+    ctx.strokeStyle = '#0284c7';
+    ctx.lineWidth = Math.max(2, canvasWidth / 350);
+    ctx.beginPath();
+    ctx.moveTo(g.startX, yLeft);
+    ctx.lineTo(g.startX, botPad);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(g.endX, yRight);
+    ctx.lineTo(g.endX, botPad);
+    ctx.stroke();
+
+    // Water table line
+    ctx.strokeStyle = '#0ea5e9';
+    ctx.lineWidth = Math.max(2, canvasWidth / 350);
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(g.startX, yLeft);
+    ctx.lineTo(g.endX, yRight);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#0284c7';
+    ctx.fillText('Nivel Freático', g.startX + g.dist * 0.42, (yLeft + yRight) / 2 - 6);
+
+    // Equipotential lines (Step 2+)
+    if (currentStep >= 2) {
+      ctx.strokeStyle = '#0d9488';
+      ctx.lineWidth = Math.max(1.5, canvasWidth / 450);
+      ctx.setLineDash([8, 8]);
+
+      var headDiff = hLeft - hRight;
+      if (Math.abs(headDiff) > 0.1) {
+        var minHead = Math.min(hLeft, hRight);
+        var maxHead = Math.max(hLeft, hRight);
+        var startHead = Math.ceil(minHead);
+        if (startHead === minHead) startHead += 1;
+
+        for (var h = startHead; h < maxHead; h++) {
+          var ratio = Math.abs((h - hLeft) / (hRight - hLeft));
+          var lineX = g.startX + ratio * g.dist;
+
+          // Unconfined
+          ctx.beginPath();
+          ctx.moveTo(lineX, getY(h));
+          ctx.lineTo(lineX, aqTopY);
+          ctx.stroke();
+
+          // Confined
+          ctx.beginPath();
+          ctx.moveTo(lineX, aqBotY);
+          ctx.lineTo(lineX, botPad);
+          ctx.stroke();
+
+          // Label
+          ctx.fillStyle = '#0f766e';
+          ctx.font = Math.max(8, fontSize - 2) + 'px Arial';
+          ctx.fillText(h + 'm', lineX + 3, botPad - 8);
+        }
+      }
+      ctx.setLineDash([]);
+
+      // Flow arrows
+      ctx.strokeStyle = '#2563eb';
+      ctx.fillStyle = '#2563eb';
+      ctx.lineWidth = Math.max(1.5, canvasWidth / 450);
+
+      var arrowDir = hLeft > hRight ? 1 : (hLeft < hRight ? -1 : 0);
+      if (arrowDir !== 0) {
+        var spacing = Math.max(80, g.dist / 4);
+        for (var xPos = g.startX + spacing; xPos < g.endX - 20; xPos += spacing) {
+          var arrowX = xPos + (arrowDir > 0 ? (offset % spacing) : -(offset % spacing));
+          if (arrowX > g.startX + 20 && arrowX < g.endX - 20) {
+            var wtY = yLeft + ((arrowX - g.startX) / g.dist) * (yRight - yLeft);
+            if (wtY < aqTopY - 10) {
+              drawArrow(arrowX, aqTopY - 15, arrowDir);
+            }
+            drawArrow(arrowX, (aqBotY + botPad) / 2, arrowDir);
+          }
+        }
+      }
+    }
+
+    // Wells
+    var wells = [
+      { id: 'Izq', x: g.startX + g.dist * 0.25, name: 'Pozo Izquierdo' },
+      { id: 'Cen', x: g.startX + g.dist * 0.50, name: 'Pozo Central' },
+      { id: 'Der', x: g.startX + g.dist * 0.75, name: 'Pozo Derecho' }
+    ];
+
+    wells.forEach(function(w) {
+      var wHead = hLeft + ((w.x - g.startX) / g.dist) * (hRight - hLeft);
+      var wY = getY(wHead);
+      var wellW = Math.max(8, canvasWidth / 90);
+
+      // Casing
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(w.x - wellW / 2, topPad - 15, wellW, wY - (topPad - 15));
+      // Water
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillRect(w.x - wellW / 2, wY, wellW, botPad - wY);
+      // Outline
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(w.x - wellW / 2, topPad - 15, wellW, botPad - (topPad - 15));
+
+      // Label
+      ctx.fillStyle = '#000';
+      ctx.font = 'bold ' + Math.max(8, fontSize - 1) + 'px Arial';
+      ctx.fillText(w.name, w.x - 30, topPad - 20);
+
+      // Head value
+      if (currentStep >= 2) {
+        ctx.fillStyle = '#000';
+        ctx.fillText(wHead.toFixed(1) + 'm', w.x + wellW / 2 + 3, wY + 4);
+      } else {
+        ctx.fillStyle = '#000';
+        ctx.fillText('? m', w.x + wellW / 2 + 3, wY + 4);
+      }
+
+      // Screen marks
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 1;
+      var screenTop, screenBot;
+      if (w.id === 'Izq') {
+        screenTop = aqBotY + 20; screenBot = aqBotY + 60;
+      } else {
+        screenTop = wY; screenBot = wY + 30;
+      }
+      if (screenBot > botPad) screenBot = botPad;
+      for (var sy = screenTop; sy <= screenBot; sy += 4) {
+        ctx.beginPath();
+        ctx.moveTo(w.x - wellW / 2, sy);
+        ctx.lineTo(w.x + wellW / 2, sy);
+        ctx.stroke();
+      }
+    });
+
+    // Boundary head labels
+    ctx.fillStyle = '#0284c7';
+    ctx.font = 'bold ' + fontSize + 'px Arial';
+    ctx.fillText(hLeft + ' m', g.startX - 30, yLeft - 5);
+    ctx.fillText(hRight + ' m', g.endX + 5, yRight - 5);
+
+    offset += 0.5;
+  }
+
+  // Start animation
+  animId = requestAnimationFrame(draw);
+
+  // Completion in Step 3
+  var step3Interactions = 0;
+  function checkCompletion() {
+    step3Interactions++;
+    if (step3Interactions >= 3 && currentStep === 3) {
+      finalEl.classList.remove('hidden');
+      finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setStep(4);
+    }
+  }
+  hLeftSlider.addEventListener('input', checkCompletion);
+  hRightSlider.addEventListener('input', checkCompletion);
+</script>

@@ -1,0 +1,44 @@
+---
+title: "Ejercicio 10"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 10</h3>
+  
+  <p>Basado en los datos de nivel de agua mostrados en el esquema, determina cuál de las opciones representa mejor las líneas equipotenciales y la dirección del flujo a través de las dos capas de arena y el acuitardo de arcilla.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_10/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 10</h3>
+
+  <p><strong>La respuesta correcta es la opción "b":</strong> La carga hidráulica en cada tramo ranurado es igual a la elevación del nivel de agua en cada pozo. Basado en los datos de carga hidráulica en las zonas de arena, la carga disminuye hacia la derecha, y el flujo vertical estará restringido debido al acuitardo. Por consiguiente, el flujo en las zonas de arena es principalmente horizontal, y las líneas equipotenciales son casi verticales porque el flujo es ortogonal a las equipotenciales en medios isotrópicos.</p>
+
+  <ul>
+    <li><strong>La opción "a"</strong> NO es la respuesta correcta. El valor de la carga trazado en cada punto es correcto porque es la elevación del agua en el pozo. Sin embargo, esta no puede ser la respuesta correcta porque la línea equipotencial no tiene una inflexión en la parte superior e inferior del intervalo de baja K.</li>
+    <li><strong>La opción "c"</strong> NO PUEDE ser la respuesta correcta porque los valores de carga trazados en los puntos de medición no representan la carga hidráulica. En cambio, representan la altura de la columna de agua en cada pozo.</li>
+    <li><strong>La opción "d"</strong> NO PUEDE ser la respuesta correcta porque los valores trazados en los puntos de medición no representan la carga hidráulica; en cambio, son las elevaciones de los puntos de medición.</li>
+  </ul>
+
+</section>

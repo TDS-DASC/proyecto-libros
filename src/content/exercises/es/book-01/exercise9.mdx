@@ -1,0 +1,52 @@
+---
+title: "Ejercicio 9"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_9 from "../../../../components/book-01/Ejercicio_9.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 9</h3>
+  
+  <p>Estima el nivel de agua en cada pozo y determina si existe flujo vertical a través del acuitardo de arcilla. Considera un sistema en el que un acuífero confinado horizontal debajo de una capa de arcilla está delimitado en ambos lados por fronteras de carga constante, que corresponden a las elevaciones del nivel de agua en los cuerpos de agua no confinados a la izquierda y a la derecha.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_9/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 9</h3>
+
+  <p><strong>Paso 1:</strong> Como aproximación, supón que el nivel freático disminuye linealmente. Por interpolación lineal, el nivel de agua en el centro es de 52 m. El pozo de la derecha se encuentra a la mitad de la distancia desde el lado derecho hasta el centro, por lo que el nivel de agua es de 51 m. De manera similar, la elevación del nivel freático en la ubicación del pozo de la izquierda es de 53 m.</p>
+
+  <p><strong>Paso 2:</strong> El acuífero confinado horizontal debajo de la arcilla está delimitado en ambos lados por fronteras de carga constante, cuyos valores corresponden a la elevación del nivel de agua en cada cuerpo de agua. El flujo es horizontal debido a la geometría del acuífero confinado y la posición de las fronteras (en cada extremo).</p>
+
+  <p><strong>Paso 3:</strong> El medio es homogéneo, por lo que el gradiente es constante, lo que significa que el espaciado entre las líneas equipotenciales es constante. El espaciado entre las líneas y sus valores se determinan mediante interpolación lineal.</p>
+
+  <p><strong>Paso 4:</strong> El pozo en el lado izquierdo está ranurado en el acuífero confinado, donde la carga hidráulica es de 53 m. En esta misma ubicación, la elevación del nivel freático también es de 53 m. Hemos simplificado asumiendo una disminución lineal del nivel freático. Debido a que estamos asumiendo un gradiente lineal tanto en el acuífero confinado como en el no confinado, la carga hidráulica en cada ubicación será la misma arriba y abajo de la arcilla. Como resultado, no hay gradiente vertical y, por lo tanto, no hay flujo vertical a través de la arcilla.</p>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conexiones Conceptuales</h4>
+  <ul>
+    <li>Compara este ejercicio con el <strong>Ejercicio 7</strong>, que también analiza el flujo vertical a través de una capa de baja K — pero en un sistema lago-sedimento-acuífero. La diferencia clave: en el Ejercicio 7, el acuífero confinado y el lago tienen cargas de frontera <em>diferentes</em>, creando un gradiente vertical. En el Ejercicio 9, ambos acuíferos comparten las <em>mismas</em> cargas de frontera, por lo que el gradiente vertical es cero.</li>
+    <li>Compara con el <strong>Ejercicio 12</strong>, donde ocurre flujo ascendente a través de un acuitardo de arcilla. En el Ejercicio 12, la carga potenciométrica en el acuífero confinado inferior (40 m) supera el nivel freático en el acuífero libre superior (~38 m), creando un gradiente vertical ascendente. El Ejercicio 9 representa el caso especial donde las cargas están perfectamente equilibradas.</li>
+    <li>La condición de <strong>flujo vertical cero</strong> a través de un acuitardo requiere que la carga hidráulica arriba sea igual a la carga hidráulica abajo en cada posición horizontal. Este es un escenario idealizado; en acuíferos reales, pequeñas diferencias en las condiciones de frontera, heterogeneidad, o recarga/descarga crean gradientes verticales pequeños pero no nulos.</li>
+    <li>Este ejercicio ilustra por qué los <strong>pozos anidados o multipuerto</strong> son esenciales para la caracterización hidrogeológica: sin medir la carga a múltiples profundidades, uno podría asumir incorrectamente que existe flujo vertical basándose únicamente en mediciones del nivel freático.</li>
+  </ul>
+
+</section>

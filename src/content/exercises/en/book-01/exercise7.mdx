@@ -1,0 +1,77 @@
+---
+title: "Exercise 7"
+bookSlug: "book-01"
+lang: 'en'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_7 from "../../../../components/book-01/Ejercicio_7.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 5.3 Flow Across Aquitards</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  In some cases, the hydraulic conductivity of the aquitard is less restrictive, and some groundwater may flow between the overlying and underlying aquifers. Such a formation may be referred to as a leaky aquitard. In the vicinity of a recharge or discharge area, the groundwater in both unconfined and confined aquifers can have a significant vertical flow component even in the presence of an aquitard.
+
+  Figure 27 shows that the direction of flow in the aquitard is dependent on the relative elevations of the water table and potentiometric surface. The flow direction is determined by the hydraulic gradient between the aquifers.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figure 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 27</b> <em> – Head profile across aquitards resulting in: a) downward and b) upward flow (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">📝 Example Problem 7</h3>
+
+  <div class="p-6 bg-[var(--subtitle-bg)] rounded-md border border-[var(--borderEjercicio)] mb-6 mt-4">
+    <p class="text-[var(--titles)] mb-4 text-lg"><b>a)</b> A piezometer is inserted into an aquifer beneath sediment (low K) of a lake, and water rises to a stable level as shown below. A water table is present but not shown. Is water flowing upward or downward through the sediment? Explain.</p>
+    <p class="text-[var(--titles)] text-lg"><b>b)</b> Draw a schematic representation of the vertical head profile, extending from the water level of the lake to the well screen.</p>
+  </div>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">📚 Interactive Solution</h3>
+
+  This interactive exercise illustrates the solution to the previous problem. A piezometer is installed in the aquifer to measure hydraulic head (h<sub>aquifer</sub>). Water can flow upward or downward through the sediment depending on the hydraulic head difference between the aquifer and the lake. In this simulation, we will discover which is the case.
+
+  We will explore how the **aquifer hydraulic head** and the **sediment hydraulic conductivity (K<sub>sediment</sub>)** affect the flow direction and velocity, as well as the vertical hydraulic head profile, based on Darcy's Law.
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Guided interactive exercise </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_7/>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  {/* Solution & Takeaways */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 7 Solution</h3>
+
+  <p>The step-by-step solution can be explored in the interactive exercise above. The key takeaways are:</p>
+
+  <ul>
+    <li><strong>Flow direction through an aquitard</strong> is determined by the <em>vertical hydraulic gradient</em> — the difference in hydraulic head between the aquifer and the overlying water body (lake or unconfined aquifer). Water always flows from higher head to lower head.</li>
+    <li><strong>In a discharge area</strong>, the potentiometric head in the confined aquifer is higher than the water table (or lake level). This creates an <em>upward vertical gradient</em>, forcing water to leak upward through the low-K sediment into the lake.</li>
+    <li><strong>In a recharge area</strong>, the water table (or lake level) is higher than the potentiometric head in the confined aquifer. This creates a <em>downward vertical gradient</em>, and water seeps downward through the sediment into the aquifer.</li>
+    <li><strong>Darcy's Law applies even through low-K sediment.</strong> As long as there is a hydraulic head difference (Δh), there will be flow — the velocity simply scales with both the gradient (Δh/ΔL) and the hydraulic conductivity (K). Very low K means very slow flow, but not zero flow.</li>
+    <li><strong>The vertical head profile</strong> shows constant head in the lake and in the aquifer (where flow is predominantly horizontal), with a linear gradient across the sediment (where flow is vertical). The slope of the profile line indicates the direction: upward slope = upward flow.</li>
+  </ul>
+
+  <h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">Conceptual Connections</h4>
+  <ul>
+    <li>Compare this exercise with <strong>Exercise 9</strong>, which also deals with vertical gradients across an aquitard — but in a two-aquifer system (unconfined over confined) with multiple wells. The underlying principle is identical: compare heads above and below the aquitard to determine flow direction.</li>
+    <li>Compare with <strong>Exercise 12</strong>, where upward flow through a clay aquitard connects a confined aquifer to an overlying unconfined aquifer. In Exercise 7, the "upper aquifer" is simply a lake; in Exercise 12, it is a full unconfined aquifer with its own water table and horizontal flow.</li>
+    <li>The sharp change in head across the sediment (Part b) is a direct consequence of Darcy's Law: low-K material requires a steep hydraulic gradient to transmit even a small flow. This same principle explains the head jumps seen in Exercise 12 across the clay aquitard.</li>
+    <li>Figure 27 from Cohen & Cherry (2020) — shown in the introduction — directly illustrates both cases: (a) downward flow when the water table is above the potentiometric surface, and (b) upward flow when the potentiometric surface is above the water table.</li>
+  </ul>
+
+</section>

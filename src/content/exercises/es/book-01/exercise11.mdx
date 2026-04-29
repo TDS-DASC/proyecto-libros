@@ -1,0 +1,45 @@
+---
+title: "Ejercicio 11"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
+
+<section class="book-section">
+
+  {/* 1. INTRODUCTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 11</h3>
+  
+  <p>Analiza la sección transversal hidrogeológica proporcionada, que consta de una unidad superior de arcilla y una unidad inferior de arena con dos pozos de monitoreo. Según las mediciones del diagrama, responde a las siguientes preguntas sobre el flujo de agua subterránea.</p>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 2. EXERCISE */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_11/>
+
+  <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+  {/* 3. SOLUTION */}
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
+  <hr class="divisor final"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 11</h3>
+
+  <p>La solución paso a paso puede explorarse en el ejercicio interactivo anterior. Las conclusiones clave son:</p>
+
+  <ul>
+    <li><strong>Las líneas equipotenciales en la unidad inferior de arena</strong> son líneas verticales uniformemente espaciadas basadas en la interpolación lineal de los valores de carga entre los pozos, disminuyendo de izquierda a derecha.</li>
+    <li><strong>La superficie potenciométrica</strong> está representada por una superficie plana (una línea recta en sección transversal) que conecta las elevaciones de carga de los dos pozos.</li>
+    <li><strong>La dirección del flujo de agua subterránea a través de la unidad de arcilla superior</strong> es principalmente hacia abajo (recarga). Esto se determina comparando la elevación del nivel freático con la elevación de la superficie potenciométrica. Como el nivel freático es más alto, existe un gradiente vertical descendente.</li>
+    <li><strong>El perfil de carga hidráulica vertical esperado</strong> cerca del Pozo 2 muestra un gradiente descendente relativamente pronunciado a través de la arcilla, seguido de una carga relativamente constante (o un gradiente mucho más leve) a través de la arena altamente conductiva.</li>
+  </ul>
+
+</section>

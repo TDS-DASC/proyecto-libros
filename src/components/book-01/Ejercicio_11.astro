@@ -1,0 +1,425 @@
+---
+const basePath = import.meta.env.BASE_URL;
+---
+
+<div class="ej11-wrapper">
+
+  <!-- ── Progress stepper ── -->
+  <div class="ej11-stepper">
+    <div class="ej11-step active" id="stepper-1"><span class="ej11-step-num">1</span><span class="ej11-step-label">Dibuja</span></div>
+    <div class="ej11-step-line"></div>
+    <div class="ej11-step" id="stepper-2"><span class="ej11-step-num">2</span><span class="ej11-step-label">Contornos</span></div>
+    <div class="ej11-step-line"></div>
+    <div class="ej11-step" id="stepper-3"><span class="ej11-step-num">3</span><span class="ej11-step-label">Dirección</span></div>
+    <div class="ej11-step-line"></div>
+    <div class="ej11-step" id="stepper-4"><span class="ej11-step-num">4</span><span class="ej11-step-label">Perfil</span></div>
+  </div>
+
+  <div class="ej11-card">
+    <h2 class="ej11-title">🗺️ Ejercicio 11: Flujo de Agua Subterránea y Carga Hidráulica</h2>
+    <p class="ej11-subtitle">Usa el lienzo para esbozar tus respuestas antes de revelar cada solución.</p>
+
+    <!-- ══ STEP 1 — Parts A + B (above the canvas) ══ -->
+    <div id="step1-ej11" class="ej11-step-card ej11-step-active">
+      <div class="ej11-step-header">
+        <span class="ej11-badge">1</span>
+        <div>
+          <h3 class="ej11-step-title">Partes A y B — Contornos y Superficie Potenciométrica</h3>
+          <p class="ej11-step-text">
+            <strong>A)</strong> Dibuja los <strong>contornos equipotenciales</strong> en la arena inferior a intervalos de 1 m.<br/>
+            <strong>B)</strong> Traza la <strong>superficie potenciométrica</strong> (línea que conecta los niveles de agua en los pozos del acuífero confinado).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Canvas area ── -->
+    <p class="ej11-canvas-label">📐 Dibuja en el lienzo y luego revela la solución</p>
+    <div id="canvas-wrapper-ej11" class="ej11-canvas-wrapper">
+      <img id="main-image-ej11" src={`${basePath}images/p47-000.png`}
+        alt="Diagrama del Problema 11" class="ej11-diagram-img" draggable="false" />
+      <canvas id="drawing-canvas-ej11" style="touch-action:none;"></canvas>
+    </div>
+
+    <!-- ── Toolbar ── -->
+    <div class="ej11-toolbar">
+      <label class="ej11-tool-label">Grosor</label>
+      <input id="brush-size-ej11" type="range" min="1" max="14" value="3" class="ej11-slider" />
+      <label class="ej11-tool-label">Color</label>
+      <input id="brush-color-ej11" type="color" value="#2563eb" class="ej11-color-picker" />
+      <button id="btn-pen-ej11"    class="ej11-tool-btn ej11-tool-active">✏️ Lápiz</button>
+      <button id="btn-eraser-ej11" class="ej11-tool-btn">🧹 Borrador</button>
+      <button id="btn-undo-ej11"   class="ej11-tool-btn">↩ Deshacer</button>
+      <button id="btn-clear-ej11"  class="ej11-tool-btn ej11-tool-danger">🗑️ Limpiar</button>
+    </div>
+
+    <!-- ══ Reveal + comparison (below toolbar, same step1 card logic via JS) ══ -->
+    <div id="step1-actions-ej11" class="ej11-step-card ej11-step-active" style="border-top: none; margin-top: -0.75rem; border-radius: 0 0 0.5rem 0.5rem;">
+      <button id="btn-reveal-ab-ej11" class="ej11-btn-primary">Revelar Solución A y B →</button>
+
+      <!-- Side-by-side comparison (hidden until revealed) -->
+      <div id="sol-ab-ej11" class="ej11-compare hidden">
+        <div class="ej11-compare-panel">
+          <p class="ej11-compare-label">A — Contornos Equipotenciales</p>
+          <img src={`${basePath}images/p64-000.png`} alt="Solución A: contornos equipotenciales" class="ej11-compare-img" />
+        </div>
+        <div class="ej11-compare-panel">
+          <p class="ej11-compare-label">B — Superficie Potenciométrica</p>
+          <img src={`${basePath}images/p64-001.png`} alt="Solución B: superficie potenciométrica" class="ej11-compare-img" />
+        </div>
+      </div>
+
+      <button id="btn-next-step1-ej11" class="ej11-btn-secondary hidden">Continuar a Parte C →</button>
+    </div>
+
+    <!-- ══ STEP 2 — Part C ══ -->
+    <div id="step2-ej11" class="ej11-step-card hidden">
+      <div class="ej11-step-header">
+        <span class="ej11-badge">2</span>
+        <div>
+          <h3 class="ej11-step-title">Parte C — Dirección del Flujo</h3>
+          <p class="ej11-step-text">¿En qué dirección fluye el agua subterránea a través de la <strong>arcilla superior</strong>?</p>
+        </div>
+      </div>
+      <div class="ej11-choice-row">
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="up">⬆ Hacia arriba</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="down">⬇ Hacia abajo</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="horizontal">➡ Horizontal</button>
+        <button class="flow-btn-ej11 ej11-choice-btn" data-ans="none">⊘ Sin flujo</button>
+      </div>
+      <p id="feedback-c-ej11" class="ej11-feedback hidden"></p>
+      <button id="btn-next-step2-ej11" class="ej11-btn-secondary hidden">Continuar a Parte D →</button>
+    </div>
+
+    <!-- ══ STEP 3 — Part D ══ -->
+    <div id="step3-ej11" class="ej11-step-card hidden">
+      <div class="ej11-step-header">
+        <span class="ej11-badge">3</span>
+        <div>
+          <h3 class="ej11-step-title">Parte D — Perfil Vertical de Carga</h3>
+          <p class="ej11-step-text">Usa el lienzo para esbozar el <strong>perfil vertical de carga hidráulica</strong> cerca del Pozo 2 (desde la arena inferior hasta la superficie).</p>
+        </div>
+      </div>
+      <button id="btn-reveal-d-ej11" class="ej11-btn-primary">Revelar Solución Final →</button>
+
+      <!-- Solution Part D (hidden until revealed) -->
+      <div id="sol-d-ej11" class="ej11-compare hidden">
+        <div class="ej11-compare-panel" style="max-width: 340px; margin: 0 auto;">
+          <p class="ej11-compare-label">D — Perfil Vertical de Carga</p>
+          <img src={`${basePath}images/sol11_final-003.png`} alt="Solución D" class="ej11-compare-img" />
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══ Completion ══ -->
+    <div id="final-ej11" class="ej11-completion hidden">
+      ✅ ¡Has completado el Ejercicio 11! Compara tu dibujo en el lienzo con las soluciones.
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Wrapper ── */
+  .ej11-wrapper { font-family: inherit; }
+
+  /* ── Stepper ── */
+  .ej11-stepper {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 1.25rem; padding: 0 0.5rem;
+  }
+  .ej11-step {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    opacity: 0.35; transition: opacity 0.3s;
+  }
+  .ej11-step.active  { opacity: 1; }
+  .ej11-step.done    { opacity: 0.8; }
+  .ej11-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.75rem;
+  }
+  .ej11-step.done .ej11-step-num { background: #22c55e; }
+  .ej11-step-label { font-size: 0.65rem; color: var(--titles); white-space: nowrap; }
+  .ej11-step-line { flex: 1; height: 2px; background: #d1d5db; min-width: 1.5rem; }
+
+  /* ── Card ── */
+  .ej11-card {
+    padding: 1.25rem; border: 1px solid var(--borderEjercicio);
+    border-radius: 0.5rem; background: var(--cardEjercicio); box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  }
+  .ej11-title { font-size: 1.05rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej11-subtitle { font-size: 0.8rem; color: var(--sidebarText); margin-bottom: 1rem; }
+  .ej11-canvas-label { font-size: 0.75rem; font-weight: 600; color: var(--sidebarText); margin-bottom: 0.35rem; }
+
+  /* ── Canvas wrapper ── */
+  .ej11-canvas-wrapper {
+    position: relative; max-width: 720px; margin: 0 auto 0.75rem;
+    border: 1px solid #d1d5db; border-radius: 0.375rem; overflow: hidden;
+  }
+  .ej11-diagram-img { display: block; width: 100%; user-select: none; }
+  #drawing-canvas-ej11 {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    cursor: crosshair; border-radius: 0.375rem;
+  }
+
+  /* ── Toolbar ── */
+  .ej11-toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    padding: 0.6rem 0.75rem; background: var(--subtitle-bg);
+    border: 1px solid var(--borderEjercicio); border-radius: 0.375rem; margin-bottom: 1.25rem;
+  }
+  .ej11-tool-label { font-size: 0.7rem; font-weight: 600; color: var(--titles); }
+  .ej11-slider { width: 5rem; accent-color: #7dc6d9; }
+  .ej11-color-picker { width: 2rem; height: 2rem; border-radius: 0.25rem; cursor: pointer; border: 1px solid #d1d5db; padding: 1px; }
+  .ej11-tool-btn {
+    padding: 0.2rem 0.65rem; font-size: 0.72rem; font-weight: 700;
+    border-radius: 0.3rem; border: 1px solid #d1d5db;
+    background: #fff; color: #374151; cursor: pointer; transition: all 0.15s;
+  }
+  .ej11-tool-btn:hover { background: #f3f4f6; }
+  .ej11-tool-active { background: #7dc6d9 !important; color: #fff !important; border-color: #7dc6d9 !important; }
+  .ej11-tool-danger { border-color: #f87171; color: #ef4444; }
+  .ej11-tool-danger:hover { background: #fef2f2; }
+
+  /* ── Step cards ── */
+  .ej11-step-card {
+    padding: 1rem 1.1rem; margin-bottom: 0.75rem;
+    border: 1px solid var(--borderEjercicio); border-radius: 0.5rem;
+    background: var(--subtitle-bg); transition: all 0.25s;
+  }
+  .ej11-step-card.ej11-step-active { border-left: 4px solid #7dc6d9; }
+  .ej11-step-card.ej11-step-done   { border-left: 4px solid #22c55e; opacity: 0.85; }
+  .ej11-step-header { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.75rem; }
+  .ej11-badge {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: #7dc6d9; color: #fff; font-weight: 700; font-size: 0.8rem;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .ej11-step-done .ej11-badge { background: #22c55e; }
+  .ej11-step-title { font-size: 0.95rem; font-weight: 700; color: var(--titles); margin-bottom: 0.25rem; }
+  .ej11-step-text  { font-size: 0.85rem; color: var(--titles); line-height: 1.5; }
+
+  /* ── Buttons ── */
+  .ej11-btn-primary {
+    padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 700;
+    background: #7dc6d9; color: #fff; border: none; border-radius: 0.375rem;
+    cursor: pointer; transition: background 0.15s; margin-top: 0.25rem;
+  }
+  .ej11-btn-primary:hover { background: #3aa6b9; }
+  .ej11-btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+  .ej11-btn-secondary {
+    padding: 0.45rem 1.1rem; font-size: 0.82rem; font-weight: 700;
+    background: transparent; color: #7dc6d9; border: 2px solid #7dc6d9;
+    border-radius: 0.375rem; cursor: pointer; transition: all 0.15s; margin-top: 0.6rem;
+  }
+  .ej11-btn-secondary:hover { background: #7dc6d9; color: #fff; }
+
+  /* ── Side-by-side comparison ── */
+  .ej11-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+    margin: 0.85rem 0 0.75rem;
+  }
+  .ej11-compare-panel { display: flex; flex-direction: column; gap: 0.3rem; }
+  .ej11-compare-label {
+    font-size: 0.75rem; font-weight: 700; color: #2563eb;
+    padding: 0.2rem 0.5rem; background: #eff6ff; border-radius: 0.25rem; text-align: center;
+  }
+  .ej11-compare-img { width: 100%; border-radius: 0.375rem; border: 1px solid #bfdbfe; }
+  @media (max-width: 560px) { .ej11-compare { grid-template-columns: 1fr; } }
+
+  /* ── Multiple choice ── */
+  .ej11-choice-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem; }
+  .ej11-choice-btn {
+    padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600;
+    border: 1px solid #d1d5db; border-radius: 0.375rem;
+    background: #fff; color: #374151; cursor: pointer; transition: all 0.15s;
+  }
+  .ej11-choice-btn:hover { background: #f3f4f6; }
+  .ej11-choice-correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+  .ej11-choice-wrong   { background: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+  /* ── Feedback ── */
+  .ej11-feedback { font-size: 0.82rem; font-weight: 600; padding: 0.5rem 0.75rem; border-radius: 0.375rem; margin-bottom: 0.5rem; }
+  .ej11-feedback-ok  { background: #dcfce7; color: #15803d; }
+  .ej11-feedback-err { background: #fee2e2; color: #b91c1c; }
+
+  /* ── Completion ── */
+  .ej11-completion {
+    margin-top: 0.75rem; padding: 0.85rem; background: #dcfce7;
+    border: 1px solid #bbf7d0; border-radius: 0.5rem;
+    text-align: center; font-weight: 600; color: #15803d; font-size: 0.9rem;
+  }
+
+  /* ── Utility ── */
+  .hidden { display: none !important; }
+</style>
+
+<script>
+  // ── Image paths ──────────────────────────────────────────────────────────────
+  const BASE = (import.meta as any).env?.BASE_URL ?? '/';
+  const IMG_PROBLEM = `${BASE}images/p47-000.png`;
+
+  // ── DOM ──────────────────────────────────────────────────────────────────────
+  const imgEl    = document.getElementById('main-image-ej11') as HTMLImageElement;
+  const canvasEl = document.getElementById('drawing-canvas-ej11') as HTMLCanvasElement;
+
+  const step1    = document.getElementById('step1-ej11')!;
+  const step2    = document.getElementById('step2-ej11')!;
+  const step3    = document.getElementById('step3-ej11')!;
+  const finalEl  = document.getElementById('final-ej11')!;
+
+  const solAB    = document.getElementById('sol-ab-ej11')!;
+  const feedbackC = document.getElementById('feedback-c-ej11')!;
+
+  const btnRevealAB   = document.getElementById('btn-reveal-ab-ej11')  as HTMLButtonElement;
+  const btnNextStep1  = document.getElementById('btn-next-step1-ej11') as HTMLButtonElement;
+  const btnNextStep2  = document.getElementById('btn-next-step2-ej11') as HTMLButtonElement;
+  const btnRevealD    = document.getElementById('btn-reveal-d-ej11')   as HTMLButtonElement;
+  const solD          = document.getElementById('sol-d-ej11')!;
+  const flowBtns      = document.querySelectorAll<HTMLButtonElement>('.flow-btn-ej11');
+
+
+  const brushSize  = document.getElementById('brush-size-ej11')  as HTMLInputElement;
+  const brushColor = document.getElementById('brush-color-ej11') as HTMLInputElement;
+  const btnPen     = document.getElementById('btn-pen-ej11')!;
+  const btnEraser  = document.getElementById('btn-eraser-ej11')!;
+  const btnUndo    = document.getElementById('btn-undo-ej11')!;
+  const btnClear   = document.getElementById('btn-clear-ej11')!;
+
+  const steppers = [1,2,3,4].map(n => document.getElementById(`stepper-${n}`)!);
+
+  // ── Canvas ───────────────────────────────────────────────────────────────────
+  const ctx = canvasEl.getContext('2d')!;
+  let drawing = false, erasing = false, lx = 0, ly = 0;
+  const undoStack: ImageData[] = [];
+
+  function resizeCanvas() {
+    const r = imgEl.getBoundingClientRect();
+    if (!r.width) return;
+    const tmp = document.createElement('canvas');
+    tmp.width = canvasEl.width; tmp.height = canvasEl.height;
+    tmp.getContext('2d')!.drawImage(canvasEl, 0, 0);
+    canvasEl.width = r.width; canvasEl.height = r.height;
+    ctx.drawImage(tmp, 0, 0, r.width, r.height);
+    applyCtx();
+  }
+  function applyCtx() {
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.lineWidth = +brushSize.value;
+    if (erasing) { ctx.globalCompositeOperation = 'destination-out'; ctx.strokeStyle = 'rgba(0,0,0,1)'; }
+    else          { ctx.globalCompositeOperation = 'source-over';     ctx.strokeStyle = brushColor.value; }
+  }
+  function pt(e: MouseEvent | Touch): [number,number] {
+    const r = canvasEl.getBoundingClientRect();
+    const sx = canvasEl.width / r.width, sy = canvasEl.height / r.height;
+    const cx = (e as MouseEvent).clientX ?? (e as Touch).clientX;
+    const cy = (e as MouseEvent).clientY ?? (e as Touch).clientY;
+    return [(cx - r.left) * sx, (cy - r.top) * sy];
+  }
+  function saveUndo() {
+    undoStack.push(ctx.getImageData(0, 0, canvasEl.width, canvasEl.height));
+    if (undoStack.length > 40) undoStack.shift();
+  }
+  function startDraw(e: MouseEvent | Touch) { drawing = true; saveUndo(); [lx, ly] = pt(e); applyCtx(); }
+  function moveDraw(e: MouseEvent | Touch) {
+    if (!drawing) return;
+    const [x, y] = pt(e);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(x, y); ctx.stroke();
+    [lx, ly] = [x, y];
+  }
+  canvasEl.addEventListener('mousedown', e => startDraw(e));
+  canvasEl.addEventListener('mousemove', e => moveDraw(e));
+  canvasEl.addEventListener('mouseup',    () => { drawing = false; });
+  canvasEl.addEventListener('mouseleave', () => { drawing = false; });
+  canvasEl.addEventListener('touchstart', e => { e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
+  canvasEl.addEventListener('touchmove',  e => { e.preventDefault(); moveDraw(e.touches[0]);  }, { passive: false });
+  canvasEl.addEventListener('touchend',   () => { drawing = false; });
+
+  brushSize.addEventListener('input',  applyCtx);
+  brushColor.addEventListener('input', () => { erasing = false; setToolActive(btnPen, btnEraser); applyCtx(); });
+
+  function setToolActive(active: Element, inactive: Element) {
+    active.classList.add('ej11-tool-active');
+    inactive.classList.remove('ej11-tool-active');
+  }
+  btnPen.addEventListener('click',    () => { erasing = false; setToolActive(btnPen, btnEraser); applyCtx(); });
+  btnEraser.addEventListener('click', () => { erasing = true;  setToolActive(btnEraser, btnPen); applyCtx(); });
+  btnClear.addEventListener('click',  () => { saveUndo(); ctx.clearRect(0, 0, canvasEl.width, canvasEl.height); });
+  btnUndo.addEventListener('click',   () => { if (undoStack.length) ctx.putImageData(undoStack.pop()!, 0, 0); });
+
+  imgEl.addEventListener('load', () => setTimeout(resizeCanvas, 50));
+  window.addEventListener('resize', resizeCanvas);
+  if (imgEl.complete) setTimeout(resizeCanvas, 50);
+
+  // ── Stepper helper ───────────────────────────────────────────────────────────
+  function setStep(n: number) {
+    steppers.forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n)  s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+  }
+
+  // ── Step 1 → Reveal A+B ───────────────────────────────────────────────────
+  btnRevealAB.addEventListener('click', () => {
+    solAB.classList.remove('hidden');
+    btnRevealAB.disabled = true;
+    btnRevealAB.textContent = '✅ Solución A y B revelada';
+    btnNextStep1.classList.remove('hidden');
+  });
+
+  btnNextStep1.addEventListener('click', () => {
+    step1.classList.remove('ej11-step-active');
+    step1.classList.add('ej11-step-done');
+    const actionsCard = document.getElementById('step1-actions-ej11');
+    actionsCard?.classList.remove('ej11-step-active');
+    actionsCard?.classList.add('ej11-step-done');
+    step2.classList.remove('hidden');
+    step2.classList.add('ej11-step-active');
+    setStep(2);
+    step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+
+  // ── Step 2 → Multiple choice (Part C) ────────────────────────────────────
+  flowBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      flowBtns.forEach(b => b.classList.remove('ej11-choice-correct', 'ej11-choice-wrong'));
+      const correct = btn.getAttribute('data-ans') === 'down';
+      btn.classList.add(correct ? 'ej11-choice-correct' : 'ej11-choice-wrong');
+      feedbackC.classList.remove('hidden', 'ej11-feedback-ok', 'ej11-feedback-err');
+      if (correct) {
+        feedbackC.textContent = '✅ ¡Correcto! La carga en la arena superior es mayor, así que el flujo a través de la arcilla superior es descendente.';
+        feedbackC.classList.add('ej11-feedback-ok');
+        btnNextStep2.classList.remove('hidden');
+      } else {
+        feedbackC.textContent = '❌ Incorrecto. Compara la elevación del nivel freático con la carga de la arena inferior para determinar la dirección.';
+        feedbackC.classList.add('ej11-feedback-err');
+      }
+    });
+  });
+
+  btnNextStep2.addEventListener('click', () => {
+    step2.classList.remove('ej11-step-active');
+    step2.classList.add('ej11-step-done');
+    step3.classList.remove('hidden');
+    step3.classList.add('ej11-step-active');
+    imgEl.src = IMG_PROBLEM; // reset canvas diagram for sketching
+    setStep(3);
+    step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // ── Step 3 → Reveal D ─────────────────────────────────────────────────────
+  btnRevealD.addEventListener('click', () => {
+    solD.classList.remove('hidden');
+    step3.classList.remove('ej11-step-active');
+    step3.classList.add('ej11-step-done');
+    btnRevealD.disabled = true;
+    btnRevealD.textContent = '✅ Solución Final revelada';
+    finalEl.classList.remove('hidden');
+    setStep(5); // all done
+    finalEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+</script>

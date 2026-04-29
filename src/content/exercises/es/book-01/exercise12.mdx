@@ -1,0 +1,150 @@
+---
+title: "Ejercicio 12"
+bookSlug: "book-01"
+lang: "es"
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_12 from "../../../../components/book-01/Ejercicio_12.astro";
+
+<section class="book-section">
+
+{/* 1. INTRODUCCIÓN */}
+
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  📖 Introducción{" "}
+</span>
+<hr class="divisor final"></hr>
+
+<h3 class="book-title text-[var(--book-title-1)] text-4xl">
+  🙋 Problema de Ejemplo 12
+</h3>
+<p>
+  Este ejercicio integra varios conceptos clave sobre la{" "}
+  <strong>carga hidráulica</strong> y el{" "}
+  <strong>flujo de agua subterránea</strong> en un sistema con un acuífero
+  libre, un acuífero confinado y un acuitardo que los separa. La sección
+  transversal muestra una unidad superior de arena, un acuitardo de arcilla
+  superior, una unidad inferior de arena y una unidad inferior de arcilla, con
+  dos pozos de monitoreo.
+</p>
+
+<p>Antes de comenzar, repasa estos principios:</p>
+<ul>
+  <li>
+    <strong>Las líneas equipotenciales</strong> conectan puntos de igual carga
+    hidráulica. En un acuífero homogéneo e isotrópico con flujo
+    predominantemente horizontal, son líneas aproximadamente verticales.
+  </li>
+  <li>
+    <strong>La superficie potenciométrica</strong> es la superficie imaginaria
+    que representa el nivel al que subiría el agua en un pozo abierto al
+    acuífero confinado en cualquier punto.
+  </li>
+  <li>
+    <strong>El flujo a través de un acuitardo</strong> es vertical (hacia arriba
+    o hacia abajo), determinado por la comparación de la carga arriba vs. abajo
+    del acuitardo.
+  </li>
+  <li>
+    <strong>La ley de Darcy</strong> aplica incluso a través de acuitardos de
+    baja K: cualquier gradiente hidráulico produce algo de flujo.
+  </li>
+</ul>
+
+<hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+{/* 2. EJERCICIO */}
+
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  ✏️ Ejercicio interactivo{" "}
+</span>
+<hr class="divisor final"></hr>
+
+<Ejercicio_12/>
+
+<hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
+
+{/* 3. SOLUCIÓN */}
+
+<span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">
+  ✅ Solución y Conclusiones{" "}
+</span>
+<hr class="divisor final"></hr>
+
+<h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">
+  Solución del Problema 12
+</h3>
+
+<p>
+  La solución paso a paso puede explorarse en el ejercicio interactivo anterior.
+  Las conclusiones clave son:
+</p>
+
+<ul>
+  <li>
+    <strong>Las líneas equipotenciales (Parte a)</strong> en la unidad inferior
+    de arena son líneas verticales uniformemente espaciadas basadas en la
+    interpolación lineal de los valores de carga entre los pozos — la carga
+    aumenta de izquierda (36 m en el Pozo 1) a derecha (40 m en el Pozo 2), por
+    lo que los contornos se etiquetan 36, 37, 38, 39, 40 m de izquierda a
+    derecha. En medios isotrópicos, el flujo es ortogonal a las líneas
+    equipotenciales, confirmando un flujo predominantemente horizontal en el
+    acuífero confinado.
+  </li>
+  <li>
+    <strong>La superficie potenciométrica (Parte b)</strong> es una superficie
+    plana (una línea recta en sección transversal) que conecta las elevaciones
+    de carga de los dos pozos ranurados en el acuífero confinado inferior (36 m
+    en el Pozo 1, 40 m en el Pozo 2). Esta superficie se encuentra por encima
+    del nivel freático en el Pozo 2 (donde la carga = 40 m > ~38 m del nivel
+    freático), indicando flujo ascendente a través del acuitardo.
+  </li>
+  <li>
+    <strong>
+      La dirección del flujo a través de la arcilla superior (Parte c)
+    </strong>{" "}
+    es <em>hacia arriba</em>. La carga potenciométrica en la arena inferior en
+    el Pozo 2 es 40 m, que es mayor que el nivel freático en esa ubicación (~38
+    m). Dado que el agua fluye de carga mayor a menor, el flujo a través del
+    acuitardo se dirige hacia arriba. Este es un ejemplo de un área de descarga
+    donde el acuífero confinado aporta agua al acuífero libre.
+  </li>
+  <li>
+    <strong>El perfil vertical de carga hidráulica esperado (Parte d)</strong>{" "}
+    cerca del Pozo 2 muestra: (1) una ligera disminución descendente de carga en
+    el acuífero libre (debido a un componente vertical de flujo no horizontal),
+    (2) un salto pronunciado ascendente a través del acuitardo de arcilla
+    (porque la carga debe aumentar de ~38 m arriba a 40 m abajo — el flujo es
+    ascendente a través de la unidad de baja K), y (3) carga casi constante en
+    el acuífero confinado inferior (donde el flujo es predominantemente
+    horizontal). El perfil de carga a través del acuitardo es un indicador claro
+    de fugas verticales.
+  </li>
+</ul>
+
+<h4 class="book-title text-[var(--book-title-1)] text-xl mt-6 mb-2">
+  Conexiones Conceptuales
+</h4>
+<ul>
+  <li>
+    Compara este ejercicio con el Ejercicio 11, donde el flujo a través del
+    acuitardo es <em>descendente</em>. La dirección se invierte porque en el Ej.
+    11 el nivel freático está más alto que la superficie potenciométrica,
+    mientras que aquí está más bajo.
+  </li>
+  <li>
+    El cambio brusco de carga a través del acuitardo (Parte d) es una
+    consecuencia directa de la ley de Darcy: la conductividad hidráulica muy
+    baja de la arcilla requiere un gradiente hidráulico grande para transmitir
+    incluso una pequeña cantidad de flujo.
+  </li>
+  <li>
+    Tanto en el Ejercicio 11 como en el 12, la superficie potenciométrica y los
+    contornos equipotenciales se determinan por los mismos principios — solo
+    difieren en los valores de carga específicos y las direcciones de flujo
+    resultantes.
+  </li>
+</ul>
+
+</section>

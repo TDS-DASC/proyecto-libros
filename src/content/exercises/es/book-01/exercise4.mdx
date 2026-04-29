@@ -1,0 +1,67 @@
+---
+title: "Ejercicio 4"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+<section class="prose prose-slate dark:prose-invert max-w-none">
+  <p class="text-xs text-slate-500 mb-2">
+    Comprensión Conceptual y Visual de la Carga Hidráulica y el Flujo de Agua Subterránea — Andrew J.B. Cohen y John A. Cherry.
+    The Groundwater Project. Descarga gratuita desde gw-project.org. ©Los Autores.
+  </p>
+
+  <h2 class="mt-0">5 Flujo Estacionario Saturado a Escala de Campo</h2>
+
+  <p>
+    A escala de campo, la carga hidráulica se puede medir utilizando varios tipos de pozos (ya sea instalados por separado, en una disposición espacialmente agrupada o en la misma ubicación horizontal pero a profundidades variables). Los pozos de agua subterránea son esencialmente versiones a gran escala de los piezómetros a escala de laboratorio utilizados para ilustrar la ley de Darcy en las secciones precedentes. A continuación se presenta la relación entre la carga hidráulica y el flujo en tres tipos básicos de formaciones (acuífero confinado, acuitardo, acuífero no confinado) en la zona saturada, y la Figura 19 proporciona una descripción esquemática.
+  </p>
+
+  <p>
+    Un <strong>acuífero confinado</strong> está limitado por arriba y por abajo por un <em>acuitardo</em>, una formación semipermeable que restringe el flujo entre los acuíferos suprayacentes y/o subyacentes. La interpolación de los niveles de agua medidos en pozos con rejilla en un acuífero confinado define la <strong>superficie potenciométrica</strong>.
+  </p>
+
+  <p>
+    Un <strong>acuífero no confinado</strong> está limitado únicamente en su base por un acuitardo. La parte superior del acuífero no confinado es el <strong>nivel freático</strong>, que es igual al nivel de agua observado en un pozo con rejilla lo suficientemente profundo como para encontrar agua estancada.
+  </p>
+
+  <img 
+    src="/proyecto-libros/figure19.png" 
+    alt="Sección transversal esquemática de un acuífero no confinado y un acuífero confinado" 
+    class="mx-auto rounded-lg shadow-md w-full max-w-2xl dark:shadow-slate-700"
+  />
+
+  <figure class="not-prose border rounded-xl p-4 bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700">
+
+    <figcaption class="text-sm text-slate-600">
+      <strong>Figura 19</strong> — Sección transversal esquemática de un acuífero no confinado y un acuífero confinado separados por un acuitardo. Todas las unidades están saturadas y, por lo tanto, conectadas hidráulicamente (Cohen y Cherry, 2020).
+    </figcaption>
+  </figure>
+
+  <h3>5.1 Hidráulica del Flujo en Acuíferos Confinados</h3>
+
+  <p>
+    Las configuraciones experimentales utilizadas para ilustrar la carga y el flujo se asemejan a las condiciones en un acuífero confinado, porque las capas confinantes de baja K lo limitan. Cuando esas capas tienen una conductividad hidráulica mucho menor que el acuífero, se comportan casi como límites de no flujo (como en los experimentos anteriores), aunque en la mayoría de las condiciones naturales todavía puede ocurrir algún flujo transversal a través de los acuitardos donde existen gradientes (ley de Darcy).
+  </p>
+
+  <p>
+    Un elemento central de los sistemas confinados es la <strong>superficie potenciométrica</strong>, una superficie imaginaria (Figura 20a) representada con contornos equipotenciales en vista de planta (Figura 20b) y como una línea en sección transversal (Figura 20c). La Sección 5.3 analiza los efectos de los acuitardos con más detalle.
+  </p>
+  
+    <img 
+    src="/proyecto-libros/figure20.png" 
+    alt="Sección transversal esquemática de un acuífero no confinado y un acuífero confinado" 
+    class="mx-auto rounded-lg shadow-md w-full max-w-2xl dark:shadow-slate-700"
+  />
+
+  <figure class="not-prose border rounded-xl p-4 bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700">
+    <figcaption class="text-sm text-slate-600">
+      <strong>Figura 20</strong> — Superficie potenciométrica de un acuífero confinado: a) perspectiva, b) planta (líneas equipotenciales), c) sección transversal. Las equipotenciales en vista de planta son análogas a las curvas de nivel topográficas para la elevación de la superficie del terreno (Cohen y Cherry, 2020).
+    </figcaption>
+  </figure>
+</section>
+
+<hr class="my-8" />
+
+import Ejercicio4 from '../../../../components/book-01/Ejercicio_4.astro';
+
+<Ejercicio4 />

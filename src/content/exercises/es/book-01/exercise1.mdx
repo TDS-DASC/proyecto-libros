@@ -1,0 +1,80 @@
+---
+title: "Ejercicio 1"
+bookSlug: "book-01"
+lang: 'es'
+---
+
+import "../../../../styles/global.css";
+import Ejercicio_1 from "../../../../components/book-01/Ejercicio_1.astro";
+
+<section class="book-section">
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 2.2 El Gradiente de Carga Hidráulica como Manifestación de Otras Variables y Condiciones</h3>
+  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  El gradiente hidráulico (Δh/ΔL) se expresa a menudo matemáticamente en formato diferencial como dh/dL.  
+  El reordenamiento de la ley de Darcy utilizando esta formulación muestra que el gradiente hidráulico es una función de Q, K y A:
+
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '1rem 0'}}>
+    <img src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/ql-cache/quicklatex.com-12a2769774e707c08643bfdfd2131b65_l3.svg" 
+        alt="ecuación 4" style={{width: '15%', height: 'auto', backgroundColor: 'white'}} class="rounded inline-block p-4"/>
+    <span style={{fontStyle: 'italic', marginLeft: '2rem', color: 'var(--titles)' }}>(4)</span>
+  </div>
+
+  Por lo tanto, un cambio en cualquiera de estas variables se manifestará como un cambio en el gradiente hidráulico:
+
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '1rem 0'}}>
+    <img src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/ql-cache/quicklatex.com-86324db2117411fc3e461947753efd77_l3.svg" 
+        alt="ecuación 5" style={{width: '18%', height: 'auto', backgroundColor: 'white'}} class="bg-[var(--images-bg)] rounded inline-block p-4" />
+    <span style={{fontStyle: 'italic', marginLeft: '2rem', color: 'var(--titles)'}}>(5)</span>
+  </div>
+
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '1rem 0'}}>
+    <img src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/ql-cache/quicklatex.com-f534b9b89c86905f12601dc4c30e9f3f_l3.svg" 
+        alt="ecuación 6" style={{width: '20%', height: 'auto', backgroundColor: 'white'}} class="bg-[var(--images-bg)] rounded inline-block p-4"/>
+    <span style={{fontStyle: 'italic', marginLeft: '2rem', color: 'var(--titles)'}}>(6)</span>
+  </div>
+
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '1rem 0'}}>
+    <img src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/ql-cache/quicklatex.com-29b828fd9111fdac30e06fd64065b726_l3.svg" 
+        alt="ecuación 7" style={{width: '20%', height: 'auto', backgroundColor: 'white'}} class="rounded inline-block p-4"/>
+    <span style={{fontStyle: 'italic', marginLeft: '2rem', color: 'var(--titles)'}}>(7)</span>
+  </div>
+
+  El signo negativo se debe al hecho de que el agua fluye en una dirección de mayor carga a menor carga, como se describió anteriormente. El término –dh/dL representa la pendiente de la disminución de la carga en la dirección del flujo (la "inclinación" del gradiente hidráulico).
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  La Figura 5 resume este concepto utilizando tres escenarios diferentes, aunque espacialmente uniformes. El gradiente hidráulico, que comúnmente se mide a través de los niveles de agua en los pozos, no es el parámetro de control que dicta el flujo. Más bien, el gradiente hidráulico es una manifestación de los efectos combinados de la geometría del sistema, las propiedades hidrogeológicas y el caudal impuesto al sistema.
+
+  <img 
+    src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/uploads/sites/14/2020/12/image6.png" 
+    alt="Figura 5"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 5</b> <em> – Ilustración de la dependencia del gradiente hidráulico de la conductividad hidráulica, el caudal y el área. En cada caso, el gradiente cambia de acuerdo con la relación de proporcionalidad definida por la ley de Darcy (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  En el ejemplo mostrado en la Figura 6, K2\<K1 mientras que Q y A son constantes. Q es el mismo en cada ubicación a lo largo del tubo porque la masa se conserva. Por lo tanto, como indica la ley de Darcy, el gradiente en la región de K2 debe ser más inclinado que en las otras regiones. Este escenario simple es un ejemplo de una heterogeneidad; en este caso, la conductividad hidráulica no es uniforme.
+
+  <img 
+    src="https://books.gw-project.org/conceptual-and-visual-understanding-of-hydraulic-head-and-groundwater-flow/wp-content/uploads/sites/14/2020/12/image7.png" 
+    alt="Figura 6"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+
+
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 6</b> <em> – Cambio en el gradiente hidráulico debido a la conductividad hidráulica variable. En este caso, el gradiente es más inclinado en la sección con menor K, ya que el gradiente es inversamente proporcional a K (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <hr class="divisor final"></hr>
+
+  <Ejercicio_1/>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+</section>
