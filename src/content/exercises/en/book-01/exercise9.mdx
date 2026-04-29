@@ -9,27 +9,50 @@ import Ejercicio_9 from "../../../../components/book-01/Ejercicio_9.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.2 Hydraulics of Flow in Unconfined Aquifers</h3>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 9</h3>
-  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Groundwater flow in unconfined aquifers obeys the same principles as flow in confined aquifers with an added element: the elevation of the top of the saturated zone defines a <strong>water table</strong>, which is the elevation of water that stands in a screened well just deep enough to encounter water. An equipotential contour connects points of equal hydraulic head. The water table itself is <em>not</em> an equipotential line; it has a variable head because it varies in elevation.
+
+  <img 
+    src="/proyecto-libros/images/figure21.png" 
+    alt="Figure 21"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 21</b> <em> – Equipotential contours in an unconfined aquifer; the contour lines connect points of equal hydraulic head and extend to the water table of the same elevation (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  At the field scale, hydraulic head can be measured using wells. The cross-section for this problem shows an upper unconfined aquifer, a clay aquitard, and a lower confined aquifer. Surface water bodies at both ends act as <strong>constant-head boundaries</strong>. In practice, horizontal flow in unconfined aquifers is often approximated as purely horizontal, and the water table can be approximated as a planar surface when assessed away from boundary conditions (see Figure 25).
+
+  <img 
+    src="/proyecto-libros/images/figure25.png" 
+    alt="Figure 25"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 25</b> <em> – Water table represented as a planar surface with predominantly horizontal flow throughout the cross section (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 9</h3>
+
   <p>Estimate the water level in each well and determine if there is vertical flow through the clay aquitard. Consider a system where a horizontal confined aquifer beneath a clay layer is bounded on both sides by constant head boundaries, which correspond to the water level elevations in the unconfined water bodies at the left and right.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
   {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Interactive exercise </span>
   <hr class="divisor final"></hr>
 
-  <Ejercicio_9/>
+  <Ejercicio_9 lang="en" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 9 Solution</h3>
 
@@ -48,5 +71,7 @@ import Ejercicio_9 from "../../../../components/book-01/Ejercicio_9.astro";
     <li>The condition of <strong>zero vertical flow</strong> across an aquitard requires that the hydraulic head above equals the hydraulic head below at every horizontal position. This is an idealized scenario; in real aquifers, slight differences in boundary conditions, heterogeneity, or recharge/discharge create small but non-zero vertical gradients.</li>
     <li>This exercise illustrates why <strong>nested or multi-port wells</strong> are essential for hydrogeological characterization: without measuring head at multiple depths, one might incorrectly assume vertical flow exists based on water table measurements alone.</li>
   </ul>
+
+</details>
 
 </section>

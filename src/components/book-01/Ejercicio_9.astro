@@ -1,55 +1,59 @@
 ---
 // Ejercicio_9.astro — Flujo Horizontal y Carga en Acuíferos Múltiples
+export interface Props {
+  lang?: 'es' | 'en';
+}
+import { useTranslations } from '../../i18n/utils';
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
-<div class="ej9-wrapper">
+<div class="ej9-wrapper" data-lang={lang}>
 
   <!-- Progress stepper -->
   <div class="ej9-stepper">
-    <div class="ej9-step active" id="stepper-1-ej9"><span class="ej9-step-num">1</span><span class="ej9-step-label">Estimar</span></div>
+    <div class="ej9-step active" id="stepper-1-ej9"><span class="ej9-step-num">1</span><span class="ej9-step-label">{t('exercise9.stepper.estimate')}</span></div>
     <div class="ej9-step-line"></div>
-    <div class="ej9-step" id="stepper-2-ej9"><span class="ej9-step-num">2</span><span class="ej9-step-label">Explicación</span></div>
+    <div class="ej9-step" id="stepper-2-ej9"><span class="ej9-step-num">2</span><span class="ej9-step-label">{t('exercise9.stepper.explanation')}</span></div>
     <div class="ej9-step-line"></div>
-    <div class="ej9-step" id="stepper-3-ej9"><span class="ej9-step-num">3</span><span class="ej9-step-label">Experimentar</span></div>
+    <div class="ej9-step" id="stepper-3-ej9"><span class="ej9-step-num">3</span><span class="ej9-step-label">{t('exercise9.stepper.experiment')}</span></div>
   </div>
 
   <div class="ej9-card">
-    <h2 class="ej9-title">🗺️ Ejercicio 9: Flujo Horizontal y Acuíferos Múltiples</h2>
-    <p class="ej9-subtitle">Estima los niveles de agua, determina el flujo vertical y experimenta con las fronteras constantes.</p>
+    <h2 class="ej9-title">{t('exercise9.title')}</h2>
+    <p class="ej9-subtitle">{t('exercise9.subtitle')}</p>
 
     <!-- ══ STEP 1 — Estimar Niveles y Flujo ══ -->
     <div id="step1-ej9" class="ej9-step-card ej9-step-active">
       <div class="ej9-step-header">
         <span class="ej9-badge">1</span>
         <div>
-          <h3 class="ej9-step-title">Paso 1: Estimar Niveles y Determinar Flujo Vertical</h3>
-          <p class="ej9-step-text">
-            Considera un acuífero no confinado sobre un acuitardo de arcilla, y un acuífero confinado debajo. El sistema está flanqueado por cuerpos de agua (54 m a la izquierda, 50 m a la derecha). Asumiendo una disminución <strong>lineal</strong> del nivel freático, estima el nivel en cada pozo (Izquierdo, Centro, Derecho) y determina si hay flujo vertical a través de la arcilla.
-          </p>
+          <h3 class="ej9-step-title">{t('exercise9.step1.title')}</h3>
+          <p class="ej9-step-text" set:html={t('exercise9.step1.description')}></p>
         </div>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">{t('exercise9.hint.label')}</summary>
         <div class="ej9-hint-body">
-          <p>Si el nivel freático disminuye linealmente de 54 m a 50 m, ¿cuáles son las cargas a 1/4, 1/2 y 3/4 de la distancia? Ahora compara esos valores con las cargas en el acuífero confinado inferior — ambos comparten las <strong>mismas fronteras de carga constante</strong>. Si la carga es igual arriba y abajo de la arcilla en cada ubicación, ¿hay gradiente vertical?</p>
+          <p set:html={t('exercise9.step1.hint')}></p>
         </div>
       </details>
       <div class="ej9-choice-grid">
         <button id="btn-opt1-ej9" class="ej9-choice-btn" data-opt="1">
           <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
-          <span class="ej9-choice-sub">Flujo vertical hacia abajo</span>
+          <span class="ej9-choice-sub">{t('exercise9.step1.option1.sub')}</span>
         </button>
         <button id="btn-opt2-ej9" class="ej9-choice-btn" data-opt="2">
           <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
-          <span class="ej9-choice-sub">Sin flujo vertical</span>
+          <span class="ej9-choice-sub">{t('exercise9.step1.option2.sub')}</span>
         </button>
         <button id="btn-opt3-ej9" class="ej9-choice-btn" data-opt="3">
           <span class="ej9-choice-main">54 m, 52 m, 50 m</span>
-          <span class="ej9-choice-sub">Flujo vertical hacia arriba</span>
+          <span class="ej9-choice-sub">{t('exercise9.step1.option3.sub')}</span>
         </button>
         <button id="btn-opt4-ej9" class="ej9-choice-btn" data-opt="4">
           <span class="ej9-choice-main">53 m, 52 m, 51 m</span>
-          <span class="ej9-choice-sub">Flujo vertical hacia arriba</span>
+          <span class="ej9-choice-sub">{t('exercise9.step1.option4.sub')}</span>
         </button>
       </div>
       <p id="feedback-step1-ej9" class="ej9-feedback hidden"></p>
@@ -60,20 +64,20 @@
       <div class="ej9-step-header">
         <span class="ej9-badge">2</span>
         <div>
-          <h3 class="ej9-step-title">Paso 2: Explicación del Gradiente Lineal</h3>
+          <h3 class="ej9-step-title">{t('exercise9.step2.title')}</h3>
         </div>
       </div>
       <div class="ej9-explanation-body">
-        <p>¡Correcto! Al asumir una disminución lineal del nivel freático de 54 m a 50 m, los pozos espaciados equitativamente tienen niveles de <strong>53 m, 52 m y 51 m</strong> respectivamente.</p>
-        <p>El acuífero confinado inferior comparte las mismas fronteras de carga hidráulica constante (54 m y 50 m). Por lo tanto, el gradiente horizontal es el <strong>mismo en ambos acuíferos</strong>. Como la carga es igual por encima y por debajo de la arcilla en cualquier ubicación (por ejemplo, 53 m en ambos acuíferos en el pozo izquierdo), <strong>no hay gradiente vertical</strong> y, en consecuencia, no hay flujo vertical a través de la arcilla.</p>
+        <p set:html={t('exercise9.step2.explanation1')}></p>
+        <p set:html={t('exercise9.step2.explanation2')}></p>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">{t('exercise9.hint.label')}</summary>
         <div class="ej9-hint-body">
-          <p>El <strong>gradiente vertical</strong> se define como la diferencia de carga dividida por el espesor del acuitardo: <em>i<sub>v</sub> = (h<sub>arriba</sub> − h<sub>abajo</sub>) / L<sub>arcilla</sub></em>. Si h<sub>arriba</sub> = h<sub>abajo</sub> en cada punto x, entonces i<sub>v</sub> = 0 y, por la Ley de Darcy, el flujo vertical Q<sub>v</sub> = 0.</p>
+          <p set:html={t('exercise9.step2.hint')}></p>
         </div>
       </details>
-      <button id="btn-next-step2-ej9" class="ej9-btn-primary">Siguiente: Experimentar con el Gradiente →</button>
+      <button id="btn-next-step2-ej9" class="ej9-btn-primary">{t('exercise9.step2.nextButton')}</button>
     </div>
 
     <!-- ══ STEP 3 — Experimentar ══ -->
@@ -81,21 +85,19 @@
       <div class="ej9-step-header">
         <span class="ej9-badge">3</span>
         <div>
-          <h3 class="ej9-step-title">Paso 3: Experimentar con las Fronteras Constantes</h3>
-          <p class="ej9-step-text">
-            Ajusta los niveles de los cuerpos de agua fronterizos. Observa cómo el nivel freático y las líneas equipotenciales del acuífero confinado cambian en paralelo, manteniendo siempre un <strong>flujo vertical nulo</strong> a través de la arcilla.
-          </p>
+          <h3 class="ej9-step-title">{t('exercise9.step3.title')}</h3>
+          <p class="ej9-step-text" set:html={t('exercise9.step3.description')}></p>
         </div>
       </div>
       <details class="ej9-hint">
-        <summary class="ej9-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej9-hint-summary">{t('exercise9.hint.label')}</summary>
         <div class="ej9-hint-body">
-          <p>¿Qué pasa si haces que la <strong>frontera izquierda sea más alta</strong> que la derecha? El gradiente horizontal se invierte, pero mientras ambos acuíferos compartan los mismos valores de frontera, la carga arriba y abajo de la arcilla seguirá siendo igual en cada punto x. El flujo vertical permanece cero.</p>
+          <p set:html={t('exercise9.step3.hint')}></p>
         </div>
       </details>
       <div class="ej9-controls">
         <div class="ej9-control-card">
-          <h4 class="ej9-control-title">Nivel de Agua Izquierdo (m)</h4>
+          <h4 class="ej9-control-title" set:html={t('exercise9.step3.leftSliderLabel')}></h4>
           <input type="range" id="hLeftBorder-ej9" min="50" max="58" step="1" value="54" class="ej9-slider" />
           <div class="ej9-slider-labels">
             <span>50 m</span>
@@ -104,7 +106,7 @@
           </div>
         </div>
         <div class="ej9-control-card">
-          <h4 class="ej9-control-title">Nivel de Agua Derecho (m)</h4>
+          <h4 class="ej9-control-title" set:html={t('exercise9.step3.rightSliderLabel')}></h4>
           <input type="range" id="hRightBorder-ej9" min="46" max="54" step="1" value="50" class="ej9-slider" />
           <div class="ej9-slider-labels">
             <span>46 m</span>
@@ -117,11 +119,11 @@
 
     <!-- Completion -->
     <div id="final-ej9" class="ej9-completion hidden">
-      ✅ ¡Has completado el Ejercicio 9! Comprendes que cuando dos acuíferos comparten las mismas fronteras de carga constante, no hay gradiente vertical a través del acuitardo.
+      {t('exercise9.completion')}
     </div>
 
     <!-- ══ Canvas Area ══ -->
-    <p class="ej9-canvas-label">📐 Simulación visual</p>
+    <p class="ej9-canvas-label">{t('exercise9.canvasLabel')}</p>
     <div class="ej9-canvas-wrapper">
       <canvas id="ej9-canvas" style="touch-action:none;"></canvas>
     </div>
@@ -296,6 +298,10 @@
   const steppers = [1,2,3].map(n => document.getElementById('stepper-' + n + '-ej9'));
   const choiceBtns = document.querySelectorAll('.ej9-choice-btn');
 
+  const wrapper = document.querySelector('.ej9-wrapper');
+  const lang = wrapper?.dataset?.lang || 'es';
+  const isEn = lang === 'en';
+
   // ── Responsive canvas sizing ──────────────────────────────────────────
   function resizeCanvas() {
     const wrapper = canvas.parentElement;
@@ -354,7 +360,9 @@
     if (opt === '2') {
       clicked.classList.add('ej9-choice-correct');
       feedback1.className = 'ej9-feedback ej9-feedback-ok';
-      feedback1.innerHTML = '✅ ¡Correcto! Los niveles son 53 m, 52 m y 51 m, y como la carga es igual arriba y abajo de la arcilla en cada ubicación, <strong>no hay gradiente vertical</strong> ni flujo vertical.';
+      feedback1.innerHTML = isEn
+        ? 'Correct! The levels are 53 m, 52 m, and 51 m, and since the head is equal above and below the clay at each location, <strong>there is no vertical gradient</strong> nor vertical flow.'
+        : '¡Correcto! Los niveles son 53 m, 52 m y 51 m, y como la carga es igual arriba y abajo de la arcilla en cada ubicación, <strong>no hay gradiente vertical</strong> ni flujo vertical.';
 
       setTimeout(function() {
         currentStep = 2;
@@ -367,15 +375,21 @@
     } else if (opt === '1') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) están bien, pero la dirección del flujo está mal. Si la carga es <strong>igual arriba y abajo de la arcilla</strong> en cada ubicación (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), el <strong>gradiente vertical es cero</strong>. Sin gradiente vertical no puede haber flujo en ninguna dirección, ni hacia abajo ni hacia arriba.';
+      feedback1.innerHTML = isEn
+        ? 'Incorrect. The levels (53, 52, 51) are correct, but the flow direction is wrong. If the head is <strong>equal above and below the clay</strong> at each location (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), the <strong>vertical gradient is zero</strong>. Without a vertical gradient there can be no flow in any direction, neither downward nor upward.'
+        : 'Incorrecto. Los niveles (53, 52, 51) están bien, pero la dirección del flujo está mal. Si la carga es <strong>igual arriba y abajo de la arcilla</strong> en cada ubicación (53 m = 53 m, 52 m = 52 m, 51 m = 51 m), el <strong>gradiente vertical es cero</strong>. Sin gradiente vertical no puede haber flujo en ninguna dirección, ni hacia abajo ni hacia arriba.';
     } else if (opt === '4') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles (53, 52, 51) son correctos, pero elegiste la dirección equivocada. Con cargas iguales arriba y abajo de la arcilla en cada punto, el gradiente vertical es <strong>cero</strong>. No hay flujo vertical — ni ascendente ni descendente.';
+      feedback1.innerHTML = isEn
+        ? 'Incorrect. The levels (53, 52, 51) are correct, but you chose the wrong direction. With equal heads above and below the clay at every point, the vertical gradient is <strong>zero</strong>. There is no vertical flow \u2014 neither upward nor downward.'
+        : 'Incorrecto. Los niveles (53, 52, 51) son correctos, pero elegiste la dirección equivocada. Con cargas iguales arriba y abajo de la arcilla en cada punto, el gradiente vertical es <strong>cero</strong>. No hay flujo vertical \u2014 ni ascendente ni descendente.';
     } else if (opt === '3') {
       clicked.classList.add('ej9-choice-wrong');
       feedback1.className = 'ej9-feedback ej9-feedback-err';
-      feedback1.innerHTML = '❌ Incorrecto. Los niveles están mal (la caída es lineal de 54 a 50, así que los valores intermedios son 53, 52, 51 — no 54, 52, 50). Además, la dirección también está mal. Recuerda: cuando ambos acuíferos comparten las mismas fronteras de carga constante, la carga es idéntica arriba y abajo en cada punto x, por lo que <strong>no hay gradiente vertical ni flujo</strong>.';
+      feedback1.innerHTML = isEn
+        ? 'Incorrect. The levels are wrong (the drop is linear from 54 to 50, so the intermediate values are 53, 52, 51 \u2014 not 54, 52, 50). Also, the direction is wrong. Remember: when both aquifers share the same constant head boundaries, the head is identical above and below at every point x, so <strong>there is no vertical gradient nor flow</strong>.'
+        : 'Incorrecto. Los niveles están mal (la caída es lineal de 54 a 50, así que los valores intermedios son 53, 52, 51 \u2014 no 54, 52, 50). Además, la dirección también está mal. Recuerda: cuando ambos acuíferos comparten las mismas fronteras de carga constante, la carga es idéntica arriba y abajo en cada punto x, por lo que <strong>no hay gradiente vertical ni flujo</strong>.';
     }
   }
 
@@ -487,11 +501,11 @@
     var fontSize = Math.max(9, Math.floor(canvasWidth / 75));
     ctx.fillStyle = '#000';
     ctx.font = 'bold ' + fontSize + 'px Arial';
-    ctx.fillText('Acuífero No Confinado', g.startX + g.dist * 0.25, aqTopY - 10);
+    ctx.fillText(isEn ? 'Unconfined Aquifer' : 'Acuífero No Confinado', g.startX + g.dist * 0.25, aqTopY - 10);
     ctx.fillStyle = '#fff';
-    ctx.fillText('Acuitardo (Arcilla)', g.startX + g.dist * 0.35, aqTopY + (aqBotY - aqTopY) / 2 + 4);
+    ctx.fillText(isEn ? 'Aquitard (Clay)' : 'Acuitardo (Arcilla)', g.startX + g.dist * 0.35, aqTopY + (aqBotY - aqTopY) / 2 + 4);
     ctx.fillStyle = '#000';
-    ctx.fillText('Acuífero Confinado', g.startX + g.dist * 0.28, botPad - 15);
+    ctx.fillText(isEn ? 'Confined Aquifer' : 'Acuífero Confinado', g.startX + g.dist * 0.28, botPad - 15);
 
     // Boundary lines
     ctx.strokeStyle = '#0284c7';
@@ -515,7 +529,7 @@
     ctx.stroke();
     ctx.setLineDash([]);
     ctx.fillStyle = '#0284c7';
-    ctx.fillText('Nivel Freático', g.startX + g.dist * 0.42, (yLeft + yRight) / 2 - 6);
+    ctx.fillText(isEn ? 'Water Table' : 'Nivel Freático', g.startX + g.dist * 0.42, (yLeft + yRight) / 2 - 6);
 
     // Equipotential lines (Step 2+)
     if (currentStep >= 2) {
@@ -577,9 +591,9 @@
 
     // Wells
     var wells = [
-      { id: 'Izq', x: g.startX + g.dist * 0.25, name: 'Pozo Izquierdo' },
-      { id: 'Cen', x: g.startX + g.dist * 0.50, name: 'Pozo Central' },
-      { id: 'Der', x: g.startX + g.dist * 0.75, name: 'Pozo Derecho' }
+      { id: 'Izq', x: g.startX + g.dist * 0.25, name: isEn ? 'Left Well' : 'Pozo Izquierdo' },
+      { id: 'Cen', x: g.startX + g.dist * 0.50, name: isEn ? 'Central Well' : 'Pozo Central' },
+      { id: 'Der', x: g.startX + g.dist * 0.75, name: isEn ? 'Right Well' : 'Pozo Derecho' }
     ];
 
     wells.forEach(function(w) {

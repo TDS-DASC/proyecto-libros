@@ -1,14 +1,20 @@
 ---
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+import { useTranslations } from '../../i18n/utils';
 import "../../styles/global.css";
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
   class="flex flex-col items-center justify-center p-6 border border-[var(--borderEjercicio)]
   bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl transition-colors duration-300"
 >
-  <h3 class="text-lg font-semibold text-[var(--titles)] mb-4 text-center">
-    Interactive Hydraulic Head with Sand Divisions
-  </h3>
+  <h3 class="text-lg font-semibold text-[var(--titles)] mb-4 text-center" set:html={t('exercise3.title')} />
 
   <!-- 💧 Contenedor visual RESPONSIVO -->
   <div
@@ -67,12 +73,12 @@ import "../../styles/global.css";
     id="headValues"
     class="mt-15 text-sm text-[var(--titles)] text-center space-y-1"
   >
-    <p>h₁ (left head): <span id="h1Value" class="font-semibold">0</span> ft</p>
+    <p>{t('exercise3.h1_label')} <span id="h1Value" class="font-semibold">0</span> ft</p>
     <p>
-      h₂ (right head): <span id="h2Value" class="font-semibold">12</span> ft
+      {t('exercise3.h2_label')} <span id="h2Value" class="font-semibold">12</span> ft
     </p>
     <p>
-      Equipotential height (piezometer): <span
+      {t('exercise3.piezo_label')} <span
         id="piezoHeightValue"
         class="font-semibold">0</span
       > ft
@@ -90,7 +96,7 @@ import "../../styles/global.css";
       for="manualToggle"
       class="text-[var(--textoCardCanvas)] cursor-pointer select-none"
     >
-      Enable manual input mode
+      {t('exercise3.manual_toggle')}
     </label>
   </div>
 
@@ -98,7 +104,7 @@ import "../../styles/global.css";
   <div class="mt-2 flex flex-col items-center gap-6">
     <div class="flex flex-col items-center">
       <label for="waterInput" class="text-sm text-[var(--titles)] mb-2">
-        Select water level (ft):
+        {t('exercise3.water_label')}
         <span id="waterValue" class="font-semibold ml-1">12</span>
       </label>
       <div id="waterContainer" class="flex justify-center"></div>
@@ -106,7 +112,7 @@ import "../../styles/global.css";
 
     <div class="flex flex-col items-center">
       <label for="sandInput" class="text-sm text-[var(--titles)] mb-2">
-        Sand divisions added:
+        {t('exercise3.sand_label')}
         <span id="sandValue" class="font-semibold ml-1">0</span>
       </label>
       <div id="sandContainer" class="flex justify-center"></div>
@@ -115,7 +121,7 @@ import "../../styles/global.css";
     <!-- Piezometer position -->
     <div id="piezometerContainer" class="flex flex-col items-center mt-2">
       <label for="piezometerInput" class="text-sm text-[var(--titles)] mb-2">
-        Piezometer position:
+        {t('exercise3.piezo_control')}
         <span id="piezoValue" class="font-semibold ml-1">0</span>
       </label>
       <div class="flex justify-center">
@@ -137,11 +143,11 @@ import "../../styles/global.css";
   <p
     class="mt-5 text-sm text-[var(--textoCardCanvas)] text-center leading-relaxed max-w-md"
   >
-    Default head on the right (h₂) = 12 ft.<br />
-    Adding sand divisions increases the left head (h₁) by 1 ft per division.<br
+    {t('exercise3.help_line1')}<br />
+    {t('exercise3.help_line2')}<br
     />
-    Divisions appear only inside the sand zone.<br />
-    Water level can be adjusted between 0 and 12 ft using either input type.
+    {t('exercise3.help_line3')}<br />
+    {t('exercise3.help_line4')}
   </p>
 </section>
 

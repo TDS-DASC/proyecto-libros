@@ -9,27 +9,43 @@ import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Aquifers and Aquitards</h3>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 11</h3>
-  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  This system consists of an upper clay unit (aquitard) separating an upper unconfined aquifer from a lower confined sand aquifer. <strong>Potentiometric contours</strong> connect points of equal hydraulic head and, in isotropic aquifers with predominantly horizontal flow, are approximately vertical lines. The <strong>potentiometric surface</strong> represents the level to which water would rise in a well open to the confined aquifer.
+
+  <img 
+    src="/proyecto-libros/images/figure28.png" 
+    alt="Figure 28"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 28</b> <em> – Potentiometric contour lines in an unconfined and confined aquifer separated by an aquitard (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  The flow direction through the aquitard is determined by comparing the hydraulic head above and below the low-conductivity unit. In the case of <strong>Figure 27a</strong>, the water table is above the potentiometric surface, so flow through the clay is <strong>downward</strong> (recharge).
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 11</h3>
+
   <p>Analyze the provided hydrogeological cross-section consisting of an upper clay unit and a lower sand unit with two monitoring wells. Based on the measurements in the diagram, answer the following questions regarding groundwater flow.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
   {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Interactive exercise </span>
   <hr class="divisor final"></hr>
 
-  <Ejercicio_11/>
+  <Ejercicio_11 lang="en" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 11 Solution</h3>
 
@@ -41,5 +57,7 @@ import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
     <li><strong>The direction of groundwater flow through the upper clay unit</strong> is mainly downward (recharge). This is determined by comparing the water table elevation to the potentiometric surface elevation. Since the water table is higher, there is a downward vertical gradient.</li>
     <li><strong>The expected vertical hydraulic head profile</strong> near Well 2 shows a relatively steep downward gradient through the clay, followed by a relatively constant head (or a much slighter gradient) through the highly conductive sand.</li>
   </ul>
+
+</details>
 
 </section>

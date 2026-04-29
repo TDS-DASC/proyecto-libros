@@ -1,5 +1,15 @@
 ---
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+import { useTranslations } from '../../i18n/utils';
 import InfoSection from "./Ejercicio_2/Information.astro";
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tUnitPerDay = t('exercise2.ui.unit_per_day');
+
 //distance ∆L
 const minDistance = 10;
 const maxDistance = 100;
@@ -21,13 +31,13 @@ const maxA = 10;
 const initA = 5;
 ---
 
-<InfoSection />
+<InfoSection lang={lang} />
 <div class="layout">
   <!-- Panel Gráfica -->
   <div
     class="visual border border-[var(--borderMario)] bg-[var(--cardMario)] rounded-md shadow-[0_8px_30px_var(--shadowMario)]"
   >
-    <h2>Gráfica</h2>
+    <h2 set:html={t('exercise2.ui.graph')} />
 
     <div class="graph">
       <div class="height-line bg-[var(--color-primary)]"></div>
@@ -68,7 +78,7 @@ const initA = 5;
     <div
       class="data border border-[var(--borderMario)] bg-[var(--cardMario)] rounded-md shadow-[0_8px_30px_var(--shadowMario)]"
     >
-      <h2>Datos</h2>
+      <h2 set:html={t('exercise2.ui.data')} />
       <div class="data-grid">
         <div>
           <h3 class="data-label">h₁:</h3><h3 class="data-value" id="data-1">
@@ -102,17 +112,17 @@ const initA = 5;
     <div
       class="panel border border-[var(--borderMario)] bg-[var(--cardMario)] rounded-md shadow-[0_8px_30px_var(--shadowMario)]"
     >
-      <h2>Controles</h2>
+      <h2 set:html={t('exercise2.ui.controls')} />
       <div class="panel-grid">
         <!-- Tipo de input -->
         <div class="control full">
-          <label>Tipo de input</label>
+          <label set:html={t('exercise2.ui.input_type')} />
           <input type="checkbox" id="input-type" value="true" />
         </div>
 
         <!-- Distancia -->
         <div class="control">
-          <label>Distancia entre piezómetros</label>
+          <label set:html={t('exercise2.ui.distance')} />
           <input
             id="range-distance"
             type="range"
@@ -131,7 +141,7 @@ const initA = 5;
 
         <!-- Ratio -->
         <div class="control">
-          <label>Ratio de flujo</label>
+          <label set:html={t('exercise2.ui.flow_rate')} />
           <input
             id="range-Q"
             type="range"
@@ -150,7 +160,7 @@ const initA = 5;
 
         <!-- Conductividad -->
         <div class="control">
-          <label>Conductividad</label>
+          <label set:html={t('exercise2.ui.conductivity')} />
           <input
             id="range-K"
             type="range"
@@ -171,7 +181,7 @@ const initA = 5;
 
         <!-- Área -->
         <div class="control">
-          <label>Área</label>
+          <label set:html={t('exercise2.ui.area')} />
           <input
             id="range-A"
             type="range"
@@ -211,7 +221,8 @@ const initA = 5;
     </div>
   </div>
 
-  <script>
+  <script define:vars={{ tUnitPerDay }}>
+    const unitPerDay = tUnitPerDay;
     const type = document.getElementById("input-type") as HTMLInputElement;
     //elements for distance (∆L) control
     const rangeDistanceIn = document.getElementById(
@@ -421,7 +432,7 @@ const initA = 5;
       );
       data4.textContent = slope + "m";
       data5.textContent = flowRate.toFixed(2) + "m³";
-      data6.textContent = conductivity.toFixed(2) + "m/día";
+      data6.textContent = conductivity.toFixed(2) + unitPerDay;
       data7.textContent = area.toFixed(2) + "m²";
 
       // Actualización visual de la línea ∆L

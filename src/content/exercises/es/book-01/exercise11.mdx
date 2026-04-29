@@ -9,27 +9,43 @@ import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introducción </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Acuíferos y Aquitardos</h3>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Problema de Ejemplo 11</h3>
-  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Este sistema consta de una unidad superior de arcilla (acuitardo) que separa un acuífero libre superior de un acuífero confinado inferior de arena. Las <strong>líneas equipotenciales</strong> conectan puntos de igual carga hidráulica y, en acuíferos isotrópicos con flujo predominantemente horizontal, son líneas aproximadamente verticales. La <strong>superficie potenciométrica</strong> representa el nivel al que subiría el agua en un pozo abierto al acuífero confinado.
+
+  <img 
+    src="/proyecto-libros/images/figure28.png" 
+    alt="Figura 28"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figura 28</b> <em> – Líneas de contorno potenciométrico en un acuífero no confinado y un acuífero confinado separados por un acuitardo (Cohen y Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  La dirección del flujo a través del acuitardo se determina comparando la carga hidráulica arriba y abajo de la unidad de baja conductividad. En el caso de la <strong>Figura 27a</strong>, el nivel freático está por encima de la superficie potenciométrica, por lo que el flujo a través de la arcilla es <strong>descendente</strong> (recarga).
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Problema de Ejemplo 11</h3>
+
   <p>Analiza la sección transversal hidrogeológica proporcionada, que consta de una unidad superior de arcilla y una unidad inferior de arena con dos pozos de monitoreo. Según las mediciones del diagrama, responde a las siguientes preguntas sobre el flujo de agua subterránea.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
   {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Ejercicio interactivo </span>
   <hr class="divisor final"></hr>
 
-  <Ejercicio_11/>
+  <Ejercicio_11 lang="es" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y Conclusiones </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Mostrar solución
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución del Problema 11</h3>
 
@@ -41,5 +57,8 @@ import Ejercicio_11 from "../../../../components/book-01/Ejercicio_11.astro";
     <li><strong>La dirección del flujo de agua subterránea a través de la unidad de arcilla superior</strong> es principalmente hacia abajo (recarga). Esto se determina comparando la elevación del nivel freático con la elevación de la superficie potenciométrica. Como el nivel freático es más alto, existe un gradiente vertical descendente.</li>
     <li><strong>El perfil de carga hidráulica vertical esperado</strong> cerca del Pozo 2 muestra un gradiente descendente relativamente pronunciado a través de la arcilla, seguido de una carga relativamente constante (o un gradiente mucho más leve) a través de la arena altamente conductiva.</li>
   </ul>
+
+
+</details>
 
 </section>

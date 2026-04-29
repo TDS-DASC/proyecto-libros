@@ -1,50 +1,53 @@
 ---
 // Ejercicio_7.astro — Flujo Ascendente y Carga Hidráulica
+export interface Props {
+  lang?: 'es' | 'en';
+}
+import { useTranslations } from '../../i18n/utils';
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
-<div class="ej7-wrapper">
+<div class="ej7-wrapper" data-lang={lang}>
 
   <!-- Progress stepper -->
   <div class="ej7-stepper">
-    <div class="ej7-step active" id="stepper-1-ej7"><span class="ej7-step-num">1</span><span class="ej7-step-label">Observar</span></div>
+    <div class="ej7-step active" id="stepper-1-ej7"><span class="ej7-step-num">1</span><span class="ej7-step-label">{t('exercise7.stepper.observar')}</span></div>
     <div class="ej7-step-line"></div>
-    <div class="ej7-step" id="stepper-2-ej7"><span class="ej7-step-num">2</span><span class="ej7-step-label">Perfil</span></div>
+    <div class="ej7-step" id="stepper-2-ej7"><span class="ej7-step-num">2</span><span class="ej7-step-label">{t('exercise7.stepper.perfil')}</span></div>
     <div class="ej7-step-line"></div>
-    <div class="ej7-step" id="stepper-3-ej7"><span class="ej7-step-num">3</span><span class="ej7-step-label">Explorar</span></div>
+    <div class="ej7-step" id="stepper-3-ej7"><span class="ej7-step-num">3</span><span class="ej7-step-label">{t('exercise7.stepper.explorar')}</span></div>
   </div>
 
   <div class="ej7-card">
-    <h2 class="ej7-title">🌊 Ejercicio 7: Flujo a través de Sedimento y Carga Hidráulica</h2>
-    <p class="ej7-subtitle">Observa la sección transversal, determina la dirección del flujo y explora la Ley de Darcy.</p>
+    <h2 class="ej7-title">{t('exercise7.title')}</h2>
+    <p class="ej7-subtitle">{t('exercise7.subtitle')}</p>
 
     <!-- ══ STEP 1 — Observar y Responder ══ -->
     <div id="step1-ej7" class="ej7-step-card ej7-step-active">
       <div class="ej7-step-header">
         <span class="ej7-badge">1</span>
         <div>
-          <h3 class="ej7-step-title">Paso 1: Análisis de la sección transversal</h3>
-          <p class="ej7-step-text">
-            Observa el lago (izquierda) y el piezómetro (derecha). El nivel del agua en el piezómetro representa la <strong>carga hidráulica del acuífero</strong> (h<sub>acuífero</sub>), mientras que el nivel del lago representa la carga en la superficie (h<sub>lago</sub> = 150).<br/><br/>
-            <strong>¿El agua fluye hacia arriba o hacia abajo a través del sedimento?</strong>
-          </p>
+          <h3 class="ej7-step-title">{t('exercise7.step1.title')}</h3>
+          <p class="ej7-step-text" set:html={t('exercise7.step1.text')}></p>
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">{t('exercise7.hint.title')}</summary>
         <div class="ej7-hint-body">
-          <p>El agua siempre fluye desde donde la <strong>carga hidráulica es mayor</strong> hacia donde es menor. Compara el nivel del agua en el lago con el nivel del agua en el piezómetro. Si el piezómetro está más alto, la carga del acuífero es mayor y el flujo es ascendente. Si está más bajo, el flujo es descendente.</p>
+          <p set:html={t('exercise7.hint1.body')}></p>
         </div>
       </details>
       <div class="ej7-choice-row">
         <button id="btn-answer-up-ej7" class="ej7-choice-btn" disabled>
-          <span class="ej7-btn-icon">⬆</span> Hacia arriba
+          <span class="ej7-btn-icon"></span> {t('exercise7.step1.answerUp')}
         </button>
         <button id="btn-answer-down-ej7" class="ej7-choice-btn" disabled>
-          <span class="ej7-btn-icon">⬇</span> Hacia abajo
+          <span class="ej7-btn-icon"></span> {t('exercise7.step1.answerDown')}
         </button>
       </div>
       <div id="countdown-ej7" class="ej7-countdown">
-        <span class="ej7-countdown-label">🔍 Observa los niveles del agua</span>
+        <span class="ej7-countdown-label">{t('exercise7.step1.countdownLabel')}</span>
         <span id="countdown-val-ej7" class="ej7-countdown-val">3</span>
       </div>
       <p id="feedback-step1-ej7" class="ej7-feedback hidden"></p>
@@ -55,17 +58,17 @@
       <div class="ej7-step-header">
         <span class="ej7-badge">2</span>
         <div>
-          <h3 class="ej7-step-title">Paso 2: Perfil de Carga Hidráulica</h3>
+          <h3 class="ej7-step-title">{t('exercise7.step2.title')}</h3>
           <p class="ej7-step-text" id="step2-explanation-ej7"></p>
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">{t('exercise7.hint.title')}</summary>
         <div class="ej7-hint-body">
-          <p>En el <strong>perfil vertical de carga</strong> (gráfica de la derecha), la carga se mantiene constante en el lago y en el acuífero, pero cambia a través del sedimiento. La pendiente de esa línea representa el <strong>gradiente hidráulico</strong>. Una pendiente ascendente indica flujo ascendente; una pendiente descendente indica flujo descendente.</p>
+          <p set:html={t('exercise7.hint2.body')}></p>
         </div>
       </details>
-      <button id="btn-next-step2-ej7" class="ej7-btn-primary">Siguiente: Explorar Ley de Darcy →</button>
+      <button id="btn-next-step2-ej7" class="ej7-btn-primary">{t('exercise7.step2.nextButton')}</button>
     </div>
 
     <!-- ══ STEP 3 — Explorar Ley de Darcy ══ -->
@@ -73,37 +76,33 @@
       <div class="ej7-step-header">
         <span class="ej7-badge">3</span>
         <div>
-          <h3 class="ej7-step-title">Paso 3: Ley de Darcy y Flujo Activo</h3>
-          <p class="ej7-step-text">
-            La velocidad del flujo depende del gradiente de carga (Δh/ΔL) y de la conductividad hidráulica del sedimento (K), según la Ley de Darcy:<br/>
-            <span class="ej7-formula">v ∝ Δh × K</span><br/><br/>
-            Ajusta los controles para experimentar cómo cambian el perfil y la velocidad del flujo.
-          </p>
+          <h3 class="ej7-step-title">{t('exercise7.step3.title')}</h3>
+          <p class="ej7-step-text" set:html={t('exercise7.step3.text')}></p>
         </div>
       </div>
       <details class="ej7-hint">
-        <summary class="ej7-hint-summary">💡 Pista conceptual</summary>
+        <summary class="ej7-hint-summary">{t('exercise7.hint.title')}</summary>
         <div class="ej7-hint-body">
-          <p>¿Qué pasa si la <strong>conductividad del sedimento es muy baja</strong> (arcilla)? El flujo sigue existiendo (la Ley de Darcy aplica siempre que haya un gradiente), pero la velocidad es muy pequeña. ¿Y si el acuífero y el lago tienen la <strong>misma carga</strong>? El gradiente es cero, por lo que no hay flujo neto.</p>
+          <p set:html={t('exercise7.hint3.body')}></p>
         </div>
       </details>
       <div class="ej7-controls">
         <div class="ej7-control-card">
-          <h4 class="ej7-control-title">Carga del Acuífero (h<sub>acuífero</sub>)</h4>
+          <h4 class="ej7-control-title" set:html={t('exercise7.step3.aquiferControl')}></h4>
           <input type="range" id="hAquifer-ej7" min="110" max="190" value="150" class="ej7-slider" />
           <div class="ej7-slider-labels">
-            <span>Menor al lago</span>
+            <span>{t('exercise7.step3.aquiferSliderLow')}</span>
             <span id="hAquiferVal-ej7" class="ej7-slider-val">150</span>
-            <span>Mayor al lago</span>
+            <span>{t('exercise7.step3.aquiferSliderHigh')}</span>
           </div>
         </div>
         <div class="ej7-control-card">
-          <h4 class="ej7-control-title">Conductividad Sedimento (K<sub>sedimento</sub>)</h4>
+          <h4 class="ej7-control-title" set:html={t('exercise7.step3.conductivityControl')}></h4>
           <input type="range" id="kSediment-ej7" min="1" max="100" value="50" class="ej7-slider" />
           <div class="ej7-slider-labels">
-            <span>Baja (Arcilla)</span>
+            <span>{t('exercise7.step3.conductivitySliderLow')}</span>
             <span id="kSedimentVal-ej7" class="ej7-slider-val">50</span>
-            <span>Alta (Arena)</span>
+            <span>{t('exercise7.step3.conductivitySliderHigh')}</span>
           </div>
         </div>
       </div>
@@ -111,11 +110,11 @@
 
     <!-- Completion -->
     <div id="final-ej7" class="ej7-completion hidden">
-      ✅ ¡Has completado el Ejercicio 7! Ahora comprendes cómo la carga hidráulica determina la dirección del flujo a través de un sedimento.
+      {t('exercise7.completion')}
     </div>
 
     <!-- ══ Canvas Area ══ -->
-    <p class="ej7-canvas-label">📐 Simulación visual</p>
+    <p class="ej7-canvas-label">{t('exercise7.canvasLabel')}</p>
     <div class="ej7-canvas-wrapper">
       <canvas id="ej7-canvas" style="touch-action:none;"></canvas>
     </div>
@@ -316,6 +315,10 @@
 
   const steppers = [1,2,3].map(n => document.getElementById(`stepper-${n}-ej7`)!);
 
+  const wrapper = document.querySelector('.ej7-wrapper') as HTMLElement;
+  const lang = wrapper?.dataset?.lang || 'es';
+  const isEn = lang === 'en';
+
   // ── State ─────────────────────────────────────────────────────────────
   let currentStep = 1;
   let observationComplete = false;
@@ -452,9 +455,15 @@
       const clicked = selectedUp ? btnUp : btnDown;
       clicked.classList.add('ej7-choice-correct');
       feedback1.className = 'ej7-feedback ej7-feedback-ok';
-      feedback1.innerHTML = `✅ ¡Correcto! El agua fluye de mayor a menor carga hidráulica. ${isAquiferHigher
-        ? 'La carga del acuífero (' + initialHAq + ') es mayor que la del lago (150), por lo que el flujo es <strong>ascendente</strong>.'
-        : 'La carga del lago (150) es mayor que la del acuífero (' + initialHAq + '), por lo que el flujo es <strong>descendente</strong>.'}`;
+      if (isAquiferHigher) {
+        feedback1.innerHTML = isEn
+          ? `Correct! Water flows from higher to lower hydraulic head. The aquifer head (${initialHAq}) is greater than the lake head (150), so the flow is <strong>upward</strong>.`
+          : `¡Correcto! El agua fluye de mayor a menor carga hidráulica. La carga del acuífero (${initialHAq}) es mayor que la del lago (150), por lo que el flujo es <strong>ascendente</strong>.`;
+      } else {
+        feedback1.innerHTML = isEn
+          ? `Correct! Water flows from higher to lower hydraulic head. The lake head (150) is greater than the aquifer head (${initialHAq}), so the flow is <strong>downward</strong>.`
+          : `¡Correcto! El agua fluye de mayor a menor carga hidráulica. La carga del lago (150) es mayor que la del acuífero (${initialHAq}), por lo que el flujo es <strong>descendente</strong>.`;
+      }
 
       // Advance to step 2 after delay
       setTimeout(() => {
@@ -466,9 +475,13 @@
 
         // Set explanation text
         if (isAquiferHigher) {
-          step2Explanation.innerHTML = `Como el agua fluye de mayor a menor carga, y la carga es mayor en el acuífero (${initialHAq} m), esto genera un <strong>flujo ascendente</strong> a través del sedimento hacia el lago.<br/><br/>Observa el <strong>perfil vertical de carga hidráulica</strong> en la gráfica. La carga se mantiene constante en el lago, disminuye a través del sedimento, y es mayor en el acuífero.`;
+          step2Explanation.innerHTML = isEn
+            ? `Since water flows from higher to lower head, and the head is higher in the aquifer (${initialHAq} m), this generates <strong>upward flow</strong> through the sediment toward the lake.<br/><br/>Observe the <strong>vertical hydraulic head profile</strong> in the graph. The head remains constant in the lake, decreases through the sediment, and is higher in the aquifer.`
+            : `Como el agua fluye de mayor a menor carga, y la carga es mayor en el acuífero (${initialHAq} m), esto genera un <strong>flujo ascendente</strong> a través del sedimento hacia el lago.<br/><br/>Observa el <strong>perfil vertical de carga hidráulica</strong> en la gráfica. La carga se mantiene constante en el lago, disminuye a través del sedimento, y es mayor en el acuífero.`;
         } else {
-          step2Explanation.innerHTML = `Como el agua fluye de mayor a menor carga, y la carga es mayor en el lago (150 m), esto genera un <strong>flujo descendente</strong> a través del sedimento hacia el acuífero.<br/><br/>Observa el <strong>perfil vertical de carga hidráulica</strong> en la gráfica. La carga se mantiene constante en el lago, disminuye a través del sedimento, y es menor en el acuífero.`;
+          step2Explanation.innerHTML = isEn
+            ? `Since water flows from higher to lower head, and the head is higher in the lake (150 m), this generates <strong>downward flow</strong> through the sediment toward the aquifer.<br/><br/>Observe the <strong>vertical hydraulic head profile</strong> in the graph. The head remains constant in the lake, decreases through the sediment, and is lower in the aquifer.`
+            : `Como el agua fluye de mayor a menor carga, y la carga es mayor en el lago (150 m), esto genera un <strong>flujo descendente</strong> a través del sedimento hacia el acuífero.<br/><br/>Observa el <strong>perfil vertical de carga hidráulica</strong> en la gráfica. La carga se mantiene constante en el lago, disminuye a través del sedimento, y es menor en el acuífero.`;
         }
 
         step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -477,7 +490,9 @@
       const clicked = selectedUp ? btnUp : btnDown;
       clicked.classList.add('ej7-choice-wrong');
       feedback1.className = 'ej7-feedback ej7-feedback-err';
-      feedback1.innerHTML = `❌ Incorrecto. Quizás confundiste la <strong>profundidad visible del agua</strong> con la <strong>carga hidráulica total</strong>. El piezómetro mide la carga hidráulica en el acuífero (h<sub>acuífero</sub> = ${initialHAq} m), que debe compararse con la carga del lago (h<sub>lago</sub> = 150 m). Como ${initialHAq} ${isAquiferHigher ? '>' : '<'} 150, el agua fluye desde ${isAquiferHigher ? 'el acuífero hacia el lago (ascendente)' : 'el lago hacia el acuífero (descendente)'}.`;
+      feedback1.innerHTML = isEn
+        ? `Incorrect. Perhaps you confused the <strong>visible water depth</strong> with the <strong>total hydraulic head</strong>. The piezometer measures the hydraulic head in the aquifer (h<sub>aquifer</sub> = ${initialHAq} m), which must be compared with the lake head (h<sub>lake</sub> = 150 m). Since ${initialHAq} ${isAquiferHigher ? '>' : '<'} 150, water flows from ${isAquiferHigher ? 'the aquifer toward the lake (upward)' : 'the lake toward the aquifer (downward)'}.`
+        : `Incorrecto. Quizás confundiste la <strong>profundidad visible del agua</strong> con la <strong>carga hidráulica total</strong>. El piezómetro mide la carga hidráulica en el acuífero (h<sub>acuífero</sub> = ${initialHAq} m), que debe compararse con la carga del lago (h<sub>lago</sub> = 150 m). Como ${initialHAq} ${isAquiferHigher ? '>' : '<'} 150, el agua fluye desde ${isAquiferHigher ? 'el acuífero hacia el lago (ascendente)' : 'el lago hacia el acuífero (descendente)'}.`;
     }
   }
 
@@ -588,20 +603,20 @@
     ctx.drawImage(sandTex, cs.csX, cs.sedBot, cs.csW, cs.aqBot - cs.sedBot);
     ctx.fillStyle = '#000';
     ctx.font = `bold ${Math.max(10, Math.floor(canvasWidth / 70))}px Arial`;
-    ctx.fillText('Acuífero Confinado', cs.csX + 8, cs.aqBot - 8);
+    ctx.fillText(isEn ? 'Confined Aquifer' : 'Acuífero Confinado', cs.csX + 8, cs.aqBot - 8);
 
     // Sediment
     ctx.fillStyle = '#d6d3d1';
     ctx.fillRect(cs.csX, cs.lakeBot, cs.csW, cs.sedBot - cs.lakeBot);
     ctx.drawImage(clayTex, cs.csX, cs.lakeBot, cs.csW, cs.sedBot - cs.lakeBot);
     ctx.fillStyle = '#000';
-    ctx.fillText('Sedimento', cs.csX + 8, cs.sedBot - 8);
+    ctx.fillText(isEn ? 'Sediment' : 'Sedimento', cs.csX + 8, cs.sedBot - 8);
 
     // Lake
     ctx.fillStyle = '#bae6fd';
     ctx.fillRect(cs.csX, cs.lakeTop, cs.csW, cs.lakeBot - cs.lakeTop);
     ctx.fillStyle = '#0284c7';
-    ctx.fillText('Lago', cs.csX + 8, cs.lakeTop + 20);
+    ctx.fillText(isEn ? 'Lake' : 'Lago', cs.csX + 8, cs.lakeTop + 20);
 
     // Lake waves
     ctx.beginPath();
@@ -701,8 +716,8 @@
       // Label sections
       ctx.fillStyle = '#6b7280';
       ctx.font = `bold ${Math.max(9, Math.floor(canvasWidth / 80))}px Arial`;
-      ctx.fillText('Sección Transversal', 8, 14);
-      ctx.fillText('Perfil de Carga Hidráulica', 8, g.profY + 14);
+      ctx.fillText(isEn ? 'Cross Section' : 'Sección Transversal', 8, 14);
+      ctx.fillText(isEn ? 'Hydraulic Head Profile' : 'Perfil de Carga Hidráulica', 8, g.profY + 14);
     }
 
     // ── Profile graph ──────────────────────────────────────────────────
@@ -715,7 +730,7 @@
       // Title
       ctx.fillStyle = '#000';
       ctx.font = `bold ${Math.max(10, Math.floor(canvasWidth / 70))}px Arial`;
-      ctx.fillText('Carga Hidráulica (h)', px + pw / 2 - 60, py + 18);
+      ctx.fillText(isEn ? 'Hydraulic Head (h)' : 'Carga Hidráulica (h)', px + pw / 2 - 60, py + 18);
 
       // X axis (top)
       ctx.beginPath();
@@ -727,14 +742,14 @@
 
       // Labels
       ctx.font = `${Math.max(9, Math.floor(canvasWidth / 80))}px Arial`;
-      ctx.fillText('Menor', px, py + 24);
-      ctx.fillText('Mayor', px + pw - 40, py + 24);
+      ctx.fillText(isEn ? 'Lower' : 'Menor', px, py + 24);
+      ctx.fillText(isEn ? 'Higher' : 'Mayor', px + pw - 40, py + 24);
 
       // Y axis label (rotated)
       ctx.save();
       ctx.translate(px - 25, py + ph / 2);
       ctx.rotate(-Math.PI / 2);
-      ctx.fillText('Profundidad (z)', -40, 0);
+      ctx.fillText(isEn ? 'Depth (z)' : 'Profundidad (z)', -40, 0);
       ctx.restore();
 
       // Head to X mapping
@@ -763,9 +778,9 @@
       // Zone labels
       ctx.fillStyle = '#6b7280';
       ctx.font = `${Math.max(9, Math.floor(canvasWidth / 85))}px Arial`;
-      ctx.fillText('Lago', lakeX - 12, py + ph * 0.2);
-      ctx.fillText('Sedimento', Math.min(lakeX, aqX) + Math.abs(aqX - lakeX) / 2 - 25, py + ph * 0.52);
-      ctx.fillText('Acuífero', aqX - 20, py + ph * 0.8);
+      ctx.fillText(isEn ? 'Lake' : 'Lago', lakeX - 12, py + ph * 0.2);
+      ctx.fillText(isEn ? 'Sediment' : 'Sedimento', Math.min(lakeX, aqX) + Math.abs(aqX - lakeX) / 2 - 25, py + ph * 0.52);
+      ctx.fillText(isEn ? 'Aquifer' : 'Acuífero', aqX - 20, py + ph * 0.8);
     }
 
     // ── Particle animation ─────────────────────────────────────────────

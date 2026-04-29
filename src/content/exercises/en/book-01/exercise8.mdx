@@ -10,7 +10,7 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
 <section class="book-section">
 
   {/* 1. BOOK CONTEXT */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 5.2 Hydraulics of Flow in Unconfined Aquifers</span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> 5.2 Hydraulics of Flow in Unconfined Aquifers</span>
   <hr class="divisor final" />
 
   <p>
@@ -38,7 +38,7 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
   <hr class="linea-delgada bg-[var(--rayas)]" />
 
   {/* 2. PROBLEM STATEMENT */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">🙋 Example Problem 8</span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Example Problem 8</span>
   <hr class="divisor final" />
 
   <p>
@@ -54,16 +54,17 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
   <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
   {/* 3. INTERACTIVE EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Interactive exercise </span>
   <hr class="divisor final" />
 
   <Ejercicio_8 lang="en" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 4. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final" />
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 8 Solution</h3>
 
@@ -93,5 +94,7 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
     alt="Problem 8 Solution Diagram"
     class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
   />
+
+</details>
 
 </section>

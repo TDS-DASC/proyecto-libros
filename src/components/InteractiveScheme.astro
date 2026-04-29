@@ -1,20 +1,31 @@
+---
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+import { useTranslations } from '../i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
 <div class="interactive-scheme">
-  <h3>Interactive Scheme: Hydraulic Head Inputs</h3>
+  <h3 set:html={t('exercise5.title')} />
   
   <div class="inputs">
     <div class="form-group">
-        <label for="elev">Elevación (z) [m]:</label>
-        <input type="number" id="elev" name="elev" placeholder="Ej. 10m" />
+        <label for="elev" set:html={t('exercise5.elevation')} />
+        <input type="number" id="elev" name="elev" placeholder={t('exercise5.elev_placeholder')} />
     </div>
 
     <div class="form-group">
-        <label for="presion">Presión (p) [Pa]:</label>
-        <input type="number" id="presion" name="presion" placeholder="Ej. 10000Pa" />
+        <label for="presion" set:html={t('exercise5.pressure')} />
+        <input type="number" id="presion" name="presion" placeholder={t('exercise5.pressure_placeholder')} />
     </div>
 
     <div class="form-group">
-        <label for="pozo">Tamaño del pozo:</label>
-        <input type="number" id="pozo" name="pozo" placeholder="Ej. 10m" value="1" min="0"/>
+        <label for="pozo" set:html={t('exercise5.well_size')} />
+        <input type="number" id="pozo" name="pozo" placeholder={t('exercise5.well_placeholder')} value="1" min="0"/>
     </div>
 
   </div>
@@ -25,7 +36,7 @@
   </div>
 
   <div class="result">
-        <strong>Carga hidráulica (h): </strong>
+        <strong>{t('exercise5.hydraulic_head')} </strong>
         <span id="headValue">0</span> m
   </div>
 </div>

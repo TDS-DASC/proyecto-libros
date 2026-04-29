@@ -10,7 +10,7 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
 <section class="book-section">
 
   {/* 1. CONTEXT DEL LIBRO */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 5.2 Hidráulica del Flujo en Acuíferos No Confinados</span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> 5.2 Hidráulica del Flujo en Acuíferos No Confinados</span>
   <hr class="divisor final" />
 
   <p>
@@ -38,7 +38,7 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
   <hr class="linea-delgada bg-[var(--rayas)]" />
 
   {/* 2. ENUNCIADO DEL PROBLEMA */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">🙋 Problema de Ejemplo 8</span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Problema de Ejemplo 8</span>
   <hr class="divisor final" />
 
   <p>
@@ -54,16 +54,17 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
   <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
   {/* 3. EJERCICIO INTERACTIVO */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Ejercicio interactivo </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Ejercicio interactivo </span>
   <hr class="divisor final" />
 
   <Ejercicio_8 lang="es" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6" />
 
-  {/* 4. SOLUCIÓN */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solución y conclusiones </span>
-  <hr class="divisor final" />
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Mostrar solución
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Solución al Problema 8</h3>
 
@@ -93,5 +94,8 @@ import Ejercicio_8 from "../../../../components/book-01/Ejercicio_8.astro";
     alt="Solución del Problema 8"
     class="inline-block p-4 mx-auto bg-white rounded shadow-sm my-4"
   />
+
+
+</details>
 
 </section>

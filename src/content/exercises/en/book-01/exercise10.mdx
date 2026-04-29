@@ -9,27 +9,65 @@ import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
 
 <section class="book-section">
 
-  {/* 1. INTRODUCTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">📖 Introduction </span>
-  <hr class="divisor final"></hr>
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> 5.3 Aquifers and Aquitards</h3>
 
-  <h3 class="book-title text-[var(--book-title-1)] text-4xl">🙋 Example Problem 10</h3>
-  
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  The flow and associated hydraulic gradient scenarios shown in the previous figures are also present in aquifers separated by an aquitard. As shown in Figure 26, the horizontal gradient in the unconfined aquifer and confined aquifer are defined by the water table and potentiometric surface, respectively. Head decreases towards the right in both aquifers. However, there is a difference in hydraulic head above and below the aquitard.
+
+  <img 
+    src="/proyecto-libros/images/figure26.png" 
+    alt="Figure 26"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 26</b> <em> – Example of horizontal flow and associated vertical head profile in: a) an unconfined and b) a confined aquifer, and the associated vertical gradient in an aquitard (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  There is a distinct change in hydraulic head across the aquitard, which is indicative of a zone of lower hydraulic conductivity. Although most of the flow in the aquifers is horizontal, a fraction flows through the aquitard (from higher head to lower head). It is important to note that a vertical gradient does not necessarily mean that the flow through the aquitard is vertical — rather, it indicates a vertical component of flow. If the presence of a lower-K interval was not known, the hydraulic heads could be misinterpreted as an indication of vertical flow throughout the entire saturated zone. This exemplifies the need to account for known or potential geologic features when interpreting head data.
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  Figure 27 shows that the direction of flow in the aquitard is dependent on the relative elevations of the water table and potentiometric surface.
+
+  <img 
+    src="/proyecto-libros/images/figure27.png" 
+    alt="Figure 27"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 27</b> <em> – Head profile across aquitards resulting in: a) downward and b) upward flow (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  An aquitard is a semi-pervious formation that restricts flow between the overlying and/or underlying aquifers. In some cases, the hydraulic conductivity of the aquitard is less restrictive, and some groundwater may flow between the aquifers (leaky aquitard). In either case, groundwater is present and fully saturates the aquitard, so some hydraulic connection between the aquifers exists. Accordingly, there is a hydraulic gradient in the aquitard, as shown in Figure 28.
+
+  <img 
+    src="/proyecto-libros/images/figure28.png" 
+    alt="Figure 28"
+    class="inline-block p-4 mx-auto bg-white rounded"
+  />
+  <small class="pie-foto text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"><b>Figure 28</b> <em> – Potentiometric contour lines in an unconfined and confined aquifer separated by an aquitard (Cohen and Cherry, 2020).</em></small>
+
+  <hr class="linea-delgada bg-[var(--rayas)]"></hr>
+
+  <h3 class="book-title text-[var(--book-title-1)] text-4xl"> Example Problem 10</h3>
+
   <p>Based on the water level data shown in the schematic, determine which of the options best represents the equipotential lines and flow direction through the two sand layers and the clay aquitard.</p>
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
   {/* 2. EXERCISE */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✏️ Interactive exercise </span>
+  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]"> Interactive exercise </span>
   <hr class="divisor final"></hr>
 
-  <Ejercicio_10/>
+  <Ejercicio_10 lang="en" />
 
   <hr class="linea-delgada bg-[var(--rayas)] mt-6"></hr>
 
-  {/* 3. SOLUTION */}
-  <span class="etiqueta-guia text-[var(--subtitle-text)] bg-[var(--subtitle-bg)]">✅ Solution & Takeaways </span>
-  <hr class="divisor final"></hr>
+  <details class="mt-6 border border-[var(--borderEjercicio)] bg-[var(--cardEjercicio)] shadow-[var(--shadowEjercicio)] rounded-xl p-4 transition-colors duration-300">
+    <summary class="cursor-pointer font-semibold text-[var(--titles)]">
+      Show solution
+    </summary>
 
   <h3 class="book-title text-[var(--book-title-1)] text-3xl mb-4 mt-6">Problem 10 Solution</h3>
 
@@ -40,5 +78,7 @@ import Ejercicio_10 from "../../../../components/book-01/Ejercicio_10.astro";
     <li><strong>Choice "c"</strong> CANNOT be the correct answer, because the head values plotted at the points of measurement do not represent hydraulic head. Instead, they represent the height of the water column in each well.</li>
     <li><strong>Choice "d"</strong> CANNOT be the correct answer, because the values plotted at the points of measurement do not represent hydraulic head; instead, they are the elevations of the points of measurement.</li>
   </ul>
+
+</details>
 
 </section>

@@ -1,24 +1,52 @@
 ---
 import { getCollection } from "astro:content";
-import { getExerciseStaticPaths } from "../../../lib/i18n-routing";
+import { getLangFromUrl } from "../../../i18n/utils";
 import ExerciseDetail from "../../../components/ExerciseDetail.astro";
 
 export async function getStaticPaths() {
-  const paths = await getExerciseStaticPaths('es');
-  return paths.map(p => ({ params: { slug: p.params.slug, exercise: p.params.exercise }, props: p.props }));
+  const [esExercises, enExercises] = await Promise.all([
+    getCollection("exercises", (ex) => ex.data.lang === 'es'),
+    getCollection("exercises", (ex) => ex.data.lang === 'en'),
+  ]);
+
+  const seen = new Set<string>();
+  const paths: { params: { slug: string; exercise: string } }[] = [];
+
+  for (const ex of [...esExercises, ...enExercises]) {
+    const bookSlug = ex.data.bookSlug;
+    const exerciseSlug = ex.id.split("/").pop()?.replace(/\.mdx?$/, '') || '';
+    const key = `${bookSlug}/${exerciseSlug}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    paths.push({
+      params: { slug: bookSlug, exercise: exerciseSlug },
+    });
+  }
+
+  return paths;
 }
 
-const { exercise } = Astro.props;
+const { slug, exercise } = Astro.params;
+const lang = getLangFromUrl(Astro.url);
 
-// Filter exercises for the sidebar (must be from the same language)
-const allExercises = await getCollection("exercises", (ex) => ex.data.lang === 'es');
-const bookExercises = allExercises.filter(
-  (ex) => ex.data.bookSlug === exercise.data.bookSlug
-).sort((a, b) => {
+const exercises = await getCollection("exercises", (ex) =>
+  ex.data.lang === lang && ex.data.bookSlug === slug
+);
+
+const currentExercise = exercises.find((ex) => {
+  const exerciseSlug = ex.id.split("/").pop()?.replace(/\.mdx?$/, '');
+  return exerciseSlug === exercise;
+});
+
+const bookExercises = exercises.sort((a, b) => {
   const numA = parseInt(a.id.match(/\d+/g)?.pop() || "0");
   const numB = parseInt(b.id.match(/\d+/g)?.pop() || "0");
   return numA - numB;
 });
+
+if (!currentExercise) {
+  return new Response(null, { status: 404 });
+}
 ---
 
-<ExerciseDetail exercise={exercise} bookExercises={bookExercises} />
+<ExerciseDetail exercise={currentExercise} bookExercises={bookExercises} />
